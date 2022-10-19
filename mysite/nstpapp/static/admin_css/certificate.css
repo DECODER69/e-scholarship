@@ -1,0 +1,476 @@
+@media print {
+    body *:not(#outer):not(#outer *) {
+        visibility: hidden;
+    }
+    #outer {
+        position: relative;
+        left: 0;
+        top: 0;
+        background-color: transparent;
+    }
+}
+
+#outer {
+    align-items: center;
+    margin: auto;
+}
+
+
+/* .inner2 {
+    margin: auto;
+    left: 0;
+    top: 0;
+    width: 97%;
+    padding: 2px;
+    height: 94vh;
+    background-color: #1e396f;
+} */
+
+
+/* cERTcSS */
+
+.download {
+    font-size: 30px;
+    margin-top: 20px;
+    margin: auto;
+    display: flex;
+    outline: none;
+    border-radius: 5px;
+    font-weight: bold;
+    height: 50px;
+    color: white;
+    background-color: rgba(45, 136, 137, 0.635);
+}
+
+.outer {
+    width: 98%;
+    height: 95vh;
+    padding-top: 5px;
+    text-align: center;
+    border: 4px solid #787878;
+}
+
+.inner2 {
+    margin: auto;
+    width: 98.2%;
+    height: 92.4vh;
+    padding-top: 5px;
+    text-align: center;
+    border: 3px solid black;
+    vertical-align: middle !important;
+}
+
+.inner1 {
+    margin: auto;
+    width: 97.5%;
+    height: 90vh;
+    padding: 5px;
+    text-align: center;
+    border: 2px solid black;
+}
+
+.inner1 .line1 {
+    font-size: 50px;
+    font-weight: bold;
+    color: darkred;
+    font-family: 'Times New Roman';
+}
+
+.inner1 .line2 {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.inner1 .name {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.inner1 .line4 {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.inner1 .line5 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.inner1 .dated {
+    font-size: 25p;
+    font-weight: bold;
+}
+
+.inner1 .date {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#img1 {
+    position: relative;
+}
+
+#img1 img {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 150px;
+    height: 150px;
+}
+
+#img2 {
+    position: relative;
+}
+
+#img2 img {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 150px;
+    height: 150px;
+}
+
+
+/*.inner1 .background img {
+	width: 400px;
+	height: 400px;
+	position: center;
+	margin-left: auto;
+	margin-right: auto;
+	
+}*/
+
+.inner1 {
+    background-image: url('../../static/images/lowop.png');
+    background-position: center;
+    background-size: 500px;
+    background-repeat: no-repeat;
+}
+
+.inner1 .up1 {
+    font-size: 23px;
+    color: #6a6d73;
+}
+
+.inner1 .up2 {
+    font-size: 23px;
+    color: #6a6d73;
+}
+
+.inner1 .up3 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.inner1 .up4 {
+    font-size: 23px;
+    color: #6a6d73;
+}
+
+.inner1 .up5 {
+    font-size: 23px;
+    color: #6a6d73;
+}
+
+.inner1 .line7 {
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.inner1 .line8 {
+    font-size: 45px;
+    font-weight: bolder;
+    display: inline-block;
+    text-transform: lowercase;
+}
+
+.inner1 .line8::first-letter {
+    text-transform: uppercase
+}
+
+.inner1 .line9 {
+    font-size: 25px;
+    font-weight: bolder;
+    color: #6a6d73;
+}
+
+.inner1 .line10 {
+    font-size: 25px;
+    font-weight: bolder;
+    color: #6a6d73;
+}
+
+.inner1 .line11 {
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+.inner1 .line12 {
+    font-size: 25px;
+    color: #6a6d73;
+}
+
+.lastline {
+    width: 100%;
+    font-weight: bold;
+    justify-content: space-between;
+}
+
+.control {
+    float: right;
+    margin-right: 10px;
+}
+
+.bot {
+    width: 100%;
+    margin-top: 100px;
+    justify-content: space-between;
+}
+
+.comm {
+    margin-left: 80px;
+}
+
+.com {
+    margin-left: 100px;
+}
+
+.outer {
+    margin: auto;
+}
+
+.prints {
+    display: flex;
+    width: 100%;
+    position: absolute;
+    background-color: rgba(127, 255, 212, 0.229);
+}
+
+button {
+    width: 20%;
+    height: 100px;
+    margin: auto;
+    position: absolute;
+    margin-top: 20%;
+    margin-left: 40%;
+    background-color: rgba(221, 13, 13, 0.871);
+    font-size: 50px;
+    color: rgb(194, 194, 194);
+}
+
+button:hover {
+    width: 20%;
+    height: 100px;
+    margin: auto;
+    position: absolute;
+    margin-top: 20%;
+    margin-left: 40%;
+    background-color: rgba(217, 150, 150, 0.871);
+    font-size: 50px;
+    color: rgb(255, 255, 255);
+}
+
+
+/* @media screen and (max-width:900px) {
+    .outer {
+        width: 600px;
+        height: 400px;
+        text-align: center;
+    }
+    .inner2 {
+        width: 590px;
+        height: 390px;
+        text-align: center;
+        border: 3px solid black;
+    }
+    .inner1 {
+        width: 545px;
+        height: 345px;
+        text-align: center;
+        font-weight: bold;
+    }
+    .inner1 .up1 {
+        font-size: 12px;
+        color: #6a6d73;
+    }
+    .inner1 .up2 {
+        font-size: 12px;
+        color: #6a6d73;
+    }
+    .inner1 .up3 {
+        font-size: 12px;
+        color: #6a6d73;
+    }
+    .inner1 .up4 {
+        font-size: 12px;
+        color: #6a6d73;
+    }
+    .inner1 .up5 {
+        font-size: 12px;
+        color: #6a6d73;
+    }
+    .inner1 .line1 {
+        font-size: 30px;
+        font-weight: bold;
+        color: darkred;
+    }
+    .inner1 .line7 {
+        font-size: 15px;
+        color: #6a6d73;
+    }
+    .inner1 .line8 {
+        font-size: 25px;
+        font-weight: bolder;
+    }
+    .inner1 .line9 {
+        font-size: 10px;
+        font-weight: bolder;
+        color: #6a6d73;
+    }
+    .inner1 .line10 {
+        font-size: 10px;
+        font-weight: bolder;
+        color: #6a6d73;
+    }
+    .inner1 .line11 {
+        font-size: 15px;
+        font-weight: bolder;
+    }
+    .inner1 .line12 {
+        font-size: 11px;
+        color: #6a6d73;
+    }
+    .bot {
+        margin-top: 30px;
+        font-size: 12px;
+    }
+    .inner1 {
+        background-image: url('../image/lowop.png');
+        background-position: center;
+        background-size: 300px;
+        background-repeat: no-repeat;
+    }
+    #img1 {
+        position: relative;
+    }
+    #img1 img {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        width: 60px;
+        height: 60px;
+    }
+    #img2 {
+        position: relative;
+    }
+    #img2 img {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media screen and (max-width:700px) {
+    .outer {
+        width: 400px;
+        height: 300px;
+        text-align: center;
+    }
+    .inner2 {
+        width: 390px;
+        height: 289px;
+        text-align: center;
+        border: 3px solid black;
+    }
+    .inner1 {
+        width: 345px;
+        height: 245px;
+        text-align: center;
+        font-weight: bold;
+    }
+    .inner1 .up1 {
+        font-size: 9px;
+        color: #6a6d73;
+    }
+    .inner1 .up2 {
+        font-size: 9px;
+        color: #6a6d73;
+    }
+    .inner1 .up3 {
+        font-size: 9px;
+        color: #6a6d73;
+    }
+    .inner1 .up4 {
+        font-size: 9px;
+        color: #6a6d73;
+    }
+    .inner1 .up5 {
+        font-size: 9px;
+        color: #6a6d73;
+    }
+    .inner1 .line1 {
+        font-size: 20px;
+        font-weight: bold;
+        color: darkred;
+        font-family: 'Times New Roman';
+        margin-top: 50px;
+    }
+    .inner1 .line7 {
+        font-size: 10px;
+        color: #6a6d73;
+    }
+    .inner1 .line8 {
+        font-size: 10px;
+        font-weight: bolder;
+    }
+    .inner1 .line9 {
+        font-size: 8px;
+        font-weight: bolder;
+        color: #6a6d73;
+    }
+    .inner1 .line10 {
+        font-size: 8px;
+        font-weight: bolder;
+        color: #6a6d73;
+    }
+    .inner1 .line11 {
+        font-size: 9px;
+        font-weight: bolder;
+    }
+    .inner1 .line12 {
+        font-size: 7px;
+        color: #6a6d73;
+    }
+    .bot {
+        margin-top: 10px;
+        font-size: 8px;
+    }
+    .inner1 {
+        background-image: url('../image/lowop.png');
+        background-position: center;
+        background-size: 200px;
+        background-repeat: no-repeat;
+    }
+    #img1 {
+        position: relative;
+    }
+    #img1 img {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        width: 50px;
+        height: 50px;
+    }
+    #img2 {
+        position: relative;
+    }
+    #img2 img {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 50px;
+        height: 50px;
+    }
+} */

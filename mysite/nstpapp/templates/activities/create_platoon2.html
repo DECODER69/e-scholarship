@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Platoons</title>
+    <link rel="stylesheet" href="../../static/admin_css/create_platoon.css">
+    <link rel="icon" href="../../static/images/tup.png">
+</head>
+
+<body>
+    {% include 'activities/admin_nav.html' %}
+    <!-- modal for sections -->
+
+
+    <!-- Button trigger modal -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        {% for s in datas %}
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">{{s.firstname}} {{s.lastname}}</h5>
+
+
+                </div>
+                <div class="modal-body">
+                    <img src="{{s.picture.url}}" id="viewpic">
+                    <img src="../../static/images/tup.png" id="tups">
+                </div>
+
+                <div class="modal-footer">
+                    <p><i class='bx bx-credit-card-front' style="vertical-align: middle;"></i> {{s.idnumber}}</p>
+                    <h2>|</h2>
+                    <p><i class='bx bx-envelope' style="vertical-align: middle;"></i> {{s.email}}</p>
+                    <a href="/create_platoon_page">
+                        <button type="button" class="btn btn-danger">Close</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <!-- EOF MODAL -->
+
+    <!-- MODAL FOR PICTURES -->
+
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        {% for s in datas %}
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{s.idnumber}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{s.picture.url}}" alt="profile pic" id="profile_pic">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+
+
+    <!-- eof modal for puictures  -->
+    <section class="home-section">
+        <div class="heads">
+            <h1 class="text"><i class='bx bxs-dashboard'></i> Manage Students</h1><br>
+        </div>
+        <div class="bg">
+            <div class="tops">
+                <div class="left1">
+                    <h1 style="font-size: 20px;">Add & Manage </h1><br>
+
+                    <h1 class="adds">Add & Manage Students</h1><br>
+                    <!-- <p1 style="color: grey; font-size:15px;"><i class='bx bx-check' style="vertical-align:middle; font-size: 20px; color:green; font-weight:bolder;"></i> {{counts}} Active Students</p1> -->
+                    <a href="#" style="text-decoration: none;">
+                        <button type="button" class="btns "> <i class='bx bx-plus' style="vertical-align:middle;"></i> Add Student</button>
+                    </a>
+                </div>
+
+
+            </div>
+
+            <div class="overall">
+                <div class="left">
+                    <h1 style="font-size: 25px;">All Students</h1>
+                    <p1 style="color:green; font-size:15px; font-weight:bold;"><i class='bx bx-check' style="vertical-align:middle; font-size: 20px; color:green; font-weight:bolder;"></i> {{counts}} Active Students</p1>
+                    <br>&nbsp;<br>
+                    <div class="table-responsive">
+
+
+                        <table class="table">
+                            <thead>
+                                <tr style="color: rgb(79, 79, 79);">
+                                    <th scope="col">Profile</th>
+                                    <th scope="col">ID Number</th>
+                                    <th scope="col">Full name</th>
+                                    <th scope="col">Course / Section</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Field</th>
+
+                                    <th scope="col">Platoon / Section</th>
+                                    <th scope="col">Last Login</th>
+                                    <th scope="col">VIew Profile</th>
+
+                                    <th scope="col">Edit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for s in counts1 %}
+                                <tr>
+                                    <th scope="row">
+
+                                        <a href="{% url 'activities:view_images' s.id %}" target="_self" title="Click to view picture">
+                                            <img src="{{s.picture.url}}" alt="profile pic" id="profile_pic">
+
+                                        </a>
+                                    </th>
+                                    <td style="font-size: 10px;">{{s.idnumber}}</td>
+                                    <td>{{s.firstname}} {{s.middlename}} {{s.lastname}}</td>
+                                    <td>{{s.section}}</td>
+                                    <td style="color:green;">{{s.status}} <i class='bx bxs-check-circle' style="vertical-align:middle;"></i></td>
+                                    <td>{{s.field}}</td>
+
+
+                                    <td>{{s.platoons}}</td>
+                                    {% for l in userContent %} {% if l.username == s.idnumber %}
+
+                                    <td style="color: rgb(196, 10, 10);">
+                                        <i class='bx bxs-time-five' style="vertical-align:middle;"></i> {{l.last_login}}
+
+                                    </td>
+                                    <td class="viewProfile">
+                                        <i class='bx bxs-low-vision'></i>
+                                        <a href="#">
+                                             View Profile
+
+                                        </a>
+
+                                    </td>
+
+
+                                    <td>
+                                        <a href="{% url 'activities:edit_manage' s.id %}" target="_self" title="Click to view picture">
+                                            <i class='bx bxs-edit' id="changes"></i>
+
+                                        </a>
+
+                                    </td>
+                                    {% endif %} {% endfor %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div><br>&nbsp;<br>&nbsp;<br>
+                <!-- <div class="right">
+                    <h1 style="font-size: 25px;">All Sections</h1>
+                    <p1 style="color: grey; font-size:15px;font-weight:bold;"><i class='bx bx-intersect' style="vertical-align:middle; font-size: 20px; color:green; font-weight:bolder;"></i> {{section1}} Section/s</p1><br>&nbsp;<br> {% for s in section %} {% if s.section_created %}
+                    <div class="haha">
+                        <div class="covers">
+                            <div class="cardss">
+                                <div class="some">
+
+                                    <div class="some2">
+                                        <h1>{{s.section_created}}</h1>
+                                        <i class='bx bxs-user-detail' style="color: grey;"></i>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+
+                        </div>
+                        <div class="view">
+
+                            <form action="{% url 'activities:section_content'  %}" method="POST">
+                                {% csrf_token %}
+                                <td>
+                                    <input type="hidden" value="{{s.section_created}}" name="platoons">
+                                    <button type="submit" class="btn btn-info" id="viewMore">View more </button>
+                                </td>
+                            </form>
+
+                        </div>
+                    </div><br> {% else %} {% endif %} {% empty %}
+                    <p style="text-align: center; margin-top:100px;">No Sections Created !</p>
+                    {% endfor %}
+                </div> -->
+
+            </div>
+
+        </div>
+    </section>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(function() {
+            $('table.table').each(function() {
+                var currentPage = 0;
+                var numPerPage = 10;
+                var $table = $(this);
+                $table.bind('repaginate', function() {
+                    $table.find('tbody tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
+                });
+                $table.trigger('repaginate');
+                var numRows = $table.find('tbody tr').length;
+                var numPages = Math.ceil(numRows / numPerPage);
+                var $pager = $('<div class="pager"></div>');
+                var $previous = $('<span class="previous"><<</spnan>');
+                var $next = $('<span class="next">>></spnan>');
+                for (var page = 0; page < numPages; page++) {
+                    $('<span class="page-number"></span>').text(page + 1).bind('click', {
+                        newPage: page
+                    }, function(event) {
+                        currentPage = event.data['newPage'];
+                        $table.trigger('repaginate');
+                        $(this).addClass('active').siblings().removeClass('active');
+                    }).appendTo($pager).addClass('clickable');
+                }
+                $pager.insertAfter($table).find('span.page-number:first').addClass('active');
+                $previous.insertBefore('span.page-number:first');
+                $next.insertAfter('span.page-number:last');
+
+                $next.click(function(e) {
+                    $previous.addClass('clickable');
+                    $pager.find('.active').next('.page-number.clickable').click();
+                });
+                $previous.click(function(e) {
+                    $next.addClass('clickable');
+                    $pager.find('.active').prev('.page-number.clickable').click();
+                });
+                $table.on('repaginate', function() {
+                    $next.addClass('clickable');
+                    $previous.addClass('clickable');
+
+                    setTimeout(function() {
+                        var $active = $pager.find('.page-number.active');
+                        if ($active.next('.page-number.clickable').length === 0) {
+                            $next.removeClass('clickable');
+                        } else if ($active.prev('.page-number.clickable').length === 0) {
+                            $previous.removeClass('clickable');
+                        }
+                    });
+                });
+                $table.trigger('repaginate');
+            });
+        });
+    </script>
+    <!-- <script>
+        {% for msg in messages %}
+        Swal.fire({
+            icon: '{{msg.icon}}',
+            text: '{{ msg }}'
+        }) {% endfor %}
+    </script>  -->
+
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            $('#staticBackdrop').modal('show');
+        });
+    </script>
+    <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
+</body>
+
+</html>

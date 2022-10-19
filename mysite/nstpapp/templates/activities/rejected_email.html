@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>admin rejected students</title>
+
+    <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> -->
+    <link rel="stylesheet" href="../../static/admin_css/admin_rejected.css">
+    <!-- icon for seacrch -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/solid.css">
+
+    <!-- for table pagination -->
+
+
+</head>
+
+<body>
+    {% include 'activities/admin_nav.html' %}
+    <section class="home-section">
+        <div class="heads">
+            <h1 class="text"><i class='bx bx-user-minus' style="vertical-align: middle;"></i> REJECTED</h1><br>
+        </div>
+        <div class="bg">
+            <ul class="nav nav-tabs nav-pills nav-fill">
+                <li class="nav-item">
+                    <a href="/school_years" class="nav-link">School Year</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="/admin_staff">Officially Enrolled <i class='bx bxs-badge-check' style="vertical-align: middle;"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin_pending">Pending Enrollees <i class='bx bxs-time-five' style="vertical-align: middle;" ></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" style="background-color: red;" href="/admin_rejected">Rejected <i class='bx bxs-user-minus' style="vertical-align: middle;"></i></a>
+                </li>
+
+
+            </ul>
+            <!-- modal -->
+
+            <div class="inside">
+                <div class="table-responsive">
+                    <p1 style="font-size:14px;color:#000000;">List of all Rejected Student/s.</p1><br>
+                    <table id="table1" class="table table-bordered table-hover ">
+                        <thead class="thead">
+                            <tr>
+                                <th scope="col">ID NUMBER</th>
+                                <th scope="col">FULL NAME</th>
+                                <th scope="col">EMAIL</th>
+
+                                <th scope="col">COURSE</th>
+                                <th scope="col">FIELD</th>
+                                <th scope="col">VIEW PROFILE</th>
+                                <th scope="col">SEND EMAIL</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for s in rejects %} {% if s.idnumber %}
+                            <tr>
+
+                                <td>
+                                    {{s.idnumber}}
+                                </td>
+                                <td>{{s.firstname}} {{s.middlename}} {{s.lastname}}</td>
+                                <td>{{s.email}}</td>
+
+                                <td>{{s.section}}</td>
+                                <td>{{s.field}}</td>
+                                <td>
+                                    <a href="{% url 'activities:rejected_email_page' s.id %}" target="_self" title="Click to compose custom Email"><i class='bx bxs-show' style="vertical-align: middle;"></i>
+                                        View Profile</a>
+                                </td>
+                                <td>
+                                    <a href="{% url 'activities:rejected_email_page' s.id %}" target="_self" title="Click to compose custom Email">
+                                        <button type="button" class="btn btn-info"> <i class='bx bx-envelope' style="vertical-align: middle;"></i> Send Email</button>
+                                    </a>
+                                </td>
+
+                                <td class="actions">
+                                    <div class="ehe">
+                                        <form action="{% url 'activities:r_approve' s.idnumber %}" method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="getID" value="{{s.idnumber}}"><button type="submit" class="btn btn-success"><i class='bx bx-check'></i>  Approve</button>
+                                        </form>
+                                    </div><br>&nbsp;<br>
+                                    <div class="ehe">
+                                        <form action="{% url 'activities:r_decline' s.id %}" method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="getID2" value="{{s.idnumber}}"><button type="submit" class="btn btn-danger"><i class='bx bx-x-circle'></i> Remove</button>
+                                        </form>
+                                    </div>
+
+
+                                </td>
+
+                            </tr>
+                            {% endif %} {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+
+    </section>
+
+    <div>{% for k in ems %}
+        <form action="{% url 'activities:custom'%}" method="post">
+            {% csrf_token %}
+            <div class="modal fade" id="exampleModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Compose Email</h5>
+
+
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Recipient:</label>
+                                    <input type="email" name="cusemail" value="{{k.email}}" required id="rec" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Subject:</label>
+                                    <input type="text" name="emailtext" placeholder="SUBJECT" required id="sub" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="message-text" class="col-form-label">Message:</label>
+                                    <textarea class="form-control" id="message-text" name="message" required placeholder="Type Your Message Here"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="/admin_rejected"><button type="button" class="btn btn-secondary" >Close</button></a>
+                            <button type="submit" class="btn btn-primary">Send message</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </form>
+        {% endfor %}
+    </div>
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#exampleModal").modal('show');
+        });
+    </script>
+    <!-- pagination -->
+
+</body>
+
+</html>

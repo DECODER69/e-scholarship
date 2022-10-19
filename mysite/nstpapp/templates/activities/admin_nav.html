@@ -1,0 +1,152 @@
+<!DOCTYPE html>{% load static%}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'admin_css/admin_nav.css' %}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <title>nav</title>
+</head>
+
+<body>
+    <div class="sidebar" id="ID"><br>
+        <div class="logo-details">
+            <!-- <i class='bx bxl-c-plus-plus icon'></i> -->
+            <!-- <i class='bx bx-shield icon'></i>
+            <span class="links_name">Home</span> -->
+            <img src="../../static/images/tup.png" class="icon" id="tup"><br>
+
+            <i class='bx bx-menu' id="btn"></i>
+        </div><br><br>
+        <ul class="nav-list">
+
+            <li>
+                <a href="/admin_dashboard">
+                    <i class='bx bx-home'></i>
+                    <span class="links_name">Home</span>
+                </a>
+                <span class="tooltip">Home</span>
+            </li>
+            <li>
+                <a href="/school_years">
+                    <i class='bx bxs-calendar-edit'></i>
+                    <span class="links_name">Manage Enrollment</span>
+                </a>
+                <span class="tooltip">Manage Enrollment</span>
+            </li>
+            <li>
+                <a href="/manage_section">
+                    <i class='bx bxs-grid-alt'></i>
+                    <span class="links_name">Manage Sections</span>
+                </a>
+                <span class="tooltip">Manage Sections</span>
+            </li>
+            <li>
+                <a href="/create_platoon_page">
+                    <i class='bx bxs-user-check'></i>
+                    <span class="links_name">Manage Students </span>
+                </a>
+                <span class="tooltip">Manage Students</span>
+            </li>
+
+
+            <!-- <li>
+                <a href="/attendance_page">
+                    <i class='bx bx-list-check'></i>
+                    <span class="links_name">Attendance</span>
+                </a>
+                <span class="tooltip">Attendance</span>
+            </li> -->
+            <li>
+                <a href="/alumni_page">
+                    <i class='bx bxs-graduation'></i>
+                    <span class="links_name">Alumni</span>
+                </a>
+                <span class="tooltip">ALumni</span>
+            </li>
+            <li>
+                <a href="/admin_files">
+                    <i class='bx bxs-folder'></i>
+                    <span class="links_name">FILES</span>
+                </a>
+                <span class="tooltip">FILES</span>
+            </li>
+            <li>
+                <a href="/cert_page">
+                    <i class='bx bxs-certification'></i>
+                    <span class="links_name">CERTIFICATION</span>
+                </a>
+                <span class="tooltip">CERTIFICATION</span>
+            </li>
+
+            <!-- <li>
+                <a href="#">
+                    <i class='bx bx-message'></i>
+                    <span class="links_name">Generate List</span>
+                </a>
+                <span class="tooltip">Generate List</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-file'></i>
+                    <span class="links_name">Documents</span>
+                </a>
+                <span class="tooltip">Documents</span>
+            </li>
+            <br> -->
+            <li>
+                <a href="/sample_attendance">
+                    <i class='bx bx-cog'></i>
+                    <span class="links_name">Setting</span>
+                </a>
+                <span class="tooltip">Setting</span>
+            </li>
+            <br>&nbsp;<br>
+            <li>
+                <a href="/logout_student">
+                    <i class='bx bx-power-off'></i>
+                    <span class="links_name">Logout</span>
+                </a>
+                <span class="tooltip">Logout</span>
+            </li>
+
+        </ul>
+    </div>
+    <!-- <section class="home-section">
+        <div class="text">Dashboard</div>
+    </section> -->
+    <script>
+        let sidebar = document.querySelector(".sidebar");
+        let closeBtn = document.querySelector("#btn");
+        let searchBtn = document.querySelector(".bx-search");
+
+        closeBtn.addEventListener("click", () => {
+            sidebar.classList.toggle("open");
+            menuBtnChange(); //calling the function(optional)
+        });
+
+        searchBtn.addEventListener("click", () => { // Sidebar open when you click on the search iocn
+            sidebar.classList.toggle("open");
+            menuBtnChange(); //calling the function(optional)
+        });
+
+        // following are the code to change sidebar button(optional)
+        function menuBtnChange() {
+            if (sidebar.classList.contains("open")) {
+                closeBtn.classList.replace("bx-menu", "bx-menu-alt-right"); //replacing the iocns class
+            } else {
+                closeBtn.classList.replace("bx-menu-alt-right", "bx-menu"); //replacing the iocns class
+            }
+        }
+    </script>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+</body>
+
+</html>

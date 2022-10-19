@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School years</title>
+    <link rel="icon" href="../../static/images/tup.png">
+    <link rel="stylesheet" href="../../static/admin_css/cert_page.css">
+
+    <!-- pagination css -->
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+</head>
+
+<body>
+    {% include 'activities/admin_nav.html' %}
+
+    <!-- modals -->
+
+
+    <section class="home-section">
+        <div class="heads">
+            <h1 class="text"><i class='bx bxs-certification'></i> CERTIFICATION</h1><br>
+        </div>
+        <div class="bg">
+            <div class="upper">
+                <div class="left">
+                    <h3 style="font-weight: bold;">Select Field you want to Modify</h3>
+                    <div>
+                        <select class="selections form-control" id="selections ">
+                            <option value="rotc" style="color: black;">ROTC</option>
+                            <option value="cwts" style="color: black;">CWTS</option>
+                        </select>
+
+                    </div>
+                    <br>
+                    <br>
+
+                    <div class="rotc box " id="rotc ">
+                        <form action="{% url 'activities:add_details' %}" method="POST">
+                            {% csrf_token %}
+                            <p1 style="font-size:14px;color:#000000; ">Set All Details to be display on Certificates (ROTC)</p1><br>&nbsp;
+                            <div>
+                                <div class="form-group ">
+                                    <label for="exampleFormControlInput1 ">School Year <span style="font-style: italic; color:rgb(138, 138, 138);">* (This will not appear in Certificate)</span></label>
+                                    <select name="sys1" id="sys1" class="form-control">
+                                    {% for s in sys %}
+                                    <option value="{{s.years}}">{{s.years}}</option>
+                                    {% endfor %}
+                                </select>
+                                </div>
+                                {% for s in details %}
+                                <div class="form-group ">
+                                    <label for="exampleFormControlInput1 ">Commandant</label>
+                                    <input type="text" class="form-control " id="exampleFormControlInput1 " placeholder="Commandant 's  Name" name="commandant" value="{{s.commandant}}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">Registrar</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Registrar" name="registrar" value="{{s.registrar}}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">Given Date</label>
+                                    <div style="display: flex; justify-content:space-between;">
+                                        <input type="text" style="width: 30%;" class="form-control" id="exampleFormControlInput1" placeholder="Month: July" name="month" required>
+                                        <input type="text" style="width: 30%;" class="form-control" id="exampleFormControlInput1" placeholder="Day: 20th" name="date" required>
+                                        <input type="text" style="width: 30%;" class="form-control" id="exampleFormControlInput1" placeholder="Year: 2022" name="year" required>
+                                    </div>
+
+                                </div>
+                                {% endfor %}
+                                <br>
+
+
+                            </div>
+                            <button type="submit" class="btn btn-info btn-lg btn-block">SAVE</button>
+                        </form>
+
+                    </div>
+                    <div class="cwts box " id="cwts ">
+                        <p1 style="font-size:14px;color:#000000; ">Set All Details to be display on Certificates (CWTS)</p1><br>&nbsp;
+                        <div>
+                            <div class="form-group ">
+                                <label for="exampleFormControlInput1 ">Coordinator</label>
+                                <input type="email " class="form-control " id="exampleFormControlInput1 " placeholder="Coordinator's  Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Instructor</label>
+                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Instructor's Name ">
+                            </div>
+                            <br>
+                            <button type="button " class="btn btn-primary btn-lg btn-block ">SAVE</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="arrow">
+                    <i class='bx bxs-right-arrow-square' id="arrow" title="Preview on the right side"></i>
+                </div>
+
+
+                <div class="right">
+
+                    <div class="rotc box" id="rotc_cover">
+
+                        <h3 style="font-weight: bold; text-align:center;">Preview of ROTC Certificate</h3>
+
+                        <div id="rotc_cert">
+
+                            <div class="inner1">
+                                {% for s in details %} {% if s.id %}
+                                <div id="img1">
+                                    <img src="../../static/images/236.png">
+                                </div>
+
+                                <div id="img2">
+                                    <img src="../../static/images/NRCEN.png">
+                                </div>
+
+                                <span class="up1">Naval Reserve Center-National Capital Region</span><br>
+                                <span class="up2">Department of Naval Science and Tactics</span><br>
+                                <span class="up3">236TH NAVAL RESERVE OFFICER TRAINING CORPS UNIT</span><br>
+                                <span class="up4">Technological University of the Philippines-Cavite</span><br>
+                                <span class="up5">Carlos Q. Trinidad Avenue, Salawag, Dasmarinas City, Cavite</span><br>
+                                <span class="line1">Certificate of Completion</span><br>
+                                <span class="line7"><i>is herby awarded to</i></span><br>
+                                <span class="line8"><i>CADET DELA CRUZ JUAN</i></span><br>&nbsp;
+                                <span class="line9"><i>for having satisfactory completed the prescribed</i></span><br>
+                                <span class="line10"><i>Program of Instruction (POI) of MS1 and MS2 for Basic</i></span><br>
+                                <span class="line11">NAVAL RESERVE OFFICERS TRAINING COURSE (NROTC)</span><br>
+                                <span class="line12"><i>Given this <span style="color: red;">{{s.date}}</span> day of <span style="color: red;">{{s.month}}  {{s.year}}</span> at TUP-Cavite, Carlos Q. Trinidad Avenue, Salawag, Dasmarinas City, Cavite</i>
+                                </span><br>&nbsp;<br>
+                                <div class="bot">
+                                    <span class="lastline"> <u class="com">{{s.commandant}}</u>&nbsp;&nbsp; &nbsp;  <u class="comm">{{s.registrar}}</u>&emsp;<u class="control">236-20-1</u></span>
+                                </div>
+                                {% else %}
+                                <div id="img1">
+                                    <img src="../../static/images/236.png">
+                                </div>
+
+                                <div id="img2">
+                                    <img src="../../static/images/NRCEN.png">
+                                </div>
+
+                                <span class="up1">Naval Reserve Center-National Capital Region</span><br>
+                                <span class="up2">Department of Naval Science and Tactics</span><br>
+                                <span class="up3">236TH NAVAL RESERVE OFFICER TRAINING CORPS UNIT</span><br>
+                                <span class="up4">Technological University of the Philippines-Cavite</span><br>
+                                <span class="up5">Carlos Q. Trinidad Avenue, Salawag, Dasmarinas City, Cavite</span><br>
+                                <span class="line1">Certificate of Completion</span><br>
+                                <span class="line7"><i>is herby awarded to</i></span><br>
+                                <span class="line8"><i>CADET DELA CRUZ JUAN</i></span><br>&nbsp;
+                                <span class="line9"><i>for having satisfactory completed the prescribed</i></span><br>
+                                <span class="line10"><i>Program of Instruction (POI) of MS1 and MS2 for Basic</i></span><br>
+                                <span class="line11">NAVAL RESERVE OFFICERS TRAINING COURSE (NROTC)</span><br>
+                                <span class="line12"><i>Given this <span style="color: red; font-weight:bolder;">Date</span> day of <span style="color: red; font-weight:bolder;">Month  Year</span>{{s.year}} at TUP-Cavite, Carlos Q. Trinidad Avenue, Salawag,
+                                Dasmarinas City, Cavite</i>
+                                </span><br>
+                                <div class="bot">
+                                    <span class="lastline"> <u class="com"><span style="color: red; font-weight:bolder;">* Commandant</span></u>&nbsp;&nbsp; &nbsp; <u class="comm"><span style="color: red; font-weight:bolder;">* Registrar</span></u>&emsp;
+                                    <u class="control">236-20-1</u>
+                                    </span>
+                                </div>
+                                {% endif %} {% endfor %}
+                            </div>
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+                    <div class="cwts box" id="cwts_cover">
+                        <h3>Preview of CWTS Certificate</h3>
+                        <div id="cwts_cert">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <br>
+            <div class="hehe ">
+
+
+                <div class="inside">
+                    <div class="table-responsive">
+                        <p1 style="font-size:14px;color:#000000; ">List of all School Years for Certifications</p1><br>&nbsp;
+                        <table id="myTable" class="table table-bordered table-hover">
+                            <thead class="thead">
+                                <tr>
+
+                                    <th scope="col">School Year</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Date Generated</th>
+                                    <th scope="col">GENERATE</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for s in sys %}
+                                <tr>
+
+                                    <form action="{% url 'activities:generate' %}" method="POST" target="_blank">
+                                        {% csrf_token %}
+                                        <td id="syears">{{s.years}}</td>
+                                        <!-- for pendings -->
+                                        {% if s.acts == 'PENDING' %}
+                                        <td id="pends">
+                                            <h3><i class='bx bxs-time-five'></i></h3>
+                                            <div class="fin">
+                                                <h2>{{s.acts}}</h2>
+                                            </div>
+
+                                        </td>
+                                        {% else %}
+                                        <td id="pends">
+                                            <h3><i class='bx bxs-check-circle' id="ch"></i></h3>
+                                            <div class="fin">
+                                                <h2>{{s.acts}}</h2>
+                                            </div>
+
+                                        </td>
+                                        {% endif %}
+                                        <td>
+                                            {% if s.date_generated != None %}
+                                            <h2 style="color:rgb(11, 115, 0); font-size:15px;">{{s.date_generated}} </h2>
+                                            {% else %}
+                                            <h2 style="color:rgb(188, 100, 0); font-size:15px;">{{s.date_generated}} </h2>
+                                            {% endif %}
+
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <input type="hidden" value="{{s.years}}" name="years">
+                                            <button type="submit" class="btn btn-success">GENERATE</button>
+                                        </td>
+                                    </form>
+
+
+
+                                </tr>
+
+                                {% empty %} {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11 "></script>
+    <!-- <script>
+        {% for msg in messages %}
+        Swal.fire({
+            icon: '{{msg.icon}}',
+            text: '{{ msg }}'
+        }) {% endfor %}
+    </script> -->
+
+    <script>
+        $('.btn-danger').on('click', function(e) {
+            e.preventDefault();
+            var self = $(this);
+            console.log(self.data('title'))
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won 't be able to revert this!",
+                icon: 'warning ',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6 ',
+                cancelButtonColor: '#d33 ',
+
+                confirmButtonText: 'Yes, delete it! '
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Deleted! ',
+                        'Your file has been deleted. ',
+                        'success '
+                    )
+                    location.href = self.attr('href ')
+                }
+            })
+        })
+    </script>
+
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#myTable').dataTable();
+        });
+    </script>
+    <!-- 
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+    <script>
+        $(document).ready(function() {
+            $(".selections").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue) {
+                        $(".box").not("." + optionValue).hide();
+                        $("." + optionValue).show();
+                    } else {
+                        $(".box").hide();
+                    }
+                });
+            }).change();
+        });
+    </script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students</title>
+    <link rel="stylesheet" href="../../static/admin_css/admin_staff.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+    <!-- icon for seacrch -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/solid.css">
+    <!-- for table pagination -->
+    <link rel="stylesheet" href="../../static/admin_css/minmin.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+
+
+</head>
+
+<body>
+    {% include 'activities/admin_nav.html' %}
+
+
+
+
+    <section class="home-section">
+        <div class="heads">
+            <h1 class="text"><i class='bx bx-user-pin'></i> ENROLLED STUDENTS</h1><br>
+        </div>
+        <div class="bg">
+            <ul class="nav nav-tabs nav-pills nav-fill">
+                <li class="nav-item">
+                    <a href="/school_years" class="nav-link">School Year</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" style="background-color: #25A643;" href="/admin_staff">Officially Enrolled <i class='bx bxs-badge-check' style="vertical-align: middle;"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin_pending">Pending Enrollees <i class='bx bxs-time-five' style="vertical-align: middle;" ></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin_rejected">Rejected <i class='bx bxs-user-minus' style="vertical-align: middle;"></i></a>
+                </li>
+
+            </ul>
+            <br>
+            <div>
+                <div class="table-responsive">
+                    {% for s in s_years %}
+                    <p1 style="font-size:14px;color:#000000;">Officially Enrolled Students. SY: {{s.years}}</p1><br>&nbsp; {% endfor %}
+                    <table id="myTable" class="table table-bordered table-hover ">
+                        <thead class="thead">
+                            <tr>
+                                <th scope="col">ID NUMBER</th>
+                                <th scope="col">FULL NAME</th>
+                                <th scope="col">EMAIL</th>
+                                <!-- <th scope="col">PROFILE PICTURE</th> -->
+                                <th scope="col">COURSE</th>
+                                <th scope="col">FIELD</th>
+                                <th scope="col">FIELD SECTION</th>
+                                <th scope="col">OPTIONS</th>
+                                <th scope="col">SAVE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for s in details %}
+                            <tr>
+                                <form action="{% url 'activities:update_officially' s.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <td>{{s.idnumber}}</td>
+                                    <td>{{s.firstname}} {{s.middlename}} {{s.lastname}}</td>
+                                    <td>{{s.email}}</td>
+                                    <!-- <td id="profile"><img src="{{s.picture.url}}"></td> -->
+                                    <td>{{s.section}}</td>
+                                    {% if s.field == 'ROTC' %}
+                                    <td style="color:red; font-weight:bolder;">{{s.field}}</td>
+                                    {% elif s.field == 'Select Course' %}
+                                    <td style="color:#4EC3D0;font-weight:bolder;">{{s.field}}</td>
+                                    {% endif %}
+                                    <td>{{s.platoons}}</td>
+                                    <td>
+                                        <select name="slc" id="slc" class="form-control">
+                                        <option value="{{s.status}}" selected>{{s.status}}</option>
+                                        <option value="PENDING">PENDING</option>
+                                        <option value="REJECTED">REJECT</option>
+                                        <option value="DROP">DROP</option>
+                                    </select>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <input type="hidden" value="{{s.id}}" name="idd">
+                                        <button type="submit" class="btn btn-success">Update</button>
+                                    </td>
+                                </form>
+                            </tr>
+
+                            {% empty %} {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        function myFunction() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                td2 = tr[i].getElementsByTagName("td")[2];
+                td3 = tr[i].getElementsByTagName("td")[3];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#ddlCountry,#ddlAge").on("change", function() {
+                var country = $('#ddlCountry').find("option:selected").val();
+                var age = $('#ddlAge').find("option:selected").val();
+                SearchData(country, age)
+            });
+        });
+
+        function SearchData(country, age) {
+            if (country.toUpperCase() == 'ALL' && age.toUpperCase() == 'ALL') {
+                $('#myTable tbody tr').show();
+            } else {
+                $('#myTable tbody tr:has(td)').each(function() {
+                    var rowCountry = $.trim($(this).find('td:eq(7)').text());
+                    var rowAge = $.trim($(this).find('td:eq(8)').text());
+                    if (country.toUpperCase() != 'ALL' && age.toUpperCase() != 'ALL') {
+                        if (rowCountry.toUpperCase() == country.toUpperCase() && rowAge == age) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    } else if ($(this).find('td:eq(7)').text() != '' || $(this).find('td:eq(7)').text() != '') {
+                        if (country != 'all') {
+                            if (rowCountry.toUpperCase() == country.toUpperCase()) {
+                                $(this).show();
+                            } else {
+                                $(this).hide();
+                            }
+                        }
+                        if (age != 'all') {
+                            if (rowAge == age) {
+                                $(this).show();
+                            } else {
+                                $(this).hide();
+                            }
+                        }
+                    }
+
+                });
+            }
+        }
+    </script>
+
+    <!-- <script>
+        $(function() {
+            $('table.table').each(function() {
+                var currentPage = 0;
+                var numPerPage = 10;
+                var $table = $(this);
+                $table.bind('repaginate', function() {
+                    $table.find('tbody tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
+                });
+                $table.trigger('repaginate');
+                var numRows = $table.find('tbody tr').length;
+                var numPages = Math.ceil(numRows / numPerPage);
+                var $pager = $('<div class="pager"></div>');
+                var $previous = $('<span class="previous"><<</spnan>');
+                var $next = $('<span class="next">>></spnan>');
+                for (var page = 0; page < numPages; page++) {
+                    $('<span class="page-number"></span>').text(page + 1).bind('click', {
+                        newPage: page
+                    }, function(event) {
+                        currentPage = event.data['newPage'];
+                        $table.trigger('repaginate');
+                        $(this).addClass('active').siblings().removeClass('active');
+                    }).appendTo($pager).addClass('clickable');
+                }
+                $pager.insertAfter($table).find('span.page-number:first').addClass('active');
+                $previous.insertBefore('span.page-number:first');
+                $next.insertAfter('span.page-number:last');
+
+                $next.click(function(e) {
+                    $previous.addClass('clickable');
+                    $pager.find('.active').next('.page-number.clickable').click();
+                });
+                $previous.click(function(e) {
+                    $next.addClass('clickable');
+                    $pager.find('.active').prev('.page-number.clickable').click();
+                });
+                $table.on('repaginate', function() {
+                    $next.addClass('clickable');
+                    $previous.addClass('clickable');
+
+                    setTimeout(function() {
+                        var $active = $pager.find('.page-number.active');
+                        if ($active.next('.page-number.clickable').length === 0) {
+                            $next.removeClass('clickable');
+                        } else if ($active.prev('.page-number.clickable').length === 0) {
+                            $previous.removeClass('clickable');
+                        }
+                    });
+                });
+                $table.trigger('repaginate');
+            });
+        });
+    </script> -->
+    <!-- pagination -->
+    <script src="../../static/js/pag.js"></script>
+    <script src="../../static/js/datbot.js"></script>
+    <script src="../../static/js/dat.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable({
+                pagingType: 'full_numbers',
+            });
+        });
+    </script>
+</body>
+
+</html>

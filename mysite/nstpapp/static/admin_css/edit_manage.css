@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.home-section {
+    position: relative;
+    top: 0;
+    left: 78px;
+    width: calc(100% - 78px);
+    transition: all 0.5s ease;
+    z-index: 2;
+}
+
+body {
+    background-attachment: fixed;
+    background-image: url(../images/sd2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+.heads {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(90deg, rgb(29, 29, 29) 0%, rgba(0, 0, 0, 0.9444152661064426) 56%);
+}
+
+.heads .text i {
+    color: #fb5800;
+}
+
+.count {
+    color: rgb(185, 2, 2);
+    font-size: 30px;
+    float: right;
+}
+
+.heads .text i {
+    vertical-align: middle;
+}
+
+.headd {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sear input {
+    width: 300px;
+    height: 40px;
+    border-radius: 5px;
+}
+
+.sidebar.open~.home-section {
+    left: 250px;
+    width: calc(100% - 250px);
+}
+
+.home-section .text {
+    /* background: #c51c39; */
+    display: inline-block;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 500;
+    margin: 18px
+}
+
+.bg {
+    width: auto;
+    background-attachment: fixed;
+    /* background-image: url(../images/tupc2.jpg); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    /* min-height: 100vh;
+    padding: 18px; */
+    height: auto;
+    padding: 10px;
+}
+
+
+/* own css */
+
+.tops {
+    justify-content: space-between;
+    padding: 18px;
+    width: 100%;
+    display: flex;
+    min-height: 20vh;
+}
+
+.overall {
+    justify-content: space-between;
+    padding: 20px;
+    width: 100%;
+    display: flex;
+}
+
+.left {
+    display: block;
+    height: auto;
+    width: 32%;
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.39), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+}
+
+.right {
+    float: right;
+    width: 32%;
+}
+
+.mid {
+    width: 32%;
+    display: block;
+}
+
+.square {
+    background-color: #ffffff;
+    height: auto;
+    padding: 10px;
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.39), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#profile_pic {
+    width: 142px;
+    height: 142px;
+    border-radius: 50%;
+    margin: auto !important;
+    display: flex;
+}
+
+#name {
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 20px !important;
+}
+
+#mess {
+    margin: auto;
+    display: flex;
+    background-color: #123d4f;
+    border: hidden;
+}
+
+.form-group {
+    width: 100%;
+}
+
+.form-inline {
+    background-color: rgb(255, 255, 255);
+}
+
+.square .form-group input {
+    width: 85% !important;
+    font-size: 12px !important;
+    color: rgb(0, 0, 0) !important;
+}
+
+.form-group label {
+    font-size: 12px !important;
+}
+
+.form-group select {
+    font-size: 12px !important;
+    color: black !important;
+}
+
+.form-group #address1 {
+    width: 60% !important;
+}
+
+.form-group #address2 {
+    width: 85% !important;
+}
+
+.form-group {
+    justify-content: space-between !important;
+}
+
+h5 {
+    font-weight: bold !important;
+    font-size: 14px !important;
+    color: #343434 !important;
+}
+
+#update {
+    bottom: 0;
+    float: right !important;
+    height: 50px !important;
+    width: 150px !important;
+    border: none !important;
+    background-color: #00ae17 !important;
+}

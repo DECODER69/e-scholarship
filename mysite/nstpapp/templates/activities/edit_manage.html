@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Platoons</title>
+    <link rel="stylesheet" href="../../static/admin_css/edit_manage.css">
+    <link rel="icon" href="../../static/images/tup.png">
+
+
+    <!-- icon for seacrch -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/solid.css">
+    <!-- 
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"> -->
+
+    <link rel="stylesheet" href="../../static/admin_css/minmin.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+
+<body>
+    {% include 'activities/admin_nav.html' %}
+    <!-- modal for sections -->
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Send Email</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+                </div> {% for s in datas %}
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="modal-body">
+
+                        <input type="hidden" name="ids" value="{{s.id}}">
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Recipient:</label>
+                            <input type="text" class="form-control" id="recipient-name" value="{{s.email}}" name="rname">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Subject:</label>
+                            <input type="text" class="form-control" id="recipient-name" name="emailtext">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Message:</label>
+                            <textarea class="form-control" id="message-text" name="message"></textarea>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Send message</button>
+                    </div>
+                </form>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+    <!-- EOF MODAL -->
+
+    <!-- MODAL FOR PICTURES -->
+
+
+
+    <!-- eof modal for puictures  -->
+    <section class="home-section">
+        <div class="heads">
+            <a href="/create_platoon_page">
+                <h1 class="text"><i class='bx bxs-dashboard'></i> Manage Students &nbsp;|</h1>
+            </a>
+            {% for s in datas %}
+            <h1 class="text"><i class='bx bx-intersect'></i>User: {{s.idnumber}}
+            </h1>
+            {% endfor %}
+
+        </div>
+        <div class="bg">
+            {% for s in datas %}
+            <form action="{% url 'activities:update_manage' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="ids" value="{{s.id}}">
+                <div class="overall">
+                    <div class="left">
+                        <div class="square">
+
+                            <img src="{{s.picture.url}}" alt="user profile" id="profile_pic"><br>
+                            <h2 id="name">{{s.firstname}} {{s.lastname}}</h2>
+                            <h5 style="text-align: center; font-style:italic;">Student</h5>
+
+                            <button type="button" class="btn btn-dark" id="mess" data-toggle="modal" data-target="#exampleModal"><i class='bx bxs-envelope' style="vertical-align: middle !important; font-size:20px; color:rgb(255, 255, 255); padding-top:2px;" title="Click to send email"></i>&nbsp;Send email</button>
+
+                        </div>
+                        <br>
+                        <div class="square">
+                            {% if s.address and s.cpnumber and s.birthday and s.age and s.civil != '' %}
+                            <h5 style="color: rgb(60, 60, 60);">Personal Informations&nbsp;&nbsp;<i class='bx bxs-badge-check' style="vertical-align: middle; color:rgb(0, 134, 0);"></i></h5>
+                            <hr>
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <label for="inputPassword6"><i class='bx bxs-map'></i></label>
+                                    <input type="text" id="address2" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Address" value="{{s.address}}" name="address">
+                                </div>
+                                <br><br>
+                                <div class="form-group">
+                                    <label for="inputPassword6"><i class='bx bxs-phone' ></i></label>
+                                    <input type="text" id="address2" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Phone" value="{{s.cpnumber}}" name="cpnumber">
+                                </div>
+                                <br><br>
+                                <div class="form-group">
+                                    <label for="inputPassword6"><i class='bx bxs-calendar' title="Birthday"></i></label>
+                                    <input type="date" id="address2" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Birthday" value="{{s.birthday}}" name="birthday">
+                                </div>
+                                <br><br>
+                                <div class="form-group">
+                                    <label for="inputPassword6"><i class='bx bxs-user-plus'></i></label>
+                                    <input type="text" id="address2" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Age" value="{{s.age}}" name="age">
+                                </div>
+                                <br><br>
+                                <div class="form-group">
+                                    <label for="inputPassword6"><i class='bx bxs-user-badge' ></i></label>
+
+                                    <select name="civil" class="form-control mx-sm-3" id="address2">
+                                        <option value="{{s.civil}}">{{s.civil}}</option>
+                                        <option value="single">single</option>
+                                        <option value="married">married</option>
+                                    </select>
+                                </div><br><br>
+                                <div class="form-group">
+                                    <label for="inputPassword6"><i class='bx bxs-envelope'></i></label>
+                                    <input type="text" id="address2" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Email" value="{{s.email}}" name="email">
+                                </div>
+                            </div>
+                            {% else %}
+                            <h5 style="color: rgb(60, 60, 60);">Personal Informations</h5>
+                            <hr>
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <label for="inputPassword6"><i class='bx bxs-map'></i></label>
+                                    <input type="text" id="address2" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Address" value="{{s.address}}" name="address">
+                                </div>
+                                <br><br>
+                                <div class="form-group">
+                                    <label for="inputPassword6"><i class='bx bxs-phone' ></i></label>
+                                    <input type="text" id="address2" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Phone" value="{{s.cpnumber}}" name="cpnumber">
+                                </div>
+                                <br><br>
+                                <div class="form-group">
+                                    <label for="inputPassword6"><i class='bx bxs-calendar' title="Birthday"></i></label>
+                                    <input type="date" id="address2" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Birthday" value="{{s.birthday}}" name="birthday">
+                                </div>
+                                <br><br>
+                                <div class="form-group">
+                                    <label for="inputPassword6"><i class='bx bxs-user-plus'></i></label>
+                                    <input type="text" id="address2" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Age" value="{{s.age}}" name="age">
+                                </div>
+                                <br><br>
+                                <div class="form-group">
+                                    <label for="inputPassword6"><i class='bx bxs-user-badge' ></i></label>
+
+                                    <select name="civil" class="form-control mx-sm-3" id="address2">
+                                        <option value="{{s.civil}}">{{s.civil}}</option>
+                                        <option value="single">single</option>
+                                        <option value="married">married</option>
+                                    </select>
+                                </div><br><br>
+                                <div class="form-group">
+                                    <label for="inputPassword6"><i class='bx bxs-envelope'></i></label>
+                                    <input type="text" id="address2" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Email" value="{{s.email}}" name="email">
+                                </div>
+                            </div>
+                            {% endif %}
+
+
+                        </div>
+
+                    </div>
+                    <div class="mid">
+                        <div class="square">
+                            <h5 style="color: rgb(60, 60, 60);">Personal Information</h5>
+                            <hr>
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <label for="inputPassword6">First name:</label>
+                                    <input type="text" id="address1" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="First name" value="{{s.firstname}}" name="firstname">
+                                </div><br><br>
+                                <div class="form-group">
+                                    <label for="inputPassword6">Middle name:</label>
+                                    <input type="text" id="address1" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Middle name" value="{{s.middlename}}" name="middlename">
+                                </div><br><br>
+                                <div class="form-group">
+                                    <label for="inputPassword6">Last name:</label>
+                                    <input type="text" id="address1" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Last name" value="{{s.lastname}}" name="lastname">
+                                </div><br>
+                                <div class="form-group">
+                                    <label for="inputPassword6">ID Number:</label>
+                                    <input type="text" id="address1" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="ID Number" value="{{s.idnumber}}" name="idnumber">
+                                </div><br><br>
+                                <div class="form-group">
+                                    <label for="inputPassword6">School Status:</label>
+                                    <select name="status" id="address1" class="form-control mx-sm-3">
+                                    <option value="{{s.status}}" selected>{{s.status}}</option>
+                                    <option value="PENDING">PENDING</option>
+                                    <option value="ENROLLED">ENROLLED</option>
+                                    <option value="REJECTED">REJECT</option>
+                                    <option value="DROP">DROP</option>
+                                    <option value="GRADUATE">GRADUATE</option>
+                                </select>
+                                </div><br>
+                                <div class="form-group">
+                                    <label for="inputPassword6">NSTP Companion:</label>
+                                    <select name="field" id="address1" class="form-control mx-sm-3">
+                                    <option value="{{s.field}}" selected>{{s.field}}</option>
+                                    <option value="ROTC">ROTC</option>
+                                    <option value="CWTS">CWTS</option>
+                                </select>
+                                </div><br><br>
+                                <div class="form-group">
+                                    <label for="inputPassword6">Platoon / Section:</label>
+                                    <select name="platoons" id="address1" class="form-control mx-sm-3">
+                                    <option value="{{s.platoons}}" selected>{{s.platoons}}</option>
+                                    {% for s in section %}
+                                    <option value="{{s.section_created}}">{{s.section_created}}</option>
+                                    {% endfor %}
+                                </select>
+                                </div><br><br>
+                                <div class="form-group">
+                                    <label for="inputPassword6">Course & Section:</label>
+                                    <input type="text" id="address1" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Course and Section" value="{{s.section}}" name="section">
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <br>
+                        <div class="square">
+                            <h5 style="color: rgb(60, 60, 60);">Health Information</h5>
+                            <hr>
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <label for="inputPassword6">Health Status:</label>
+                                    <input type="text" id="address1" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Health Status" value="">
+                                </div><br><br>
+                            </div><br><br>
+
+                        </div>
+                    </div>
+
+
+                    <!-- roifghtijerrrrhh -->
+                    <div class="right">
+                        <div class="square">
+                            {% if s.nfather and s.foccupation or s.nmother and s.moccupation and s.pcontact != '' %}
+                            <h5 style="color: rgb(60, 60, 60);">Parent's Information&nbsp;&nbsp;<i class='bx bxs-badge-check' style="vertical-align: middle; color:rgb(0, 134, 0);"></i></h5>
+                            <hr>
+                            <div class="form-inline">
+
+                                <div class="form-group">
+                                    <label for="inputPassword6">Father's Name:</label>
+                                    <input type="text" id="address1" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Father's Fullname" value="{{s.nfather}}" name="nfather">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputPassword6">Profession:</label>
+                                    <input type="text" id="address1" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Father's Profession" value="{{s.foccupation}}" name="foccupation">
+                                </div>
+                                <br><br>
+                                <div class="form-group">
+                                    <label for="inputPassword6">Mother's Name:</label>
+                                    <input type="text" id="address1" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Mother's Fullname" value="{{s.nmother}}" name="nmother">
+                                </div>
+                                <br><br>
+                                <div class="form-group">
+                                    <label for="inputPassword6">Profession:</label>
+                                    <input type="text" id="address1" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Mother's Profession" value="{{s.moccupation}}" name="moccupation">
+                                </div><br><br>
+                                <div class="form-group">
+                                    <label for="inputPassword6">Contact Info:</label>
+                                    <input type="text" id="address1" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Parent's Contact" value="{{s.pcontact}}" name="pcontact">
+                                </div>
+
+                            </div><br> {% else %}
+                            <h5 style="color: rgb(60, 60, 60);">Parent's Information </h5><br>
+                            <hr>
+                            <div class="form-inline">
+
+                                <div class="form-group">
+                                    <label for="inputPassword6">Father's Name:</label>
+                                    <input type="text" id="address1" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Father's Fullname" value="{{s.nfather}}" name="nfather">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputPassword6">Profession:</label>
+                                    <input type="text" id="address1" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Father's Profession" value="{{s.foccupation}}" name="foccupation">
+                                </div>
+                                <br><br>
+                                <div class="form-group">
+                                    <label for="inputPassword6">Mother's Name:</label>
+                                    <input type="text" id="address1" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Mother's Fullname" value="{{s.nmother}}" name="nmother">
+                                </div>
+                                <br><br>
+                                <div class="form-group">
+                                    <label for="inputPassword6">Profession:</label>
+                                    <input type="text" id="address1" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Mother's Profession" value="{{s.moccupation}}" name="moccupation">
+                                </div><br><br>
+                                <div class="form-group">
+                                    <label for="inputPassword6">Contact Info:</label>
+                                    <input type="text" id="address1" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Parent's Contact" value="{{s.pcontact}}" name="pcontact">
+                                </div>
+
+                            </div>
+                            <br> {% endif %} {% if s.nguardian and s.goccupation and s.gcontact != '' %}
+
+                            <h5 style="color: rgb(60, 60, 60);">Guardian's Information&nbsp;&nbsp;<i class='bx bxs-badge-check' style="vertical-align: middle; color:rgb(0, 134, 0);"></i></h5>
+                            <hr>
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <label for="inputPassword6">Guardian's Name:</label>
+                                    <input type="text" id="address1" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Guardian's Fullname" value="{{s.nguardian}}" name="nguardian">
+                                </div><br><br>
+                                <div class="form-group">
+                                    <label for="inputPassword6">Profession:</label>
+                                    <input type="text" id="address1" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Guardian's Profession" value="{{s.goccupation}}" name="goccupation">
+                                </div><br><br>
+                                <div class="form-group">
+                                    <label for="inputPassword6">Ccntact:</label>
+                                    <input type="text" id="address1" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Guardian's Contact" value="{{s.gcontact}}" name="gcontact">
+                                </div>
+                            </div>
+                            {% else %}
+                            <h5 style="color: rgb(60, 60, 60);">Guardian's Information</h5>
+                            <hr>
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <label for="inputPassword6">Guardian's Name:</label>
+                                    <input type="text" id="address1" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Guardian's Fullname" value="{{s.nguardian}}" name="nguardian">
+                                </div><br><br>
+                                <div class="form-group">
+                                    <label for="inputPassword6">Profession:</label>
+                                    <input type="text" id="address1" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Guardian's Profession" value="{{s.goccupation}}" name="goccupation">
+                                </div><br><br>
+                                <div class="form-group">
+                                    <label for="inputPassword6">Ccntact:</label>
+                                    <input type="text" id="address1" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Guardian's Contact" value="{{s.gcontact}}" name="gcontact">
+                                </div>
+                            </div>
+                            {% endif %}
+
+                        </div><br><br>
+                        <button type="submit" class="btn btn-success" id="update"><i class='bx bx-refresh' style="font-size:30px; vertical-align:middle;"></i> Update</button>
+
+                    </div>
+
+                </div>
+
+            </form>
+            {% endfor %}
+
+        </div>
+    </section>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    <!-- <script>
+        {% for msg in messages %}
+        Swal.fire({
+            icon: 'success',
+            text: '{{ msg }}'
+        }) {% endfor %}
+    </script>  -->
+    <!-- search  -->
+    <script>
+        function myFunction() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = '';
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+    <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+
+    <script type="text/javascript">
+        function ExportToExcel(type, fn, dl) {
+            var elt = document.getElementById('myTable');
+            var wb = XLSX.utils.table_to_book(elt, {
+                sheet: "sheet1"
+            });
+            return dl ?
+                XLSX.write(wb, {
+                    bookType: type,
+                    bookSST: true,
+                    type: 'base64'
+                }) :
+                XLSX.writeFile(wb, fn || ('MySheetName.' + (type || 'xlsx')));
+        }
+    </script>
+
+
+    <!-- <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#myTable').dataTable();
+        });
+    </script> -->
+
+    <script src="../../static/js/pag.js"></script>
+    <script src="../../static/js/datbot.js"></script>
+    <script src="../../static/js/dat.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#table1').DataTable({
+                pagingType: 'full_numbers',
+            });
+        });
+    </script>
+
+
+
+
+</body>
+
+</html>

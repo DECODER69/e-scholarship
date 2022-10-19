@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background-attachment: fixed;
+    background-image: url(../images/sd2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+.home-section {
+    position: relative;
+    top: 0;
+    left: 78px;
+    width: calc(100% - 78px);
+    transition: all 0.5s ease;
+    z-index: 2;
+}
+
+.lines {
+    display: flex;
+}
+
+.heads {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(90deg, rgb(29, 29, 29) 0%, rgba(0, 0, 0, 0.9444152661064426) 56%);
+}
+
+.heads .text i {
+    color: #fb5800;
+}
+
+.heads .text i {
+    font-size: 25px;
+    vertical-align: middle;
+}
+
+.sidebar.open~.home-section {
+    left: 250px;
+    width: calc(100% - 250px);
+}
+
+.home-section .text {
+    /* background: #c51c39; */
+    display: inline-block;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 500;
+    margin: 18px
+}
+
+#spacer {
+    display: inline-block;
+    color: #ffffff;
+    font-size: 25px;
+    font-weight: 500;
+    margin: 18px
+}
+
+
+/* 
+OWN CSS */
+
+.containers {
+    display: block;
+    margin: auto;
+    height: auto;
+    width: 80%;
+    background-color: transparent;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.over {
+    padding: 10px;
+    display: flex;
+    margin: auto;
+    height: auto;
+    width: 100%;
+}
+
+.taas {
+    padding: 10px;
+    background-color: #ffffff;
+    width: 100%;
+    height: 150px;
+}
+
+.inputs {
+    float: right;
+    justify-content: space-between;
+    width: 45%;
+    display: flex;
+}
+
+.selects {
+    /* border-top: none;
+    border-left: none;
+    border-right: none; */
+    font-size: 20px;
+    border-radius: 5px;
+    width: 200px;
+}
+
+
+/* .selects:focus {
+    outline: none !important;
+    box-shadow: none !important;
+} */
+
+.btn i {
+    font-size: 30px;
+    vertical-align: middle;
+}
+
+.left {
+    display: block;
+    width: 40%;
+    height: auto;
+    border-right: 2px solid rgb(122, 122, 122);
+    border-right-style: dotted;
+}
+
+.right {
+    padding-bottom: 18px;
+    padding-left: 18px;
+    float: right;
+    width: 60%;
+    height: auto;
+}
+
+.profile .profile2 {
+    display: flex;
+    margin: auto;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: solid rgb(24, 7, 7) 5px;
+}
+
+.name {
+    text-align: center;
+    font-size: 25px;
+}
+
+.student {
+    text-align: center;
+    font-style: italic;
+    font-size: 20px;
+}
+
+.socials {
+    padding-left: 10px;
+    text-align: left;
+}
+
+.socials i {
+    vertical-align: middle;
+}
+
+.background {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.details {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.hehe {
+    height: auto;
+    display: grid;
+    width: 50%;
+}
+
+.hehe img {
+    height: 100px;
+    width: 100px;
+    display: grid;
+    float: left;
+}
+
+@media screen and (min-width:1366px) and (max-width:1920px) {
+    .home-section .text {
+        /* background: #c51c39; */
+        display: inline-block;
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: 500;
+        margin: 18px
+    }
+}

@@ -1,0 +1,156 @@
+<!DOCTYPE html>{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="icon" href="../../static/images/tup.png">
+
+
+
+
+    <title>Dashboard</title>
+</head>
+
+<body>
+    {% include 'activities/navbar.html' %}
+
+    <!-- MODAL -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Complete Profile !</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+                </div>
+                <div class="modal-body">
+                    Please fill up all related Field to complete the registration process. Disregard this message if you already done it. Thank you !
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a href="/editprofile"><button type="button" class="btn btn-primary">Proceed</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end of modal -->
+
+    <section class="home-section">
+        <div class="heads">
+            <h1 class="text"><i class='bx bxs-dashboard'></i> Dashboard</h1><br>
+        </div>
+        <div class="bg">
+            <div class="card-holder">
+                {% for n in name %}
+                <div class="card mb-3" id="deta">
+                    <div class="row no-gutters">
+                        <div class="col-md-4" id="cage">
+                            <img src="{{n.picture.url}}" alt="..." id="profile">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{n.firstname}} {{n.lastname}}</h5>
+                                <p class="card-text">Student Name</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3" id="deta">
+                    <div class="row no-gutters">
+                        <div class="col-md-4" id="cage">
+                            <img src="../../static/images/approved.jpg" alt="..." id="play">
+                            <img src="../../static/images/pending.jpg" alt="..." id="pause">
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <input type="text" class="card-title" id="status" value="{{n.status}}" readonly>
+                                <p class="card-text">Enrollment Status</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3" id="deta">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="../../static/images/course.jpg" alt="..." id="profile">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{n.field}} {{e.section}}</h5>
+                                <p class="card-text">Field</p><br>
+                                <p class="card-text" id="course"><a href="/fields">View Fields</a></p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+
+
+
+            </div>
+            <div class="announcements">
+                <h1 class="ans"><i class='bx bxs-megaphone'></i> Announcements</h1>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card" id="card">
+                            <div class="co">
+                                <img src="../../static/images/tup.png" class="img" alt="admin logo" id="admin-logo">
+                                <div class="dt">
+                                    <h1 class="author">Admin</h1>
+                                    <p class="date">July 11, 2022, 4:20 a.m.</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="card-body" id="card-body">
+                                <h5 class="card-title">Examination day</h5>
+                                <p class="card-text" id="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+
+
+            </div>
+
+
+
+
+        </div>
+
+    </section>
+
+
+    <script>
+        var txt = document.getElementById('status').value;
+
+        if (txt == 'ENROLLED') {
+            document.getElementById('play').style.display = "initial"
+        } else {
+            document.getElementById('pause').style.display = "initial"
+        }
+    </script>
+
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            $('#exampleModal').modal('show');
+        });
+    </script>
+
+</body>
+
+</html>

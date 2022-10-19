@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href="../../static/images/tup.png">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../static/admin_css/sample_attendance.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+
+<body>
+    {% include 'activities/admin_nav.html' %}
+    <!-- modal for sections -->
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#ffffff; color:white;">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Training Day</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white;">
+              <span aria-hidden="true">&times;</span>
+            </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{% url 'activities:create_td' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Add date</label>
+                            <input type="date" class="form-control" id="message-text" placeholder="Ex: ALPHA" name="td" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Training day count</label>
+                            <input type="number" class="form-control" id="message-text" placeholder="Ex: 1" name="td_count" required>
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                    <button type="submit" class="btn btn-info"><i class='bx bx-plus' style="vertical-align: middle;" ></i> Create</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- EOF MODAL -->
+
+    <section class="home-section">
+        <div class="heads">
+            <a href="/sample_attendance">
+                <h1 class="text"><i class='bx bxs-dashboard'></i> Manage Attendance &nbsp;|</h1>
+            </a>
+
+
+        </div>
+        <div class="bg">
+            <div class="overall">
+                <div class="left">
+                    <div class="tss">
+
+
+                        <div class="txt ">
+                            <h1 style="margin-left: 10px; font-size:20px; color:#000000; font-weight:bold;" id="mega">Take Attendance</h1>
+
+                        </div>
+                        <button type="button" class="btns" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" id="new"><i class='bx bx-plus'></i>  ADD TRAINING DAY</button>
+
+
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        {% for s in date %}
+                        <form action="{% url 'activities:open_date' %}" class="column" style="text-decoration: none;" method="POST">
+                            {% csrf_token %}
+                            <div class="card">
+                                <i class='bx bxs-calendar-check' id="ro_logo"></i>
+                                <h5 class="title">{{s.td}}</h5>
+                                <input type="hidden" value="{{s.td}}" name="date">
+                                <p>Training day {{s.td_count}}</p>
+                                <div class="multi">
+                                    <input type="hidden" value="{{s.td_count}}" name="td_count">
+                                    <button type="submit" class="btn btn-info" id="sub">Open</button>
+                                    <a href="/del_tday/{{s.id}}" class="btn btn-dark" id="del"><i class='bx bx-trash'></i> </a>
+                                </div>
+
+
+                            </div>
+                        </form>
+                        {% empty %}
+                        <p1 style="text-align: center; margin:auto;">No Training Day Created <i class='bx bx-sad'></i></p1>
+                        {% endfor %}
+                    </div>
+
+
+
+                </div>
+                <br>
+                <div class="left">
+                    <div class="tss">
+
+
+                        <div class="txt ">
+                            <h1 style="margin-left: 10px; font-size:20px; color:#000000; font-weight:bold;" id="mega">Attendance Reports</h1>
+
+                        </div>
+                        {% comment %} <button type="button" class="btns" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" id="new"><i class='bx bx-plus'></i>  ADD TRAINING DAY</button> {% endcomment %}
+
+
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        {% for s in section %}
+                        <form action="{% url 'activities:show_students'%}" class="column" style="text-decoration: none;" method="POST">
+                            {% csrf_token %} {% if s.fiel == 'ROTC' %}
+                            <div class="card">
+                                <img src="../../static/images/236.png" alt="ROTC LOGO" id="ro_logo">
+                                <h5 class="title ">{{s.section_created}}</h5>
+                                
+                        
+                                <input type="hidden" value="{{s.section_created}}" name="getSection"><br>
+                                <button type="submit" class="btn btn-info">Open</button><br>
+                                <p class="card-text"><small class="text-muted">Created for ROTC Only</small></p>
+                            </div>
+                            {% elif s.fiel == 'CWTS' %}
+                            <div class="card">
+                                <img src="../../static/images/tup.png" alt="ROTC LOGO" id="ro_logo">
+                                <h5 class="title ">{{s.section_created}}</h5>
+                                <input type="hidden" value="{{s.section_created}}" name="getSection"><br>
+                                <button type="submit" class="btn btn-info">Open</button><br>
+                                <p class="card-text"><small class="text-muted">Created for CWTS Only</small></p>
+                            </div>
+                            {% endif %}
+                        </form>
+                        {% endfor %}
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        {% for msg in messages %}
+        Swal.fire({
+            icon: '',
+            text: '{{ msg }}'
+        }) {% endfor %}
+    </script> 
+
+    <script>
+        $('.btn-dark').on('click', function(e) {
+            e.preventDefault();
+            var self = $(this);
+            console.log(self.data('title'))
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                    location.href = self.attr('href')
+                }
+            })
+        })
+    </script>
+
+
+
+    <!-- pagination -->
+    <script src="../../static/js/pag.js"></script>
+    <script src="../../static/js/datbot.js"></script>
+    <script src="../../static/js/dat.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                pagingType: 'full_numbers',
+            });
+        });
+    </script>
+</body>
+
+</html>

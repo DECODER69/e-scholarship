@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background-attachment: fixed;
+    background-image: url(../images/sd2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+.home-section {
+    position: relative;
+    top: 0;
+    left: 78px;
+    width: calc(100% - 78px);
+    transition: all 0.5s ease;
+    z-index: 2;
+}
+
+.heads {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(90deg, rgb(29, 29, 29) 0%, rgba(0, 0, 0, 0.9444152661064426) 56%);
+}
+
+.heads .text i {
+    color: #fb5800;
+}
+
+.count {
+    color: rgb(185, 2, 2);
+    font-size: 30px;
+    float: right;
+}
+
+.heads .text i {
+    vertical-align: middle;
+}
+
+.headd {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sear input {
+    width: 300px;
+    height: 40px;
+    border-radius: 5px;
+}
+
+.sidebar.open~.home-section {
+    left: 250px;
+    width: calc(100% - 250px);
+}
+
+.home-section .text {
+    /* background: #c51c39; */
+    display: inline-block;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 500;
+    margin: 18px
+}
+
+.bg {
+    width: auto;
+    background-attachment: fixed;
+    /* background-image: url(../images/tupc2.jpg); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    /* min-height: 100vh;
+    padding: 18px; */
+    height: auto;
+}
+
+
+/* OWWWWWWWWWN CSSSS */
+
+.tops {
+    justify-content: space-between;
+    padding: 18px;
+    width: 100%;
+    display: flex;
+    min-height: 20vh;
+}
+
+.overall {
+    justify-content: space-between;
+    padding: 18px;
+    width: 100%;
+    display: flex;
+    min-height: 100vh;
+}
+
+.left {
+    /* background-color: #ffffff; */
+    height: auto;
+    padding: 10px;
+    padding-bottom: 20px !important;
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.603), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.right {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100vh;
+    width: 28%;
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.39), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.left1 {
+    color: white;
+    border-radius: 5px;
+    background: rgb(87, 4, 4);
+    background: linear-gradient(90deg, rgba(87, 4, 4, 1) 0%, rgba(208, 10, 10, 1) 50%, rgba(131, 5, 5, 1) 100%);
+    height: auto;
+    padding: 10px;
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.39), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.right1 {
+    color: rgb(192, 192, 192);
+    /* overflow-y: scroll;
+    overflow-x: hidden; */
+    /* background-color: #212A39; */
+    height: auto;
+    width: 100%;
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.39), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.row {
+    display: inline-block;
+    height: 90%;
+    padding: 10px;
+}
+
+.column {
+    height: 220px;
+    width: 25%;
+    padding: 0 10px;
+}
+
+
+/* Clear floats after the columns */
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.card {
+    color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    /* this adds the "card" effect */
+    padding: 10px;
+    text-align: center;
+    background-color: #a7bbb7!important;
+}
+
+.card h1 {
+    color: #000000;
+}
+
+.card p {
+    color: #2b2b2b;
+}
+
+hr {
+    color: #fb5800;
+}
+
+#att {
+    width: 40px;
+    height: 40px;
+    margin: auto;
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+    .column {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 959px) {
+    .column {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+    }
+}

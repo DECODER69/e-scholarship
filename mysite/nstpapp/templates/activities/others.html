@@ -1,0 +1,86 @@
+<!DOCTYPE html>{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>others</title>
+    <link rel="stylesheet" href="../../static/css/others.css">
+</head>
+
+<body>
+    {% include 'activities/navbar.html' %}
+
+    <section class="home-section">
+        <div class="lines">
+            <a href="/profile_page">
+                <h1 class="text"><i class='bx bx-user'></i>User Profile</h1>
+            </a>
+            <a href="/editprofile">
+                <h1 class="text">/</h1>
+                <!-- <i class='bx bxs-chevron-right' id="spacer"></i> -->
+                <h1 class="text"><i class='bx bx-edit' id="edit"></i>Edit Profile</h1><br>
+            </a>
+            <a href="/others">
+                <h1 class="text">/</h1>
+                <!-- <i class='bx bxs-chevron-right' id="spacer"></i> -->
+                <h1 class="text"><i class='bx bx-edit' id="edit"></i> Other Requirements</h1><br>
+            </a>
+        </div>
+
+        <div class="bg">
+            <div class="profile">
+                <div class="first">
+                    <div class="right">
+                        <div class="blocks">
+                            <h1 class="ti">Other Requirements &nbsp;*Required*</h1>
+                        </div>
+
+                        <hr> {% for e in uwu %}
+                        <form action="{% url 'activities:edit_others' e.id %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="block">
+                                <label>Submit here the photo of your Student's ID.</label>
+                                {% if e.idpic %}
+                                <img src="{{e.idpic.url}}" class="ids" alt="id picture">
+                                {% else %}
+                                <input type="file" name="studentid" >
+                                {% endif %}
+
+                            </div>
+                            <div class="block">
+                                {% if e.idpic %}
+                                <a href="{{e.idpic.url}}" target="_blank">
+                                    <img src="{{e.idpic.url}}" class="ids" alt="id picture">
+                                </a>
+                                {% else %}
+                                <p></p>
+                                {% endif %}
+
+
+                            </div>
+
+                            &nbsp;<br>&nbsp;<br>
+
+                            <hr>
+
+                            <hr>
+                            <div class="buttons">
+                                <button type="submit" class="btn btn-success"><i class='bx bx-save'> Next</i> </button>
+
+                            </div>
+                        </form>
+                        {% endfor %}
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

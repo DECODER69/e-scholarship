@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>attendance peoples</title>
+    <link rel="icon" href="../../static/images/tup.png">
+    <link rel="stylesheet" href="../../static/admin_css/attendance_main.css">
+    <!-- pagination css -->
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+</head>
+
+<body>
+    {% include 'activities/admin_nav.html' %}
+
+
+
+
+
+
+    <section class="home-section">
+        <div class="heads">
+            <a href="/attendance_page">
+                <h1 class="text"><i class='bx bxs-dashboard'></i> Manage Attendance &nbsp;|</h1>
+            </a>
+
+            <a href="/attendance_sections">
+                <h1 class="text"><i class='bx bxs-dashboard'></i> Sections &nbsp;|</h1>
+            </a>
+            <a href="/attendance_main/">
+                <h1 class="text"><i class='bx bx-star'></i> {{sectionz}}</h1>
+            </a>
+            <h1 class="text"><i class='bx bx-star'></i> {{sectionz}}</h1>
+        </div>
+        <div class="bg">
+            <div class="inside">
+                <div class="table-responsive">
+                    <div class="he">
+                        <br>
+
+                        <p1 style="margin-left: 10px; color:#000000;">List of All Students in {{getSection}}</p1><br>&nbsp;
+                        <h1 style="margin-left: 10px; font-size:30px; color:#000000">Students</h1><br>
+
+                    </div>
+                    <br>
+                    <table id="myTable" class="table table-bordered table-hover ">
+                        <thead class="thead">
+                            <tr>
+                                <th scope="col">ID NUMBER</th>
+                                <th scope="col">FULL NAME</th>
+                                <th scope="col">TD 1</th>
+                                <th scope="col">Save</th>
+
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for s in names2 %}
+                            <tr>
+                                <form action="{% url 'activities:update_attendance' ALPHA %}" method="POST">
+                                    {% csrf_token %}
+                                    <td>{{s.platoons}}</td>
+                                    <td>
+
+                                        {{s.firstname}} {{s.middlename}} {{s.lastname}}
+
+                                    </td>
+                                    <td>
+                                        <select name="td1" id="td1">
+                                            <option value="{{s.TD1}}">{{s.TD1}}</option>
+                                            <option value="PRESENT">PRESENT</option>
+                                            <option value="LATE">LATE</option>
+                                            <option value="ABSENT">ABSENT</option>
+                                    </select>
+                                    </td>
+                                    <td>
+                                        <input type="hidden" value="{{s.id}}" name="ids">
+                                        <button type="submit" class="btn btn-success">Save</button>
+                                    </td>
+                                </form>
+                            </tr>
+
+                            {% empty %}
+                            <h1 style="color: red;">NO STUDENTS AVAILABLE!</h1>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#myTable').dataTable();
+        });
+    </script>
+
+
+
+    <script type="text/javascript ">
+        $(window).on('load', function() {
+            $('#id01').modal('show');
+        });
+    </script>
+
+</body>
+
+</html>

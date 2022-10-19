@@ -1,0 +1,347 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.home-section {
+    position: relative;
+    top: 0;
+    left: 78px;
+    width: calc(100% - 78px);
+    transition: all 0.5s ease;
+    z-index: 2;
+}
+
+body {
+    background-attachment: fixed;
+    background-image: url(../images/sd2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+.heads {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(90deg, rgb(29, 29, 29) 0%, rgba(0, 0, 0, 0.9444152661064426) 56%);
+}
+
+.heads .text i {
+    color: #fb5800;
+}
+
+.count {
+    color: rgb(185, 2, 2);
+    font-size: 30px;
+    float: right;
+}
+
+.heads .text i {
+    vertical-align: middle;
+}
+
+.headd {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sear input {
+    width: 300px;
+    height: 40px;
+    border-radius: 5px;
+}
+
+.sidebar.open~.home-section {
+    left: 250px;
+    width: calc(100% - 250px);
+}
+
+.home-section .text {
+    /* background: #c51c39; */
+    display: inline-block;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 500;
+    margin: 18px
+}
+
+.bg {
+    width: auto;
+    background-attachment: fixed;
+    /* background-image: url(../images/tupc2.jpg); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    /* min-height: 100vh;
+    padding: 18px; */
+    height: auto;
+}
+
+
+/* own css */
+
+.tops {
+    justify-content: space-between;
+    padding: 18px;
+    width: 100%;
+    display: flex;
+    min-height: 20vh;
+}
+
+.overall {
+    justify-content: space-between;
+    padding: 18px;
+    width: 100%;
+    display: flex;
+    background-color: white;
+}
+
+.left {
+    height: auto;
+    padding: 10px;
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.39), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.right {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100vh;
+    width: 28%;
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.39), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.left1 {
+    color: white;
+    border-radius: 5px;
+    background: rgb(54, 55, 56);
+    background: linear-gradient(90deg, rgba(54, 55, 56, 1) 0%, rgba(22, 72, 87, 1) 99%);
+    height: auto;
+    padding: 10px;
+    padding-bottom: 50px !important;
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.39), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.left1 button {
+    background-color: rgb(255, 106, 0);
+    color: white;
+    margin: auto;
+    height: 50px;
+    width: 200px;
+    border-radius: 5px;
+    border: none;
+    font-size: 20px;
+}
+
+.left1 button:hover {
+    background-color: rgb(202, 91, 12);
+    color: white;
+    margin: auto;
+    border: none;
+}
+
+.left1 a {
+    display: flex;
+    margin: auto;
+}
+
+.adds {
+    font-size: 80px;
+    color: white;
+    text-align: center;
+}
+
+#dl {
+    background-color: #006b86 !important;
+    border-color: transparent !important;
+}
+
+.right1 {
+    /* overflow-y: scroll;
+    overflow-x: hidden; */
+    height: auto;
+    width: 48%;
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.39), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#profile_pic {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.12);
+}
+
+#profile_pic2 {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.12);
+}
+
+
+/* table pagers */
+
+
+/* EOF PAGER */
+
+.covers {
+    display: block;
+    min-height: 150px;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    /* background: rgb(66, 102, 120);
+    background: linear-gradient(90deg, rgba(66, 102, 120, 1) 0%, rgba(164, 21, 158, 1) 100%); */
+}
+
+.cardss {}
+
+.some {
+    display: flex;
+    justify-content: space-between;
+}
+
+.some h1,
+p1 {
+    color: white;
+}
+
+.view {
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.479);
+    text-align: center;
+}
+
+.view a {
+    font-size: 20px;
+    color: white;
+}
+
+.view a:hover {
+    color: rgb(213, 213, 213);
+}
+
+.haha {
+    border-radius: 5px;
+    background: rgb(66, 102, 120);
+    background: linear-gradient(90deg, rgba(66, 102, 120, 1) 0%, rgba(164, 21, 158, 1) 100%);
+}
+
+.some2 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.some2 h1 {
+    margin-top: 7%;
+    vertical-align: -webkit-baseline-middle;
+}
+
+.some2 i {
+    font-size: 100px;
+}
+
+#viewMore {
+    background-color: transparent !important;
+    border: none;
+}
+
+#viewpic {
+    width: 700px;
+    height: 700px;
+}
+
+.modal-body {
+    background-color: rgb(125, 153, 164);
+    display: flex;
+}
+
+#tups {
+    width: 300px;
+    height: 300px;
+    margin: auto;
+}
+
+.modal-dialog {
+    width: auto !important;
+    margin: auto;
+}
+
+.modal-footer {
+    justify-content: space-between !important;
+}
+
+
+/* table custom */
+
+.table td,
+.table th {
+    font-size: 12px !important;
+}
+
+.table-responsive {
+    font-size: 15px;
+    color: black;
+}
+
+.table-responsive input,
+select,
+label {
+    border-radius: 5px;
+    font-weight: 100;
+    color: rgb(0, 0, 0);
+}
+
+#selections {
+    height: 30px;
+    border-radius: 5px;
+}
+
+#changes {
+    text-align: center;
+    font-size: 12px;
+    width: 40%;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(149, 132, 0);
+    color: white;
+    padding: 5px;
+    text-align: center;
+    margin: auto;
+    text-decoration: none !important;
+}
+
+#changes:hover {
+    background-color: rgb(57, 50, 0);
+}
+
+#times {
+    background-color: #880000 !important;
+    color: white;
+    padding: 4px;
+    border-radius: 7px;
+}
+
+#times2 {
+    background-color: #980808 !important;
+    color: white;
+    padding: 4px;
+    border-radius: 7px;
+}
+
+.nav-item .nav-link {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#navs {
+    padding: 18px;
+}

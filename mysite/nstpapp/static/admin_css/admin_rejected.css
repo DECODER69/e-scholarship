@@ -1,0 +1,278 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background-attachment: fixed;
+    background-image: url(../images/sd2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+.home-section {
+    position: relative;
+    top: 0;
+    left: 78px;
+    width: calc(100% - 78px);
+    transition: all 0.5s ease;
+    z-index: 2;
+}
+
+.heads {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(90deg, rgb(29, 29, 29) 0%, rgba(0, 0, 0, 0.9444152661064426) 56%);
+}
+
+.heads .text i {
+    color: #fb5800;
+}
+
+.heads .text i {
+    vertical-align: middle;
+}
+
+.sidebar.open~.home-section {
+    left: 250px;
+    width: calc(100% - 250px);
+}
+
+.home-section .text {
+    /* background: #c51c39; */
+    display: inline-block;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 500;
+    margin: 18px
+}
+
+.bg {
+    width: auto;
+    background-attachment: fixed;
+    /* background-image: url(../images/tupc2.jpg); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: auto;
+    padding: 18px;
+}
+
+
+/* own css */
+
+.inside {
+    padding: 5px;
+}
+
+.add {
+    display: flex;
+}
+
+.add .btns {
+    border-radius: 5px;
+    padding-right: 10px;
+    height: 50px;
+    text-align: center !important;
+    text-decoration: none !important;
+    color: white;
+    width: auto;
+    background-color: #0069d9;
+    display: flex;
+}
+
+.btns i {
+    font-size: 25px;
+    vertical-align: middle;
+}
+
+.add p {
+    margin: auto;
+    text-align: center;
+}
+
+.add .btns:hover {
+    color: rgb(255, 255, 255);
+    background-color: #0050a7;
+}
+
+.options {
+    float: right;
+    width: 100%;
+}
+
+.options #mylist {
+    /* float: right; */
+    border-radius: 5px;
+    width: 10%;
+    height: 100%;
+}
+
+.table #profile img {
+    width: 50px;
+}
+
+.details {
+    /* background-color: #811616; */
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.details p {
+    font-weight: bolder;
+    font-size: 20px;
+    vertical-align: middle;
+    color: rgb(68, 68, 68);
+}
+
+#myInput {
+    border-radius: 5px;
+    height: 40px;
+}
+
+
+/* navs tabs */
+
+.nav-item .nav-link {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.filters {
+    padding-top: 20px;
+    display: flex;
+    height: 100px;
+}
+
+.filter_in {
+    padding-top: 20px;
+    width: 40%;
+    display: flex;
+}
+
+.filter_in select {
+    padding: 5px;
+    border-radius: 5px;
+    height: 40px;
+    width: auto;
+}
+
+.sear {
+    padding-top: 20px;
+    width: 60%;
+    float: right;
+}
+
+.sear input {
+    width: 350px;
+    float: right;
+}
+
+.table-responsive {
+    padding: 10px !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: auto;
+    background-color: #fff;
+}
+
+.table th {
+    color: rgb(36, 36, 36);
+    font-size: 15px;
+    background-color: #222d325a !important;
+}
+
+.table td {
+    font-size: 13px;
+}
+
+.table #profile img {
+    width: 50px;
+    height: 50px;
+}
+
+.tar {
+    padding: 10px;
+    text-align: center;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+}
+
+
+/* .he {
+    width: 100%;
+    background: rgb(66, 102, 120);
+    background: linear-gradient(90deg, rgba(66, 102, 120, 1) 3%, rgba(2, 0, 36, 1) 100%, rgba(0, 212, 255, 1) 100%);
+} */
+
+
+/* 
+pager */
+
+@media screen and (min-width:360px)and (max-width:640px) {
+    .add .btns {
+        border-radius: 5px;
+        padding: 10px;
+        height: 50px;
+        text-align: center !important;
+        text-decoration: none !important;
+        color: white;
+        width: 70%;
+        background-color: #0069d9;
+        display: -webkit-box;
+    }
+    .add p {
+        margin: auto;
+        text-align: center;
+        font-size: 12px;
+    }
+    .add i {
+        font-size: 15px;
+        vertical-align: middle;
+    }
+    .options {
+        width: 30%;
+    }
+    .options #mylist {
+        border-radius: 5px;
+        width: 100%;
+        height: 100%;
+    }
+    .details {
+        background-color: #811616;
+        padding: 5px;
+        display: inline-block;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .details p {
+        font-weight: bolder;
+        font-size: 20px;
+        vertical-align: middle;
+        color: white;
+        text-align: center;
+    }
+    #myInput {
+        border-radius: 5px;
+        margin: auto;
+        display: flex;
+    }
+}
+
+@media screen and (min-width:1366px) and (max-width:1920px) {
+    .home-section .text {
+        /* background: #c51c39; */
+        display: inline-block;
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: 500;
+        margin: 18px
+    }
+}
