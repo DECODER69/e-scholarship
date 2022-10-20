@@ -1,0 +1,162 @@
+<!DOCTYPE html>{% load static%}
+<html lang="en">
+
+<head>
+    <link rel="icon" href="../../static/images/tup.png">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <title>signup</title>
+    <!-- sweet alert -->
+
+</head>
+
+<body>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: red;">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: white;">Attention !</h5>
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button> -->
+                </div>
+                <div class="modal-body">
+                    Registration is not yet Open!
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% comment %} ############################# {% endcomment %}
+    <div class="page">
+        <div class="left">
+            <div class="logo">
+                <img src="../../static/images/tup.png">
+            </div>
+            <div class="text">
+                <h1 id="tit">Sign up to NSTP</h1>
+            </div>
+
+        </div>
+
+        <div class="right">
+            <div class="cont">
+                <form class="container" action="{% url 'activities:signup' %}" method="POST" enctype="multipart/form-data">
+                    {%csrf_token%} {% for s in schools %} {% if s.years %}
+                    <input type="hidden" name="s_year" value="{{s.years}}">
+                    <div class="form-group">
+                        <label for="firstname">First Name</label>
+                        <input type="text" class="form-control" id="firstname" placeholder="Juan" required name="firstname">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="middle">MiddleName</label>
+                        <input type="text" class="form-control" id="middle" placeholder="Reyes" name="middle">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Last Name</label>
+                        <input type="text" class="form-control" id="lastname" placeholder="Dela Cruz" required name="lastname">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastname">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Juan.DelaCruz@gsfe.tupcavite.edu.ph" required name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">ID Number</label>
+                        <input type="text" class="form-control" id="idnumber" placeholder="TUPC-18-XXXX" required name="idnumber">
+                    </div>
+                    <div class="custom-file mb-3">
+                        <input type="file" class="custom-file-input" id="validatedCustomFile" required name="picture">
+                        <label class="custom-file-label" for="validatedCustomFile">1 x 1 Picture</label>
+
+                    </div><br>
+
+                    <div class="form-group">
+                        <label for="">Password</label><br>
+                        <div id="pass">
+                            <input type="password" class="password1 form-control" id="password1" placeholder="Password" required name="password1">
+                            <input type="password" class="password2 form-control" id="password2" placeholder="Confirm Password" required name="password2">
+                        </div>
+                    </div><br>
+                    <button type="submit" class="btn btn-success">Sign Up</button><br>&nbsp;<br>
+                    <p id="already">Already have an Account? <a href="/login_page"> Login</a></p>
+
+
+
+                    <!-- oppppssssssssssssss -->
+
+                    {% else %} {% endif %} {% endfor %}
+                </form>
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <!-- sweet alert -->
+
+    {% comment %}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> {% endcomment %}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        { %
+            for msg in messages %
+        }
+        Swal.fire({
+            icon: '',
+            text: '{{ msg }}'
+        }) { % endfor %
+        }
+    </script>
+
+    {% comment %} {% for s in schools %} {% if s.years %} {% endcomment %}
+    <script type="text/javascript">
+        document.querySelector('.btn').onclick = function() {
+
+            var password = document.querySelector('.password1').value,
+                password2 = document.querySelector('.password2').value;
+
+            if (password == "") {
+                alert("Field cannot be empty");
+            } else if (password != password2) {
+                alert("Password didn't match try again.");
+                document.querySelector('.password1').value = '';
+                document.querySelector('.password2').value = '';
+
+                return false
+            }
+            return true
+        }
+
+        setTimeout(function() {
+            if ($('#msg').length > 0) {
+                $('#msg').remove();
+            }
+        }, 3000)
+    </script>
+    {% comment %} {% else %} {% endif %} {% endfor %} {% endcomment %} {% for s in schools %} {% if s.years %} {% else %}
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            $('#exampleModal').modal('show');
+        });
+    </script>
+    {% endif %} {% endfor %}
+
+</body>
+
+</html>

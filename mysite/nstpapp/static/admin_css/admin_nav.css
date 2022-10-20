@@ -301,6 +301,11 @@
     margin: 18px
 } */
 
+#logout {
+    position: absolute;
+    bottom: 0px !important;
+}
+
 @media (max-width: 420px) {
     .sidebar li .tooltip {
         display: none;

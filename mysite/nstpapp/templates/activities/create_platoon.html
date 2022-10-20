@@ -106,7 +106,7 @@
 
                             <thead>
                                 <tr style="color: rgb(0, 0, 0);">
-                                    <th scope="col">Profile</th>
+
                                     <th scope="col">ID Number</th>
                                     <th scope="col">Full name</th>
                                     <th scope="col">Course / Section</th>
@@ -124,13 +124,7 @@
                             <tbody>
                                 {% for s in counts1 %}
                                 <tr>
-                                    <th scope="row">
 
-                                        <a href="{% url 'activities:view_images' s.id %}" target="_self" title="Click to view picture">
-                                            <img src="{{s.picture.url}}" alt="profile pic" id="profile_pic">
-
-                                        </a>
-                                    </th>
                                     <td style="font-size: 10px;">{{s.idnumber}}</td>
                                     <td>{{s.lastname}} {{s.firstname}} {{s.middlename}}</td>
                                     <td>{{s.section}}</td>

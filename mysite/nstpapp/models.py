@@ -30,6 +30,9 @@ class extenduser(models.Model):
     picture = models.ImageField(upload_to='images/', null=False)
     status = models.CharField(max_length=10, default='PENDING')
     platoons = models.CharField(max_length=20, default='PROCESSING')
+    school = models.CharField(max_length=  20, default='')
+    start_dates = models.CharField(max_length=15, default='')
+    end_date = models.CharField(max_length=15, default='')
     
     
     
@@ -93,7 +96,7 @@ class school_year(models.Model):
         return self.years
 
 class sections(models.Model):
-    fiel = models.CharField(max_length=20, default='')
+    fiel = models.ImageField(upload_to="images/" , default='')
     section_created = models.CharField(max_length=20, default='', primary_key=True)
     
 class training_day(models.Model):

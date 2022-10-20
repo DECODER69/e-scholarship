@@ -1,3 +1,4 @@
+
 from dataclasses import field
 import csv
 from distutils.command.build_scripts import first_line_re
@@ -51,9 +52,9 @@ import pandas as pd
 def index(request):
     return render(request, 'activities/landing.html')
 def signup_page(request):
-    schools = school_year.objects.all()
+    schools = sections.objects.all()
     context = {
-        'schools':[schools.last()],
+        'schools':schools,
     }
     return render(request, 'activities/signup.html', context)
 def login_page(request):
@@ -306,8 +307,8 @@ def signup(request):
         email = request.POST.get('email')
         idnumber = request.POST.get('idnumber')
         password = request.POST.get('password1')
-        picture = request.FILES['picture']
-        s_year = request.POST.get('s_year')
+        school = request.POST.get('school')
+        # s_year = request.POST.get('s_year')
         if User.objects.filter(username=idnumber).exists():
             messages.error(request, 'ID Number ' + str (idnumber) + ' Already Exist !')
             return redirect('/signup_page')
@@ -317,7 +318,7 @@ def signup(request):
        
         else:
             user = User.objects.create_user(username=idnumber, password=password, email=email)
-            datas = extenduser(s_year=s_year,firstname=firstname, middlename=middle, lastname=lastname, email=email, idnumber=idnumber, password=password,picture=picture,user=user)
+            datas = extenduser(firstname=firstname, middlename=middle, lastname=lastname, email=email, idnumber=idnumber, password=password, school=school,user=user)
             datas.save()
             auth.login(request, user)
             messages.info(request, 'Account created successfully\nPlease Login and complete profile for verification')
@@ -492,7 +493,7 @@ def custom(request):
             sub = request.POST.get('emailtext')
             msg = request.POST.get('message')
             emaila = request.POST.get('cusemail')
-            send_mail(sub, msg,'tupc.nstp@gmail.com',[emaila])
+            send_mail(sub, msg,'escholarship2022@gmail.com',[emaila])
             return redirect('/admin_rejected')
         except ImportError:
             messages.success(request, 'Email Encountered some errors. Please Contact your Administrator')
@@ -540,15 +541,16 @@ def delete_sy(request, id):
 def create_section(request):
     if request.method == 'POST':
         secs = request.POST.get('secs')
-        field = request.POST.get('field')
+        logos = request.FILES['logos']
+        print("pogi" +str(field))
         if secs is not None and field is not None:
             if sections.objects.filter(section_created  = secs).exists():
                 messages.info(request, 'Section ' + str (secs) + ' Already exist !')
                 return redirect('/manage_section')
             else:
-                data = sections(section_created=secs, fiel=field)
+                data = sections(section_created=secs, fiel=logos)
                 data.save()
-                messages.info(request, 'Section ' + str (secs) + ' Created !')
+                messages.info(request, 'School ' + str (secs) + ' Created !')
                 return redirect('/manage_section')
         else:
             messages.info(request, 'Please Input Something!! Ex: ALPHA')
@@ -614,7 +616,7 @@ def edit_manage(request, id):
             sub = request.POST.get('emailtext')
             msg = request.POST.get('message')
             emaila = request.POST.get('rname')
-            send_mail(sub, msg,'tupc.nstp@gmail.com',[emaila])
+            send_mail(sub, msg,'escholarship2022@gmail.com',[emaila])
             messages.success(request, 'Email Sent to ' +str(emaila))
             
         except ImportError:
@@ -718,8 +720,9 @@ def section_content(request):
     if request.method == 'POST':
      
         getSection = request.POST.get('getSection')
-        print(getSection)
-        content3 = extenduser.objects.filter(platoons=getSection).filter(status='ENROLLED')
+       
+        content3 = extenduser.objects.filter(school=getSection).filter(status='ENROLLED')
+        print("school" + str(content3))
         content33 = extenduser.objects.filter(platoons=getSection).filter(status='ENROLLED').count()
     else:
        
@@ -1589,3 +1592,12 @@ def update_attendance(request):
    
         messages.info(request, 'Attendance Up to date')
     return redirect('/attendance_page')
+def update_years(request):
+    if request.method == 'POST':
+        ids = request.POST.get('ids')
+        start_dates = request.POST.get('start_date')
+        end_dates = request.POST.get('end_date')
+        print("start" +str(start_dates))
+        print("end" +str(end_dates))
+        extenduser.objects.filter(id=ids).update(start_dates=start_dates, end_date= end_dates)
+    return redirect('/manage_section')

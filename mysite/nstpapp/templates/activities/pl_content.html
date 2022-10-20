@@ -69,26 +69,36 @@
                                 <th scope="col">EMAIL</th>
 
                                 <th scope="col">COURSE</th>
-                                <th scope="col">FIELD</th>
-                                <th scope="col">SECTION</th>
+                                <th scope="col">DATE APPROVED</th>
+                                <th scope="col">EXPECTED END DATE</th>
+                                <th scope="col">SAVE</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for s in content3 %}
+
                             <tr>
                                 <td>{{s.idnumber}}</td>
                                 <td>{{s.firstname}} {{s.middlename}} {{s.lastname}}</td>
                                 <td>{{s.email}}</td>
 
                                 <td>{{s.section}}</td>
-                                {% if s.field == 'ROTC' %}
-                                <td style="color:red; font-weight:bolder;">{{s.field}}</td>
-                                {% elif s.field == 'CWTS' %}
-                                <td style="color:#4EC3D0;font-weight:bolder;">{{s.field}}</td>
-                                {% endif %}
-                                <td>{{s.platoons}}</td>
+                                <form action="{% url 'activities:update_years' %}" method="post">
+                                    {% csrf_token %}
 
+                                    <td>
+                                        <input type="date" class="form-control" name="start_date" value="{{s.start_dates}}">
+                                    </td>
+                                    <td>
+                                        <input type="date" class="form-control" name="end_date" value="{{s.end_date}}">
+                                    </td>
+                                    <td>
+                                        <input type="hidden" value="{{s.id}}" name="ids">
+                                        <button type="submit" class="btn btn-info">Save</button>
+                                    </td>
+                                </form>
                             </tr>
+
 
                             {% empty %} {% endfor %}
                         </tbody>

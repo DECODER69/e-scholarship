@@ -89,8 +89,8 @@
 
     <section class="home-section">
         <div class="heads">
-            <h1 class="text"><i class='bx bx-home'></i> NSTP SYSTEM DASHBOARD</h1><br>
-            <h1 class="text">{% now "jS F Y H:i" %}</h1>
+            <h1 class="text"><i class='bx bx-home'></i> e-Scholarship Dashboard</h1><br>
+            <h1 class="text">{% now "jS F Y" %}</h1>
         </div><br>
         <div class="bg">
 
@@ -100,7 +100,7 @@
                         <div class="inside1">
                             <div class="left">
                                 <h1>{{active}}</h1>
-                                <p>Active Students</p>
+                                <p>Active Scholars</p>
                             </div>
                             <div class="right">
                                 <img class="graph" src="../../static/images/graph.png">
@@ -117,7 +117,7 @@
                         <div class="inside1">
                             <div class="left">
                                 <h1>{{pending}}</h1>
-                                <p>Pending Enrollees</p>
+                                <p>Pending Applications</p>
                             </div>
                             <div class="right">
                                 <img class="graph" src="../../static/images/graph.png">
@@ -154,7 +154,7 @@
                         <div class="inside1">
                             <div class="left">
                                 <h1>8</h1>
-                                <p>All Sections</p>
+                                <p>All Schools</p>
                             </div>
                             <div class="right">
                                 <img class="graph" src="../../static/images/graph.png">
@@ -339,13 +339,16 @@
     </script>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        {% for msg in messages %}
+    <!-- <script>
+        { %
+            for msg in messages %
+        }
         Swal.fire({
             icon: '',
             text: '{{ msg }}'
-        }) {% endfor %}
-    </script>
+        }) { % endfor %
+        }
+    </script> -->
 
     <script>
         $('.btn-danger').on('click', function(e) {

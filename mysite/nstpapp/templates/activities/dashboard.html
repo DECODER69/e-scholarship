@@ -45,89 +45,82 @@
             <h1 class="text"><i class='bx bxs-dashboard'></i> Dashboard</h1><br>
         </div>
         <div class="bg">
-            <div class="card-holder">
-                {% for n in name %}
-                <div class="card mb-3" id="deta">
-                    <div class="row no-gutters">
-                        <div class="col-md-4" id="cage">
-                            <img src="{{n.picture.url}}" alt="..." id="profile">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">{{n.firstname}} {{n.lastname}}</h5>
-                                <p class="card-text">Student Name</p>
+            {% for s in name %}
+            <div class="left">
+                <div class="cards">
+                    <div class="data">
+                        <h5 id="title">Student</h5>
+                        <h1 id="name">Welcome {{s.firstname}} {{s.lastname}}</h1>
 
-                            </div>
-                        </div>
                     </div>
-                </div>
+                    <div class="icon">
+                        <i class='bx bxs-user-circle'></i>
 
-                <div class="card mb-3" id="deta">
-                    <div class="row no-gutters">
-                        <div class="col-md-4" id="cage">
-                            <img src="../../static/images/approved.jpg" alt="..." id="play">
-                            <img src="../../static/images/pending.jpg" alt="..." id="pause">
-                        </div>
-
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <input type="text" class="card-title" id="status" value="{{n.status}}" readonly>
-                                <p class="card-text">Enrollment Status</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mb-3" id="deta">
-                    <div class="row no-gutters">
-                        <div class="col-md-4">
-                            <img src="../../static/images/course.jpg" alt="..." id="profile">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">{{n.field}} {{e.section}}</h5>
-                                <p class="card-text">Field</p><br>
-                                <p class="card-text" id="course"><a href="/fields">View Fields</a></p>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-
-
-
-
-            </div>
-            <div class="announcements">
-                <h1 class="ans"><i class='bx bxs-megaphone'></i> Announcements</h1>
-
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="card" id="card">
-                            <div class="co">
-                                <img src="../../static/images/tup.png" class="img" alt="admin logo" id="admin-logo">
-                                <div class="dt">
-                                    <h1 class="author">Admin</h1>
-                                    <p class="date">July 11, 2022, 4:20 a.m.</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="card-body" id="card-body">
-                                <h5 class="card-title">Examination day</h5>
-                                <p class="card-text" id="card-text">With supporting text below as a natural lead-in to additional content.</p>
-
-                            </div>
-                        </div>
                     </div>
 
                 </div>
                 <br>
+                <div class="announcements">
+                    <h1 id="tits">Announcements</h1>
+
+                </div>
+
+            </div>
+
+            <div class="right">
+                <div class="cards" id="r_card2">
+                    <div class="data">
+                        <h5 id="title">Today</h5>
+                        <h1 id="name">{% now "jS F Y" %}</h1>
+
+                    </div>
+                    <div class="icon">
+                        <i class='bx bxs-calendar' id="calendar"></i>
+
+                    </div>
+
+                </div><br>
+                <div class="cards" id="r_card">
+                    <div class="data">
+                        <h5 id="title">Application Status</h5>
+
+                        <h1 id="name">{{s.status}}</h1>
+
+
+                    </div>
+                    <div class="icon">
+                        {% if s.status == 'ENROLLED' %}
+                        <i class='bx bxs-check-circle' style="color: green;"></i> {% elif s.status == 'PENDING' %}
+                        <i class='bx bxs-check-circle' style="color: rgb(187, 141, 1);"></i> {% endif %}
+                    </div>
+
+                </div>
+                <br>
+                <div class="cards1">
+                    <div class="data1">
+                        <h5 id="title">Scholarship Period</h5><br>
+                        <div class="period">
+
+                            <h1 id="name" style="color: rgb(55, 59, 55);">{{s.start_dates}} </h1>
+                            <p> -</p>
+                            <h1 id="name" style="color: rgb(109, 4, 4);">{{s.end_date}}</h1>
+
+                        </div>
+
+                    </div>
+                    <!-- <div class="icon">
+                        {% if s.status == 'ENROLLED' %}
+                        <i class='bx bxs-time'></i> {% elif s.status == 'PENDING' %}
+                        <i class='bx bxs-time'></i> {% endif %}
+                    </div> -->
+
+                </div>
 
 
             </div>
 
 
+            {% endfor %}
 
 
         </div>
@@ -150,6 +143,8 @@
             $('#exampleModal').modal('show');
         });
     </script>
+
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 
 </body>
 

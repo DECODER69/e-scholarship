@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
   
     'django.contrib.staticfiles',
-    'nstpapp.apps.NstpappConfig'
+    'nstpapp.apps.NstpappConfig',
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [
@@ -84,7 +85,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'nstp',
+        'NAME': 'scholarship',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',
@@ -142,9 +143,9 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 
-EMAIL_HOST_USER = 'tupc.nstp@gmail.com'
+EMAIL_HOST_USER = 'escholarship2022@gmail.com'
 
-EMAIL_HOST_PASSWORD = 'mlvbynxtxrsraiwc'
+EMAIL_HOST_PASSWORD = 'xedpzfhmwzrheufl'
 
 EMAIL_PORT = 587
 

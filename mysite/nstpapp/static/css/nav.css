@@ -19,10 +19,21 @@
     height: 100%;
     width: 78px;
     /* background: #11101D; */
-    background: #000000;
+    /* background: #1E272C; */
+    /* background: #212A39; */
+    /* background: #5F0706; */
+    /* background: #272119; */
+    background: #010101;
     padding: 6px 14px;
     z-index: 99;
     transition: all 0.5s ease;
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+    /* make scrollbar transparent */
 }
 
 .sidebar.open {
@@ -47,6 +58,11 @@
     font-weight: 600;
     opacity: 0;
     transition: all 0.5s ease;
+}
+
+#logout {
+    position: absolute;
+    bottom: 0px !important;
 }
 
 .sidebar.open .logo-details .icon,

@@ -14,13 +14,14 @@
 <body>
     <div class="sidebar" id="ID"><br>
         <div class="logo-details">
-            <!-- <i class='bx bxl-c-plus-plus icon'></i> -->
-            <!-- <i class='bx bx-shield icon'></i>
+            <!-- <i class='bx bxl-c-plus-plus icon'></i>
+            <i class='bx bx-shield icon'></i>
             <span class="links_name">Home</span> -->
-            <img src="../../static/images/tup.png" class="icon" id="tup"><br>
+            <img src="../../static/images/logo.png" class="icon" id="tup"><br>
 
             <i class='bx bx-menu' id="btn"></i>
         </div><br><br>
+
         <ul class="nav-list">
 
             <li>
@@ -40,9 +41,9 @@
             <li>
                 <a href="/manage_section">
                     <i class='bx bxs-grid-alt'></i>
-                    <span class="links_name">Manage Sections</span>
+                    <span class="links_name">Manage Schools</span>
                 </a>
-                <span class="tooltip">Manage Sections</span>
+                <span class="tooltip">Manage Schools</span>
             </li>
             <li>
                 <a href="/create_platoon_page">
@@ -60,7 +61,7 @@
                 </a>
                 <span class="tooltip">Attendance</span>
             </li> -->
-            <li>
+            <!-- <li>
                 <a href="/alumni_page">
                     <i class='bx bxs-graduation'></i>
                     <span class="links_name">Alumni</span>
@@ -80,7 +81,7 @@
                     <span class="links_name">CERTIFICATION</span>
                 </a>
                 <span class="tooltip">CERTIFICATION</span>
-            </li>
+            </li> -->
 
             <!-- <li>
                 <a href="#">
@@ -97,15 +98,15 @@
                 <span class="tooltip">Documents</span>
             </li>
             <br> -->
-            <li>
+            <!-- <li>
                 <a href="/sample_attendance">
                     <i class='bx bx-cog'></i>
                     <span class="links_name">Setting</span>
                 </a>
                 <span class="tooltip">Setting</span>
             </li>
-            <br>&nbsp;<br>
-            <li>
+            <br>&nbsp;<br> -->
+            <li id="logout">
                 <a href="/logout_student">
                     <i class='bx bx-power-off'></i>
                     <span class="links_name">Logout</span>
@@ -122,6 +123,7 @@
         let sidebar = document.querySelector(".sidebar");
         let closeBtn = document.querySelector("#btn");
         let searchBtn = document.querySelector(".bx-search");
+
 
         closeBtn.addEventListener("click", () => {
             sidebar.classList.toggle("open");
@@ -142,6 +144,8 @@
             }
         }
     </script>
+
+
 
 
 
