@@ -125,7 +125,7 @@ body {
     vertical-align: middle;
     font-size: 80px;
     text-align: right !important;
-    color: #038ccb;
+    color: #818d93;
 }
 
 #title {
@@ -157,4 +157,54 @@ body {
 .announcements {
     height: auto;
     background-color: #038ccb;
+}
+
+.card3 {
+    box-shadow: 0 4px 8px 0 rgba(151, 151, 151, 0.401), 0 6px 20px 0 rgba(94, 94, 94, 0.385);
+    padding: 18px;
+    border-left: solid 5px rgb(157, 4, 168);
+    background-color: white;
+    height: 70vh;
+    justify-content: space-between;
+    border-radius: 3px;
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: red;
+    /* make scrollbar transparent */
+}
+
+#anns {
+    display: flex;
+    border: 0.2px solid grey;
+    height: 80px;
+    text-decoration: none !important;
+    border-radius: 3px;
+}
+
+.left2 {
+    width: 10%;
+}
+
+#subject {
+    font-weight: bold;
+}
+
+.left2 i {
+    vertical-align: middle !important;
+    padding: 10px;
+    font-size: 40px;
+    color: #3f3b3b;
+}
+
+.right2 {
+    width: 88%;
+    padding: 10px;
+    color: #161010;
+}
+
+#no {
+    text-align: center;
 }

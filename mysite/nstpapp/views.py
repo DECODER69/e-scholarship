@@ -63,8 +63,10 @@ def login_page(request):
 @login_required(login_url='/login_page')
 def dashboard_page(request):
     name = extenduser.objects.filter(user = request.user)
+    anns = Announcement.objects.all()
     context = {
         'name': name,
+        'anns':anns
     }
     return render(request, 'activities/dashboard.html', context)
 @login_required(login_url='/login_page')

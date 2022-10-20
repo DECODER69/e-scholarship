@@ -60,8 +60,24 @@
 
                 </div>
                 <br>
-                <div class="announcements">
-                    <h1 id="tits">Announcements</h1>
+                <div class="card3">
+                    <h5 id="tits">Announcements</h5>
+                    <hr> {% for k in anns %}
+                    <a href="" id="anns">
+                        <div class="left2">
+                            <i class='bx bxs-megaphone'></i>
+
+                        </div>
+                        <div class="right2">
+                            <h5 id="subject">{{k.subject}}</h5>
+                            <p>{{k.date_posted}}</p>
+
+                        </div>
+                    </a><br> {% empty %}
+                    <h5 id="no">No Announcements <i class='bx bx-sad' style="vertical-align: middle;"></i></h5>
+                    {% endfor %}
+
+
 
                 </div>
 
