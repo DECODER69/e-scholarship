@@ -7,14 +7,21 @@
 }
 
 .home-section {
-    background: #c51c39;
     position: relative;
-    min-height: 100vh;
     top: 0;
     left: 78px;
     width: calc(100% - 78px);
     transition: all 0.5s ease;
     z-index: 2;
+}
+
+body {
+    background-attachment: fixed;
+    background-image: url(../images/sd2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
 }
 
 .sidebar.open~.home-section {
@@ -28,15 +35,6 @@
     font-size: 20px;
     font-weight: 500;
     margin: 18px
-}
-
-.bg {
-    background-attachment: fixed;
-    background-image: url(../images/tupc.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
 }
 
 
@@ -54,6 +52,10 @@
     padding: 5px;
     border-radius: 5px;
     color: white;
+}
+
+.heads {
+    background: #0a181a;
 }
 
 .blocks a:hover {

@@ -14,122 +14,21 @@
 
 
     <section class="home-section">
-        <a href="#">
-            <h1 class="text"><i class='bx bx-user'></i>User Profile</h1><br></a>
+        <div class="heads">
+            <h1 class="text"><i class='bx bxs-dashboard'></i> User profile</h1><br>
+        </div>
 
 
         <!-- whole body -->
         <div class="bg">
             <div class="profile">
                 {% for e in details %}
-                <div class="first">
-                    <div class="left"><br>&nbsp;<br>&nbsp;<br>
-                        <img src="{{e.picture.url}}" id="picture"><br>
-                        <h1 class="name" id="name">{{e.firstname}} {{e.lastname}}</h1>
-                        <p class="name">{{e.idnumber}}</p>
-                    </div>
-                    <div class="right">
-                        <div class="cool" id="part1">
-
-                            <div class="blocks">
-                                <h1 class="ti">Personal Information</h1>
-                                <a href="/editprofile" style="text-decoration: none;"><i class='bx bx-edit' id="edit"></i> Edit Profile</a>
-                            </div>
-
-                            <hr>
-                            <div class="block">
-                                <label>Gender: </label>
-                                <p class="tag">{{e.gender}}</p>
-                            </div>
-
-                            <div class="block">
-                                <label>Course/Section: </label>
-                                <p class="tag">{{e.section}}</p>
-                            </div>
-                            <div class="block">
-                                <label>Email: </label>
-                                <p class="tag">{{e.email}}</p>
-                            </div>
-                            <div class="block">
-                                <label>Age: </label>
-                                <p class="tag">{{e.age}}</p>
-                            </div>
-                            <div class="block">
-                                <label>Civil Status: </label>
-                                <p class="tag">{{e.civil}}</p>
-                            </div>
-                            <div class="block">
-                                <label>Phone Number: </label>
-                                <p class="tag">{{e.cpnumber}}</p>
-                            </div>
-                            <div class="block">
-                                <label>Address: </label>
-                                <p class="tag">{{e.address}}</p>
-                            </div>
-                            <div class="block">
-                                <label>Birthday: </label>
-                                <p class="tag">{{e.birthday}}</p>
-                            </div>&nbsp;<br>&nbsp;<br>
-
-
-                            <!-- FAMILYYYYYYYYYYYYYY -->
-                            <div class="blocks">
-                                <h1 class="ti">Family Background</h1>
-
-                            </div>
-                            <hr>
-
-                            <div class="block">
-                                <label>Father's Name: </label>
-                                <p class="tag">{{e.nfather}}</p>
-                            </div>
-
-                            <div class="block">
-                                <label>Father's Occupation: </label>
-                                <p class="tag">{{e.foccupation}}</p>
-                            </div>
-
-                            <div class="block">
-                                <label>Mother's Name: </label>
-                                <p class="tag">{{e.nmother}}</p>
-                            </div>
-
-                            <div class="block">
-                                <label>Mother's Occupation: </label>
-                                <p class="tag">{{e.moccupation}}</p>
-                            </div>
-                            <div class="block">
-                                <label>Parent's Contact: </label>
-                                <p class="tag">{{e.pcontact}}</p>
-                            </div>&nbsp;<br>
-
-                            <div class="block">
-                                <label>Guardian's Name: </label>
-                                <p class="tag">{{e.nguardian}}</p>
-                            </div>
-
-                            <div class="block">
-                                <label>Guardian's Occupation: </label>
-                                <p class="tag">{{e.goccupation}}</p>
-                            </div>
-                            <div class="block">
-                                <label>Guardian's Contact: </label>
-                                <p class="tag">{{e.gcontact}}</p>
-                            </div>
-                            <hr>
-
-                            <!-- OTHERSSSSSSSSSSSSSS -->
-
-
-
-                        </div>
-
-
-
-
-                    </div>
+                <div>
 
                 </div>
+
+
+
                 {% endfor %}
 
             </div>

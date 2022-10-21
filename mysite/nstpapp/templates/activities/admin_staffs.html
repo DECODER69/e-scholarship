@@ -58,8 +58,8 @@
                                 <th scope="col">EMAIL</th>
                                 <!-- <th scope="col">PROFILE PICTURE</th> -->
                                 <th scope="col">COURSE</th>
-                                <th scope="col">FIELD</th>
-                                <th scope="col">FIELD SECTION</th>
+
+
                                 <th scope="col">OPTIONS</th>
                                 <th scope="col">SAVE</th>
                             </tr>
@@ -74,12 +74,7 @@
                                     <td>{{s.email}}</td>
 
                                     <td>{{s.section}}</td>
-                                    {% if s.field == 'ROTC' %}
-                                    <td style="color:red; font-weight:bolder;">{{s.field}}</td>
-                                    {% elif s.field == 'Select Course' %}
-                                    <td style="color:#4EC3D0;font-weight:bolder;">{{s.field}}</td>
-                                    {% endif %}
-                                    <td>{{s.platoons}}</td>
+
                                     <td>
                                         <select name="slc" id="slc" class="form-control">
                                         <option value="{{s.status}}" selected>{{s.status}}</option>

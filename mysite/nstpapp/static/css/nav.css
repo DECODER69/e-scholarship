@@ -9,7 +9,9 @@
 }
 
 #tup {
-    width: 30px;
+    width: 120px !important;
+    margin: auto;
+    color: #000000 !important;
 }
 
 .sidebar {

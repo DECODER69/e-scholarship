@@ -67,7 +67,7 @@
         <div class="bg">
             <ul class="nav nav-tabs " id="navs">
                 <li class="nav-item">
-                    <a href="/create_platoon_page" class="nav-link active">Enrolled</a>
+                    <a href="/create_platoon_page" class="nav-link active">Approved</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " href="/dropped">Dropped </a>
@@ -111,9 +111,7 @@
                                     <th scope="col">Full name</th>
                                     <th scope="col">Course / Section</th>
                                     <th scope="col">Status</th>
-                                    <th scope="col">Field</th>
 
-                                    <th scope="col">Platoon / Section</th>
                                     <th scope="col">Last Login</th>
 
 
@@ -133,10 +131,7 @@
                                         <i class='bx bxs-check-circle' id="times2">  {{s.status}}</i>
 
                                     </td>
-                                    <td>{{s.field}}</td>
 
-
-                                    <td>{{s.platoons}}</td>
                                     {% for l in userContent %} {% if l.username == s.idnumber %}
 
                                     <td>

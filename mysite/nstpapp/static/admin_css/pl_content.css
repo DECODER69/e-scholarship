@@ -25,19 +25,13 @@ body {
 }
 
 .heads {
+    display: flex;
     background: rgb(0, 0, 0);
     background: linear-gradient(90deg, rgb(29, 29, 29) 0%, rgba(0, 0, 0, 0.9444152661064426) 56%);
 }
 
 .heads .text i {
-    vertical-align: middle;
-    color: #fb5800;
-}
-
-.count {
-    color: rgb(185, 2, 2);
-    font-size: 30px;
-    float: right;
+    color: #147022;
 }
 
 .sidebar.open~.home-section {
@@ -55,14 +49,11 @@ body {
 }
 
 .bg {
-    width: auto;
     background-attachment: fixed;
     /* background-image: url(../images/tupc2.jpg); */
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    /* min-height: 100vh;
-    padding: 18px; */
     height: auto;
 }
 

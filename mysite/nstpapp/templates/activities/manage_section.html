@@ -96,7 +96,13 @@
                                 <h5 class="title ">{{s.section_created}}</h5>
                                 <input type="hidden" value="{{s.section_created}}" name="getSection"><br>
 
-                                <button type="submit" class="btn btn-dark">Open</button>
+                                <div class="options">
+
+                                    <button type="submit" class="btn btn-dark" id="open">Open</button>
+                                    <a href="/del_school/{{s.section_created}}" class="btn btn-dark" id="del"><i class='bx bx-trash'></i> </a>
+
+                                </div>
+
                                 <p class="card-text"><small class="text-muted">Managed by e-Scholarship</small></p>
 
                             </div>

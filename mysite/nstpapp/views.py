@@ -140,6 +140,7 @@ def admin_dashboard(request):
     sy = school_year.objects.all()
     active = extenduser.objects.filter(status='ENROLLED').count()
     pending = extenduser.objects.filter(status='PENDING').count()
+    cnt = sections.objects.all().count()
 
     context = {
         'active':active,   
@@ -147,13 +148,14 @@ def admin_dashboard(request):
         'sy':[sy.last()],
         'audience':audience,
         'ann':ann,
+        'cnt':cnt
     
     }
     return render(request, 'activities/admin_dashboard.html', context)
 
 def admin_staff(request):
     s_years = school_year.objects.all()
-    details = extenduser.objects.filter(status='ENROLLED')
+    details = extenduser.objects.filter(status='APPROVED')
     pendings = extenduser.objects.filter(status='PENDING')
     pending = extenduser.objects.filter(status='PENDING').count()
 
@@ -220,8 +222,8 @@ def create_platoon_page(request):
     current_datetime = datetime.datetime.now() 
     userContent = User.objects.all()
     sectionxx = extenduser.objects.all()
-    counts = extenduser.objects.filter(status='ENROLLED').count()
-    counts1 = extenduser.objects.filter(status='ENROLLED')
+    counts = extenduser.objects.filter(status='APPROVED').count()
+    counts1 = extenduser.objects.filter(status='APPROVED')
     section = sections.objects.all()
     section1 = sections.objects.all().count()
     context = {
@@ -444,7 +446,7 @@ def approve(request, idnumber):
     platoons = request.POST.get('platoons')
     
 
-    extenduser.objects.filter(idnumber=stat2).update(status='ENROLLED', platoons=platoons)
+    extenduser.objects.filter(idnumber=stat2).update(status='APPROVED', platoons=platoons)
     messages.success(request, 'Student ' + str (stat2) + ' has been Approved !')
     return redirect('/admin_pending')
 
@@ -723,9 +725,10 @@ def section_content(request):
      
         getSection = request.POST.get('getSection')
        
-        content3 = extenduser.objects.filter(school=getSection).filter(status='ENROLLED')
+        content3 = extenduser.objects.filter(school=getSection).filter(status='APPROVED')
         print("school" + str(content3))
-        content33 = extenduser.objects.filter(platoons=getSection).filter(status='ENROLLED').count()
+        print(getSection)
+        content33 = extenduser.objects.filter(platoons=getSection).filter(status='APPROVED').count()
     else:
        
         return render(request, 'activities/pl_content.html')
@@ -758,7 +761,7 @@ def download(request):
 def download1(request):
     if request.method == 'POST':
     
-        csvfile = extenduser.objects.filter(status='ENROLLED')
+        csvfile = extenduser.objects.filter(status='APPROVED')
         response = HttpResponse(content_type='text/csv')  
         print("CSV FILE ITO" + str(csvfile))
         
@@ -1026,8 +1029,8 @@ def dropped(request):
     current_datetime = datetime.datetime.now() 
     userContent = User.objects.all()
     sectionxx = extenduser.objects.all()
-    counts = extenduser.objects.filter(status='DROPPED').count()
-    counts1 = extenduser.objects.filter(status='DROPPED')
+    counts = extenduser.objects.filter(status='DROP').count()
+    counts1 = extenduser.objects.filter(status='DROP')
     section = sections.objects.all()
     section1 = sections.objects.all().count()
     context = {
@@ -1045,7 +1048,7 @@ def dropped(request):
 def download3(request):
     if request.method == 'POST':
     
-        csvfile = extenduser.objects.filter(status='DROPPED')
+        csvfile = extenduser.objects.filter(status='DROP')
         response = HttpResponse(content_type='text/csv')  
         print("CSV FILE ITO" + str(csvfile))
         
@@ -1179,7 +1182,7 @@ def del_tday(request, id):
 def download5(request):
     if request.method == 'POST':
         getSection = request.POST.get('cate')
-        csvfile = extenduser.objects.filter(status='ENROLLED').filter(platoons=getSection)
+        csvfile = extenduser.objects.filter(status='APPROVED').filter(platoons=getSection)
         response = HttpResponse(content_type='text/csv')  
         print("CSV FILE ITO" + str(csvfile))
         
@@ -1602,4 +1605,12 @@ def update_years(request):
         print("start" +str(start_dates))
         print("end" +str(end_dates))
         extenduser.objects.filter(id=ids).update(start_dates=start_dates, end_date= end_dates)
+    return redirect('/manage_section')
+
+
+
+def del_school(request, section_created):
+    print("id ito" +str(id))
+    sections.objects.filter(section_created=section_created).delete()
+    
     return redirect('/manage_section')

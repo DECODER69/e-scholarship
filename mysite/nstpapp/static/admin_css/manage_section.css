@@ -30,8 +30,7 @@ body {
 }
 
 .heads .text i {
-    vertical-align: middle;
-    color: #fb5800;
+    color: #147022;
 }
 
 .count {
@@ -162,6 +161,21 @@ body {
 .modal-title {
     color: rgb(61, 61, 61);
     font-weight: bolder;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+}
+
+#open {
+    width: 70% !important;
+}
+
+#del {
+    width: 20% !important;
+    background-color: #78000a;
+    color: white;
 }
 
 
