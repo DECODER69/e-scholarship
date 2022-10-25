@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="icon" href="../../static/images/logo.png">
     <title>profile</title>
 </head>
 
@@ -21,17 +22,256 @@
 
         <!-- whole body -->
         <div class="bg">
-            <div class="profile">
-                {% for e in details %}
-                <div>
+            <form action="{% url 'activities:edit' %}" method="post">
+                {% csrf_token %} {% for s in usern %}
+                <div class="profile">
+
+                    <div class="left3">
+                        <div class="picture">
+                            <img src="{{s.picture.url}}" id="profile">
+
+                        </div>&nbsp; {% if s.status == 'APPROVED' %}
+                        <h3 style="text-align: center;">{{s.firstname}} {{s.lastname}} <i class='bx bxs-badge-check'></i></h3>
+                        {% else %}
+                        <h3 style="text-align: center;">{{s.firstname}} {{s.lastname}} </h3>
+                        {% endif %}
+                        <h6 style="text-align: center; color:rgb(4, 174, 4);">Student </h6>
+                        <br>
+                        <hr>
+                        <div class="details">
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-3 col-form-label">ID Number</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" readonly value="{{s.idnumber}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-3 col-form-label">School</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" readonly value="{{s.school}}" name="school">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-3 col-form-label">Address</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="inputEmail3" value="{{s.address}}" name="address">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-3 col-form-label">Contact</label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" id="" value="{{s.cpnumber}}" name="cpnumber">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-3 col-form-label">Email</label>
+                                <div class="col-sm-9">
+                                    <input type="email" class="form-control" id="" value="{{s.email}}" name="email">
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <br>
+                    <div class="right3">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Personal Information</a>
+                            </li>
+                            <!-- <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Parents/Guardian Information</a>
+                        </li> -->
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Parents Information</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="income-tab" data-toggle="tab" href="#income" role="tab" aria-controls="income" aria-selected="false">Family Income</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <br>
+                                <div class="details">
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-4 col-form-label">First name</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="" readonly value="{{s.firstname}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-4 col-form-label">Middle name</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="" readonly value="{{s.middle}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-4 col-form-label">Last name</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="" readonly value="{{s.lastname}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-4 col-form-label">Gender</label>
+                                        <div class="col-sm-8">
+                                            <select class="form-control" id="" name="gender">
+                                            <option value="{{s.gender}}">{{s.gender}}</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                         
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-4 col-form-label">Birthday</label>
+                                        <div class="col-sm-8">
+                                            <input type="date" class="form-control" id="" value="{{s.birthday}}" name="birthday">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-4 col-form-label">Age</label>
+                                        <div class="col-sm-8">
+                                            <input type="number" class="form-control" id="" value="{{s.age}}" name="age">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-4 col-form-label">Civil Status</label>
+                                        <div class="col-sm-8">
+                                            <select class="form-control" id="" name="civil">
+                                            <option value="{{s.civil}}">{{s.civil}}</option>
+                                            <option value="single">Single</option>
+                                            <option value="married">Married</option>
+                                            <option value="divorced">Divorced</option>
+                                        </select>
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-4 col-form-label">Course /Year</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="" value="{{s.section}}" name="section">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-4 col-form-label">Status</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="" readonly value="{{s.status}}" name="status">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+
+                            <!-- <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">gdgdgsgagdggggggg</div> -->
+                            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                <br>
+                                <div class="details">
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-4 col-form-label">Father's name</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="" value="{{s.nfather}}" name="nfather">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-4 col-form-label">Father's Profession</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="" value="{{s.foccupation}}" name="foccupation">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-4 col-form-label">Mother's name</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="" value="{{s.nmother}}" name="nmother">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-4 col-form-label">Mother's Profession</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="" value="{{s.moccupation}}" name="moccupation">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-4 col-form-label">Parent's Contact</label>
+                                        <div class="col-sm-8">
+                                            <input type="number" class="form-control" id="" value="{{s.pcontact}}" name="pcontact">
+                                        </div>
+                                    </div>
+
+                                    <hr>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-4 col-form-label">Guardian's name</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="" value="{{s.nguardian}}" name="nguardian">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-4 col-form-label">Guardian's Profession</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="" value="{{s.goccupation}}" name="goccupation">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-4 col-form-label">Guardian's Contact</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="" value="{{s.gcontact}}" name="gcontact">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+                            <div class="tab-pane fade" id="income" role="tabpanel" aria-labelledby="income-tab">
+                                <br>
+                                <div class="form-group row">
+                                    <label for="inputEmail3" class="col-sm-4 col-form-label">Sources of Income</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="" value="{{s.sources_income}}" placeholder="Ex: Teaching" name="sources_income">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputEmail3" class="col-sm-4 col-form-label">Monthly Income</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="" value="{{s.monthly_income}}" name="monthly_income">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <br>
+                    <div class="save">
+
+                        <button class="btn btn-info" id="update" type="submit"><i class='bx bx-refresh'></i>  Update</button>
+
+
+
+                    </div>
+
+
+
+
 
                 </div>
-
-
-
                 {% endfor %}
 
-            </div>
 
 
 
@@ -39,9 +279,7 @@
 
 
 
-
-
-
+            </form>
 
         </div>
 

@@ -22,6 +22,7 @@ body {
     background-size: cover;
     background-position: center;
     height: 100vh;
+    background: #cad0df !important;
 }
 
 .sidebar.open~.home-section {
@@ -60,13 +61,6 @@ body {
 
 .blocks a:hover {
     color: rgb(185, 185, 185);
-}
-
-.profile {
-    /* background-color: #22c51c; */
-    height: auto;
-    display: flex;
-    padding: 18px;
 }
 
 .first {
@@ -138,6 +132,77 @@ body {
 
 
 /* s */
+
+.profile {
+    /* background-color: #22c51c; */
+    height: auto;
+    display: flex;
+    padding: 60px;
+    justify-content: space-between;
+}
+
+.left3 {
+    border-radius: 10px;
+    padding: 14px;
+    height: auto;
+    background-color: #ffffff;
+    width: 35%;
+    display: block;
+}
+
+.right3 {
+    height: auto;
+    border-radius: 10px;
+    padding: 14px;
+    height: auto;
+    background-color: #ffffff;
+    width: 40%;
+    display: block;
+}
+
+.picture {
+    display: flex;
+    margin: auto;
+    width: 50% !important;
+}
+
+.details {
+    padding: 10px;
+}
+
+#profile {
+    margin: auto !important;
+    width: 150px !important;
+}
+
+.form-group label {
+    color: #656565;
+}
+
+.save {
+    height: auto;
+    border-radius: 10px;
+    height: auto;
+    width: auto;
+    display: flex;
+}
+
+#update {
+    height: 100px !important;
+    width: 200px !important;
+    font-size: 30px !important;
+    font-weight: bold;
+    background-color: #00627e;
+    border: none;
+    top: 15px !important;
+    right: 15px !important;
+}
+
+.left3 i {
+    color: rgb(23, 7, 255);
+    vertical-align: middle;
+    font-size: 20px !important;
+}
 
 
 /* MEDIA QUERIIIIES */

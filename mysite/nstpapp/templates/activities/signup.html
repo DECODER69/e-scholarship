@@ -22,12 +22,12 @@
                 <img src="../../static/images/leftpic2.svg">
             </div>
             <div class="login-content">
-
-                <form action="{% url 'activities:signup' %}" method="post">
+                <!-- <a href="/">
+                    <img src="../../static/images/logo2.png"></a>
+                <h3 class="title">Welcome</h3> -->
+                <form action="{% url 'activities:signup' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <a href="/">
-                        <img src="../../static/images/logo2.png"></a>
-                    <h3 class="title">Welcome</h3>
+                    <h3 class="title">Sign Up </h3>
                     <div class="row">
                         <div class="col">
                             <input type="text" class="form-control " placeholder="First name" name="firstname" required>
@@ -64,16 +64,17 @@
                             <option value="{{s.section_created}}" class="form-control">{{s.section_created}}</option>
                             {% endfor %}
                         </select>
+
                     </div>
-                    <!-- <div class="row">
-                        <div class="cform-inline" style="display: flex !important;">
-                            <p style="width: 40%;">&nbsp;&nbsp;Profile Picture: </p>
+                    <div class="form-group">
+                        <div class="form-control-file" style="display: flex !important;">
+                            <p style="width: 40%;">&nbsp;&nbsp;Profile </p>
                             <input type="file" class="form-control-file" placeholder="Username" name="picture" accept=".jpg, .jpeg, .png, .PNG">
                         </div>
-                    </div> -->
+                    </div>
                     <div class="row">
                         <div class="col">
-                            <input type="text" class="form-control " placeholder="Username" name="idnumber" required>
+                            <input type="text" class="form-control " placeholder="Id Number" name="idnumber" required>
                         </div>
                     </div><br>
                     <div class="row">

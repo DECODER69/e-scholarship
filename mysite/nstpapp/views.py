@@ -71,9 +71,9 @@ def dashboard_page(request):
     return render(request, 'activities/dashboard.html', context)
 @login_required(login_url='/login_page')
 def profile_page(request):
-    details = extenduser.objects.filter(user=request.user)
+    usern = extenduser.objects.filter(user=request.user)
     context={
-        'details':details,
+        'usern':usern,
     }
     return render(request, 'activities/profile.html', context)
 @login_required(login_url='/login_page')
@@ -312,6 +312,7 @@ def signup(request):
         idnumber = request.POST.get('idnumber')
         password = request.POST.get('password1')
         school = request.POST.get('school')
+        profile = request.FILES['picture']
         # s_year = request.POST.get('s_year')
         if User.objects.filter(username=idnumber).exists():
             messages.error(request, 'ID Number ' + str (idnumber) + ' Already Exist !')
@@ -322,7 +323,7 @@ def signup(request):
        
         else:
             user = User.objects.create_user(username=idnumber, password=password, email=email)
-            datas = extenduser(firstname=firstname, middlename=middle, lastname=lastname, email=email, idnumber=idnumber, password=password, school=school,user=user)
+            datas = extenduser(firstname=firstname, middlename=middle, lastname=lastname, email=email, idnumber=idnumber, password=password, school=school,user=user, picture=profile)
             datas.save()
             auth.login(request, user)
             messages.info(request, 'Account created successfully\nPlease Login and complete profile for verification')
@@ -370,14 +371,17 @@ def edit(request):
         nguardian  = request.POST.get('nguardian')
         goccupation = request.POST.get('goccupation')
         gcontact = request.POST.get('gcontact')
+        sources_income = request.POST.get('sources_income')
+        monthly_income = request.POST.get('monthly_income')
         extenduser.objects.filter(user=request.user).update(gender=gender, section=section, email=email, age=age, 
                                                             civil=civil, cpnumber=cpnumber, address=address, birthday=birthday,
                                                             nfather=nfather, foccupation=foccupation, nmother=nmother, moccupation=moccupation,
                                                             pcontact=pcontact, nguardian=nguardian, goccupation=goccupation, gcontact=gcontact,
-                                            )
-        return redirect('/others')
+                                                            sources_income=sources_income, monthly_income=monthly_income)
+                                            
+        return redirect('/profile_page')
     else:
-        return redirect('/editprofile')
+        return redirect('/profile_page')
 @login_required(login_url='/login_page')
 def edit_others(request, id):
     hehe = extenduser.objects.get(id=id)
@@ -747,16 +751,16 @@ def section_content(request):
 def download(request):
     if request.method == 'POST':
     
-        csvfile = extenduser.objects.filter(status='ENROLLED')
+        csvfile = extenduser.objects.filter(status='APPROVED')
         response = HttpResponse(content_type='text/csv')  
         print("CSV FILE ITO" + str(csvfile))
         
         response['Content-Disposition'] = 'attachment; filename="List.csv"  '
         writer = csv.writer(response)  
-        writer.writerow(['STUDENT NUMBER', 'FIRSTNAME', 'LASTNAME', 'NSTP COMPONENT', 'NSTP SECTION', 'STATUS'])  
+        writer.writerow(['STUDENT NUMBER', 'FIRSTNAME', 'LASTNAME', 'COURSE', 'STATUS', 'START DATE', 'END DATE'])  
         for s in csvfile:  
    
-            writer.writerow([s.idnumber, s.firstname, s.lastname, s.field, s.platoons, s.status])  
+            writer.writerow([s.idnumber, s.firstname, s.lastname, s.section, s.status, s.start_dates, s.end_date ])  
     return response  
 def download1(request):
     if request.method == 'POST':

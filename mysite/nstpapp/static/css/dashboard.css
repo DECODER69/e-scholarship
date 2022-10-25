@@ -8,11 +8,12 @@
 
 body {
     background-attachment: fixed;
-    background-image: url(../images/sd2.jpg);
+    /* background-image: url(../images/sd2.jpg); */
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     height: 100vh;
+    background-color: #CAD0DF !important;
 }
 
 .home-section {
@@ -46,7 +47,7 @@ body {
 /* own css */
 
 .bg {
-    padding: 10px;
+    padding: 70px;
     display: flex;
     justify-content: space-between;
 }
@@ -73,7 +74,7 @@ body {
     background-color: white;
     height: 130px;
     justify-content: space-between;
-    border-radius: 3px;
+    border-radius: 10px;
 }
 
 #r_card {
@@ -84,7 +85,7 @@ body {
     background-color: white;
     height: 130px;
     justify-content: space-between;
-    border-radius: 3px;
+    border-radius: 10px;
 }
 
 #r_card2 {
@@ -95,7 +96,7 @@ body {
     background-color: white;
     height: 130px;
     justify-content: space-between;
-    border-radius: 3px;
+    border-radius: 10px;
 }
 
 .data {
@@ -134,7 +135,7 @@ body {
 
 .period {
     margin: auto;
-    width: 60%;
+    width: 90%;
     display: flex;
     justify-content: space-between;
 }
@@ -146,7 +147,7 @@ body {
     background-color: white;
     height: 130px;
     justify-content: space-between;
-    border-radius: 3px;
+    border-radius: 10px;
 }
 
 .data1 {
@@ -164,9 +165,9 @@ body {
     padding: 18px;
     border-left: solid 5px rgb(157, 4, 168);
     background-color: white;
-    height: 70vh;
+    height: 50vh;
     justify-content: space-between;
-    border-radius: 3px;
+    border-radius: 10px;
     overflow-y: scroll;
 }
 

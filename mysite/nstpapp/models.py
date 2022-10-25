@@ -34,6 +34,9 @@ class extenduser(models.Model):
     start_dates = models.CharField(max_length=15, default='')
     end_date = models.CharField(max_length=15, default='')
     
+    sources_income = models.CharField(max_length=100, default='')
+    monthly_income = models.CharField(max_length=100, default='')
+    
     
     
     # additionals
