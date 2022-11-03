@@ -141,14 +141,15 @@ def admin_dashboard(request):
     active = extenduser.objects.filter(status='ENROLLED').count()
     pending = extenduser.objects.filter(status='PENDING').count()
     cnt = sections.objects.all().count()
-
+    nav_pending_count = extenduser.objects.filter(status='PENDING').count()
     context = {
         'active':active,   
         'pending':pending,
         'sy':[sy.last()],
         'audience':audience,
         'ann':ann,
-        'cnt':cnt
+        'cnt':cnt,
+        'nav_pending_count':nav_pending_count
     
     }
     return render(request, 'activities/admin_dashboard.html', context)
