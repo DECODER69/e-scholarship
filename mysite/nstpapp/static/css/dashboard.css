@@ -15,8 +15,9 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 100vh;
+    height: auto;
     display: flex;
+    padding-bottom: 10px;
 }
 
 section {
@@ -75,7 +76,7 @@ section {
 .cards {
     box-shadow: 0 4px 8px 0 rgba(151, 151, 151, 0.401), 0 6px 20px 0 rgba(94, 94, 94, 0.385);
     padding: 18px;
-    border-left: solid 5px rgb(99, 2, 57);
+    border-left: solid 5px rgb(107, 105, 105);
     display: flex;
     background-color: white;
     height: 130px;
@@ -83,21 +84,21 @@ section {
     border-radius: 10px;
 }
 
-#r_card {
+
+/* #r_card {
     box-shadow: 0 4px 8px 0 rgba(151, 151, 151, 0.401), 0 6px 20px 0 rgba(94, 94, 94, 0.385);
     padding: 18px;
-    border-left: solid 5px rgb(171, 36, 2);
+    border-left: solid 5px rgb(32, 10, 4);
     display: flex;
     background-color: white;
     height: 130px;
     justify-content: space-between;
     border-radius: 10px;
-}
+} */
 
 #r_card2 {
     box-shadow: 0 4px 8px 0 rgba(151, 151, 151, 0.401), 0 6px 20px 0 rgba(94, 94, 94, 0.385);
     padding: 18px;
-    border-left: solid 5px rgb(90, 1, 26);
     display: flex;
     background-color: white;
     height: 130px;
@@ -113,6 +114,7 @@ section {
 #name {
     font-weight: bold;
     font-size: 23px;
+    color: #4b5050;
 }
 
 .icon {
@@ -124,7 +126,8 @@ section {
     vertical-align: middle;
     font-size: 40px;
     text-align: right !important;
-    color: #a34758;
+    color: #d38900;
+    margin-top: 25px;
 }
 
 .icon #calendar {
@@ -136,20 +139,26 @@ section {
 }
 
 #title {
-    color: rgb(38, 1, 1);
+    color: rgb(119, 119, 119);
 }
 
 .period {
+    text-align: center !important;
     margin: auto;
     width: 90%;
     display: flex;
-    justify-content: space-between;
+}
+
+.period h1 {
+    text-align: center;
+    margin: auto;
+    display: flex;
 }
 
 .cards1 {
     box-shadow: 0 4px 8px 0 rgba(151, 151, 151, 0.401), 0 6px 20px 0 rgba(94, 94, 94, 0.385);
     padding: 18px;
-    border-left: solid 5px rgb(4, 168, 157);
+    border-left: solid 5px rgb(107, 105, 105);
     background-color: white;
     height: 130px;
     justify-content: space-between;
@@ -167,36 +176,35 @@ section {
 }
 
 .card3 {
-    box-shadow: 0 4px 8px 0 rgba(151, 151, 151, 0.401), 0 6px 20px 0 rgba(94, 94, 94, 0.385);
+    box-shadow: 0 4px 8px 0 rgba(150, 150, 150, 0.401), 0 6px 20px 0 rgba(94, 94, 94, 0.385);
     padding: 18px;
-    border-left: solid 5px rgb(157, 4, 168);
+    border-left: solid 5px rgb(107, 105, 105);
     background-color: white;
-    height: 50vh;
+    height: 65vh;
     justify-content: space-between;
     border-radius: 10px;
     overflow-y: scroll;
 }
 
-::-webkit-scrollbar {
-    width: 0px;
-    background: red;
-    /* make scrollbar transparent */
-}
-
 #anns {
     display: flex;
-    border: 0.2px solid grey;
+    border: 0.2px solid rgb(206, 206, 206);
     height: 80px;
     text-decoration: none !important;
-    border-radius: 3px;
+    border-radius: 10px;
 }
 
 .left2 {
     width: 10%;
 }
 
+.left2 i {
+    color: #555a5a !important;
+}
+
 #subject {
     font-weight: bold;
+    color: #575555;
 }
 
 .left2 i {
@@ -209,9 +217,109 @@ section {
 .right2 {
     width: 88%;
     padding: 10px;
-    color: #161010;
+    color: #4e4e4e;
 }
 
 #no {
     text-align: center;
+}
+
+@media screen and (max-width:359px) {
+    .bg {
+        height: auto;
+        display: block;
+    }
+    .left {
+        width: 100%;
+    }
+    .right {
+        width: 100%;
+    }
+    .card3 {
+        margin-top: 500px;
+    }
+    #name {
+        font-size: 13px !important;
+    }
+    .left2 i {
+        font-size: 15px !important;
+    }
+    #subject {
+        font-size: 15px;
+    }
+}
+
+@media screen and (min-width:360px)and (max-width:640px) {
+    .bg {
+        height: auto;
+        display: block;
+    }
+    .left {
+        width: 100%;
+    }
+    .right {
+        width: 100%;
+    }
+    .card3 {
+        margin-top: 500px;
+    }
+    #name {
+        font-size: 15px !important;
+    }
+    .left2 i {
+        font-size: 17px !important;
+    }
+    #subject {
+        font-size: 17px;
+    }
+}
+
+@media screen and (min-width:641px) and (max-width:1024px) {
+    .bg {
+        height: auto;
+        display: block;
+    }
+    .left {
+        width: 100%;
+    }
+    .right {
+        width: 100%;
+    }
+    .card3 {
+        margin-top: 500px;
+    }
+    #name {
+        font-size: 15px !important;
+    }
+    .left2 i {
+        font-size: 17px !important;
+    }
+    #subject {
+        font-size: 17px;
+    }
+}
+
+@media screen and (min-width:1025px) and (max-width:1080px) {
+    .bg {
+        height: auto;
+        display: flex;
+    }
+    .left {
+        width: 100%;
+    }
+    .right {
+        width: 100%;
+    }
+    .card3 {
+        margin-top: 500px;
+    }
+    #name {
+        font-size: 15px !important;
+    }
+    .left2 i {
+        font-size: 13px !important;
+    }
+    #subject {
+        font-size: 15px;
+    }
 }

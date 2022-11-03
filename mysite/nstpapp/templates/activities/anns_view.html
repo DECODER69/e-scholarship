@@ -16,29 +16,30 @@
 
 <body>
     {% include 'activities/navbar.html' %}
-
-    <!-- MODAL -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        {% for s in anns2 %}
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Complete Profile !</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">{{s.subject}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+            <span aria-hidden="true">&times;</span>
+          </button>
                 </div>
                 <div class="modal-body">
-                    Please fill up all related Field to complete <a href="/profile_page">profile</a> details. Disregard this message if you already done it. Thank you !
+                    {{s.content}}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <a href="/editprofile"><button type="button" class="btn btn-primary">Proceed</button></a>
+                    <a href="/dashboard_page" class="btn btn-secondary">Close</a>
+                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                    <button type="button" class="btn btn-primary">Understood</button>
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
 
-    <!-- end of modal -->
     <section class="home-section">
         <div class="heads">
             <h1 class="text"><i class="fa-solid fa-house"></i> DASHBOARD</h1><br>
@@ -62,7 +63,7 @@
                 <div class="card3">
                     <h5 id="tits"><i class="fa-solid fa-grip-lines-vertical" style="color: rgb(138, 90, 0);"></i> Announcements</h5>
                     <hr> {% for k in anns %}
-                    <a href="/open_anns/{{k.id}}" id="anns">
+                    <a href="" id="anns">
                         <div class="left2">
                             <i class="fa-solid fa-bullhorn"></i>
 
@@ -155,7 +156,7 @@
 
     <script type="text/javascript">
         $(window).on('load', function() {
-            $('#exampleModal').modal('show');
+            $('#staticBackdrop').modal('show');
         });
     </script>
 

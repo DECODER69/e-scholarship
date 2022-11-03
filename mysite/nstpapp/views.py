@@ -1654,3 +1654,15 @@ def graduates_list(request):
     print(content33)
     print(getSection)
     return render(request, 'activities/graduates_list.html', context)
+
+def open_anns(request, id):
+    anns2 = Announcement.objects.filter(id=id)
+    print(anns2)
+    name = extenduser.objects.filter(user = request.user)
+    anns = Announcement.objects.all()
+    context={
+        'anns':anns,
+        'name':name,
+        'anns2':anns2
+    }
+    return render(request, 'activities/anns_view.html', context)
