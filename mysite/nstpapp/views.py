@@ -62,6 +62,7 @@ def login_page(request):
 
 @login_required(login_url='/login_page')
 def dashboard_page(request):
+    
     name = extenduser.objects.filter(user = request.user)
     anns = Announcement.objects.all()
     context = {
@@ -469,7 +470,7 @@ def r_approve(request, idnumber):
     platoons = request.POST.get('platoons')
     
 
-    extenduser.objects.filter(idnumber=stat2).update(status='ENROLLED', platoons=platoons)
+    extenduser.objects.filter(idnumber=stat2).update(status='APPROVED', platoons=platoons)
     messages.success(request, 'Student ' + str (stat2) + ' has been Approved !')
     return redirect('/admin_rejected')
 
@@ -1604,12 +1605,13 @@ def update_attendance(request):
     return redirect('/attendance_page')
 def update_years(request):
     if request.method == 'POST':
+        act = request.POST.get('act')
         ids = request.POST.get('ids')
         start_dates = request.POST.get('start_date')
         end_dates = request.POST.get('end_date')
         print("start" +str(start_dates))
         print("end" +str(end_dates))
-        extenduser.objects.filter(id=ids).update(start_dates=start_dates, end_date= end_dates)
+        extenduser.objects.filter(id=ids).update(start_dates=start_dates, end_date= end_dates, status=act)
     return redirect('/manage_section')
 
 
@@ -1619,3 +1621,36 @@ def del_school(request, section_created):
     sections.objects.filter(section_created=section_created).delete()
     
     return redirect('/manage_section')
+
+
+def graduates(request):
+    section = sections.objects.all()
+    context ={
+        'section':section
+    }
+    return render(request, 'activities/graduates.html', context)
+
+def graduates_list(request):
+    schools = school_year.objects.all()
+    if request.method == 'POST':
+     
+        getSection = request.POST.get('getSection')
+       
+        content3 = extenduser.objects.filter(school=getSection).filter(status='GRADUATE')
+        print("school" + str(content3))
+        print(getSection)
+        content33 = extenduser.objects.filter(platoons=getSection).filter(status='GRADUATE').count()
+    else:
+       
+        return render(request, 'activities/graduates_list.html')
+    context = {
+        'content3':content3,
+        
+        'content33':content33,
+        'getSection':getSection,
+        'schools':[schools.last()],
+         
+    }
+    print(content33)
+    print(getSection)
+    return render(request, 'activities/graduates_list.html', context)

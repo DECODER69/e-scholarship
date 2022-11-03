@@ -109,6 +109,8 @@ urlpatterns = [
     path('show_students/', views.show_students, name='show_students'),
     path('update_years/', views.update_years, name='update_years'),
     path('del_school/<str:section_created>', views.del_school, name='del_school'),
+    path('graduates/', views.graduates, name='graduates'),
+    path('graduates_list/', views.graduates_list, name='graduates_list'),
 
     path('password_reset/',auth_views.PasswordResetView.as_view(template_name='activities/registration/password_reset_form.html'),name='password_reset'),
     path('password_reset/done/',auth_views.PasswordResetDoneView.as_view(template_name='activities/registration/password_reset_done.html'),name='password_reset_done'),

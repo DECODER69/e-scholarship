@@ -11,7 +11,7 @@
 
 
 
-    <title>Dashboard</title>
+    <title>DASHBOARD</title>
 </head>
 
 <body>
@@ -39,10 +39,9 @@
     </div>
 
     <!-- end of modal -->
-
     <section class="home-section">
         <div class="heads">
-            <h1 class="text"><i class='bx bxs-dashboard'></i> Dashboard</h1><br>
+            <h1 class="text"><i class="fa-solid fa-house"></i> DASHBOARD</h1><br>
         </div>
         <div class="bg">
             {% for s in name %}
@@ -91,7 +90,7 @@
 
                     </div>
                     <div class="icon">
-                        <i class='bx bxs-calendar' id="calendar"></i>
+                        <i class="fa-solid fa-calendar-days"></i>
 
                     </div>
 
@@ -106,7 +105,7 @@
                     </div>
                     <div class="icon">
                         {% if s.status == 'APPROVED' %}
-                        <i class='bx bxs-check-circle' style="color: green;"></i> {% elif s.status == 'PENDING' %}
+                        <i class="fa-solid fa-circle-check" style="color: green;"></i> {% elif s.status == 'PENDING' %}
                         <i class='bx bxs-check-circle' style="color: rgb(187, 141, 1);"></i> {% endif %}
                     </div>
 

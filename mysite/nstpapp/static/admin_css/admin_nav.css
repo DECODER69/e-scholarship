@@ -110,6 +110,14 @@ body {
     left: -40px;
 }
 
+.sidebar-brand #pogi {
+    display: flex;
+    margin: auto !important;
+    text-align: center !important;
+    font-size: 17px bold;
+    color: #a5a5a5;
+}
+
 
 /*----------------sidebar-wrapper----------------*/
 
@@ -179,6 +187,7 @@ body {
 .sidebar-wrapper .sidebar-header .user-pic {
     /* float: left; */
     width: 120px;
+    height: 120px;
     padding: 2px;
     border-radius: 12px;
     margin: auto;
@@ -186,10 +195,10 @@ body {
 }
 
 .sidebar-wrapper .sidebar-header .user-pic img {
-    object-fit: cover;
-    height: 70%;
+    height: 100%;
     width: 100%;
     margin: auto !important;
+    border-radius: 50%;
 }
 
 .sidebar-wrapper .sidebar-header .user-info {

@@ -20,8 +20,8 @@
 
     <section class="home-section">
         <div class="heads">
-            <a href="/manage_section">
-                <h1 class="text"><i class='bx bxs-dashboard'></i> Manage Section &nbsp;>&nbsp;</h1>
+            <a href="/graduates">
+                <h1 class="text"><i class='bx bxs-dashboard'></i> GRADUATES &nbsp;>&nbsp;</h1>
             </a>
 
             <h1 class="text"><i class='bx bx-intersect'></i> {{getSection}}
@@ -70,7 +70,7 @@
 
                                 <th scope="col">COURSE</th>
                                 <th scope="col">DATE APPROVED</th>
-                                <th scope="col">EXPECTED END DATE</th>
+                                <th scope="col">DATE GRADUATED</th>
                                 <th scope="col">ACTION</th>
                                 <th scope="col">SAVE</th>
                             </tr>
@@ -95,7 +95,6 @@
                                     </td>
                                     <td>
                                         <select name="act" id="" class="form-control">
-                                            <option value="{{s.status}}" selected>{{s.status}}</option>
                                             <option value="DROP">DROP</option>
                                             <option value="GRADUATE">GRADUATE</option>
 

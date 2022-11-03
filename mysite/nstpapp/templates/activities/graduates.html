@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage sections</title>
+    <link rel="stylesheet" href="../../static/admin_css/manage_section.css">
+    <link rel="icon" href="../../static/images/logo2.png">
+</head>
+
+<body>
+    {% include 'activities/admin_nav.html' %}
+
+
+
+
+    <!-- eof modal for puictures  -->
+    <section class="home-section">
+        <div class="heads">
+            <h1 class="text"><i class='bx bxs-dashboard'></i> GRADUATES</h1><br>
+        </div><br>
+        <div class="bg">
+
+            <div class="overall">
+                <div class="left">
+                    <div class="tss">
+
+
+                        <div class="txt ">
+                            <h1 style="margin-left: 10px; font-size:25px; color:#000000; font-weight:bold;" id="mega">All Schools</h1>
+
+                        </div>
+
+
+
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        {% for s in section %}
+                        <form action="{% url 'activities:graduates_list'%}" class="column" style="text-decoration: none;" method="POST">
+                            {% csrf_token %}
+                            <div class="card">
+                                <img src="{{s.fiel.url}}" alt="SCHOOL LOGO" id="ro_logo">
+                                <h5 class="title ">{{s.section_created}}</h5>
+                                <input type="hidden" value="{{s.section_created}}" name="getSection"><br>
+
+                                <div class="options">
+
+                                    <button type="submit" class="btn btn-dark" id="open">Open</button>
+                                    <a href="/del_school/{{s.section_created}}" class="btn btn-dark" id="del"><i class="fa-solid fa-trash-can"></i> </a>
+
+                                </div>
+
+                                <p class="card-text"><small class="text-muted">Managed by e-Scholarship</small></p>
+
+                            </div>
+
+
+                        </form>
+                        {% endfor %}
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </section>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11 "></script>
+
+    <!-- <script>
+        { %
+            for msg in messages %
+        }
+        Swal.fire({
+            icon: '{{msg.icon}}',
+            text: '{{ msg }}'
+        }) { % endfor %
+        }
+    </script> -->
+
+</body>
+
+</html>

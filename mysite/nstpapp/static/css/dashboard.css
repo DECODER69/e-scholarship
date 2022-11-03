@@ -6,48 +6,54 @@
     font-family: "Poppins", sans-serif;
 }
 
+
+/* add */
+
 body {
     background-attachment: fixed;
-    /* background-image: url(../images/sd2.jpg); */
+    background-image: url(../images/sd2.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     height: 100vh;
-    background-color: #CAD0DF !important;
+    display: flex;
 }
 
-.home-section {
-    position: relative;
-    top: 0;
-    left: 78px;
-    width: calc(100% - 78px);
-    transition: all 0.5s ease;
-    z-index: 2;
+section {
+    display: inline-block;
+    width: 100%;
+    padding-left: 0px;
+}
+
+section>div {
+    padding: 20px 40px;
+}
+
+section {
+    overflow-x: hidden;
 }
 
 .heads {
-    background: #0a181a;
+    justify-content: space-between;
+    display: flex;
+    background: #4b4d52;
+    height: 60px !important;
 }
 
-.sidebar.open~.home-section {
-    left: 250px;
-    width: calc(100% - 250px);
-}
-
-.home-section .text {
-    /* background: #c51c39; */
-    display: inline-block;
+.heads .text {
     color: #ffffff;
     font-size: 20px;
-    font-weight: 500;
-    margin: 18px
+    font-weight: bold;
 }
+
+
+/* eof new */
 
 
 /* own css */
 
 .bg {
-    padding: 70px;
+    padding: 30px;
     display: flex;
     justify-content: space-between;
 }
@@ -110,13 +116,13 @@ body {
 }
 
 .icon {
-    width: 25%;
+    width: 15%;
 }
 
 .icon i {
     float: right !important;
     vertical-align: middle;
-    font-size: 80px;
+    font-size: 40px;
     text-align: right !important;
     color: #a34758;
 }
