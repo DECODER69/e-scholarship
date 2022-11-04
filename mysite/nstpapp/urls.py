@@ -112,7 +112,9 @@ urlpatterns = [
     path('graduates/', views.graduates, name='graduates'),
     path('graduates_list/', views.graduates_list, name='graduates_list'),
     path('open_anns/<str:id>', views.open_anns, name='open_anns'),
-
+    path('admin_login/', views.admin_login, name='admin_login'),
+    path('admin_log/', views.admin_log, name='admin_log'),
+    path('admin_logout/', views.admin_logout, name='admin_logout'),
     path('password_reset/',auth_views.PasswordResetView.as_view(template_name='activities/registration/password_reset_form.html'),name='password_reset'),
     path('password_reset/done/',auth_views.PasswordResetDoneView.as_view(template_name='activities/registration/password_reset_done.html'),name='password_reset_done'),
     path('reset/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name='activities/registration/password_reset_confirm.html'),name='password_reset_confirm'),

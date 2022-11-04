@@ -21,17 +21,17 @@
                 <img src="../../static/images/leftpic2.svg">
             </div>
             <div class="login-content">
-                <form action="{% url 'activities:signin' %}" method="post">
+                <form action="{% url 'activities:admin_log' %}" method="post">
                     {% csrf_token %}
                     <a href="/">
                         <img src="../../static/images/logo2.png"></a>
-                    <h2 class="title">Welcome</h2>
+                    <h2 class="title">Admin <i class="fa-solid fa-unlock-keyhole"></i></h2>
                     <div class="input-div one">
                         <div class="i">
                             <i class="fas fa-user"></i>
                         </div>
                         <div class="div">
-                            <h5>ID Number</h5>
+                            <h5>Username</h5>
                             <input type="text" class="input" name="username">
                         </div>
                     </div>
@@ -44,9 +44,9 @@
                             <input type="password" class="input" name="password">
                         </div>
                     </div>
-                    <a href="{% url  'activities:password_reset'  %}">Forgot Password?</a>
+                    <!-- <a href="{% url  'activities:password_reset'  %}">Forgot Password?</a> -->
                     <input type="submit" class="btn" value="Login">
-                    <p>Don't have an account? <a href="/signup_page" style="">Sign-up</a></p>
+                    <!-- <p>Don't have an account? <a href="/signup_page" style="">Sign-up</a></p> -->
                 </form>
             </div>
 
@@ -84,7 +84,7 @@
     <script>
         {% for msg in messages %}
         Swal.fire({
-            icon: 'error',
+            icon: 'danger',
             text: '{{ msg }}'
         }) {% endfor %}
     </script>

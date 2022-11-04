@@ -35,8 +35,8 @@
                     <div class="he">
 
                         <div class="ada">
-                            <p1 style="margin-left:  10px;font-size:20px;  color:#000000;">Officially Enrolled Students</p1><br>
-                            <p1 style="margin-left: 10px; font-size:15px; color:#ff0000; font-weight:bold;">{{content33}} Student/s</p1><br>
+                            <p1 style="margin-left:  10px;font-size:20px;  color:#000000;"><i class="fa-solid fa-play"></i> List of all Graduates</p1><br>
+
                         </div>
 
                         <div class="adda">
@@ -71,8 +71,8 @@
                                 <th scope="col">COURSE</th>
                                 <th scope="col">DATE APPROVED</th>
                                 <th scope="col">DATE GRADUATED</th>
-                                <th scope="col">ACTION</th>
-                                <th scope="col">SAVE</th>
+
+
                             </tr>
                         </thead>
                         <tbody>
@@ -93,17 +93,8 @@
                                     <td>
                                         <input type="date" class="form-control" name="end_date" value="{{s.end_date}}">
                                     </td>
-                                    <td>
-                                        <select name="act" id="" class="form-control">
-                                            <option value="DROP">DROP</option>
-                                            <option value="GRADUATE">GRADUATE</option>
 
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <input type="hidden" value="{{s.id}}" name="ids">
-                                        <button type="submit" class="btn btn-info">Save</button>
-                                    </td>
+
                                 </form>
                             </tr>
 

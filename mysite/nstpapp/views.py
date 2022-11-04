@@ -50,7 +50,7 @@ import datetime
 import pandas as pd
 #   PAGE SHOWING
 def index(request):
-    return render(request, 'activities/landing.html')
+    return render(request, 'activities/login.html')
 def signup_page(request):
     schools = sections.objects.all()
     context = {
@@ -72,9 +72,11 @@ def dashboard_page(request):
     return render(request, 'activities/dashboard.html', context)
 @login_required(login_url='/login_page')
 def profile_page(request):
+    name = extenduser.objects.filter(user = request.user)
     usern = extenduser.objects.filter(user=request.user)
     context={
         'usern':usern,
+        'name': name,
     }
     return render(request, 'activities/profile.html', context)
 @login_required(login_url='/login_page')
@@ -134,42 +136,49 @@ def logout_student(request):
 ####################
 #########################
 # ADMIN PAGE DISPLAYS
-
+@login_required(login_url='/admin_login')
 def admin_dashboard(request):
-    audience = sections.objects.all()
-    ann = Announcement.objects.all()
-    sy = school_year.objects.all()
-    active = extenduser.objects.filter(status='ENROLLED').count()
-    pending = extenduser.objects.filter(status='PENDING').count()
-    cnt = sections.objects.all().count()
-    nav_pending_count = extenduser.objects.filter(status='PENDING').count()
-    context = {
-        'active':active,   
-        'pending':pending,
-        'sy':[sy.last()],
-        'audience':audience,
-        'ann':ann,
-        'cnt':cnt,
-        'nav_pending_count':nav_pending_count
-    
-    }
-    return render(request, 'activities/admin_dashboard.html', context)
+    if request.user.is_superuser:
+        audience = sections.objects.all()
+        ann = Announcement.objects.all()
+        sy = school_year.objects.all()
+        active = extenduser.objects.filter(status='ENROLLED').count()
+        pending = extenduser.objects.filter(status='PENDING').count()
+        cnt = sections.objects.all().count()
+        nav_pending_count = extenduser.objects.filter(status='PENDING').count()
+        context = {
+            'active':active,   
+            'pending':pending,
+            'sy':[sy.last()],
+            'audience':audience,
+            'ann':ann,
+            'cnt':cnt,
+            'nav_pending_count':nav_pending_count
+        
+        
+        }
+        return render(request, 'activities/admin_dashboard.html', context)
+    else:
+        messages.info(request, 'Invalid User Type')
+    return redirect('/')
 
+@login_required(login_url='/admin_login')
 def admin_staff(request):
-    s_years = school_year.objects.all()
-    details = extenduser.objects.filter(status='APPROVED')
-    pendings = extenduser.objects.filter(status='PENDING')
-    pending = extenduser.objects.filter(status='PENDING').count()
+    if request.user.is_superuser:
+        s_years = school_year.objects.all()
+        details = extenduser.objects.filter(status='APPROVED')
+        pendings = extenduser.objects.filter(status='PENDING')
+        pending = extenduser.objects.filter(status='PENDING').count()
 
-    context = {
-        'pending':pending,
-        'details': details,
-        'pendings':pendings,
-        's_years':[s_years.last()]
-       
-    }
-    
-    return render(request, 'activities/admin_staffs.html', context)
+        context = {
+            'pending':pending,
+            'details': details,
+            'pendings':pendings,
+            's_years':[s_years.last()]
+        
+        }
+        
+        return render(request, 'activities/admin_staffs.html', context)
 
 def admin_pending(request):
     platoons = sections.objects.all()
@@ -1666,3 +1675,36 @@ def open_anns(request, id):
         'anns2':anns2
     }
     return render(request, 'activities/anns_view.html', context)
+
+
+def admin_login(request):
+    return render(request, 'activities/admin_login.html')
+
+def admin_log(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        if User.objects.filter(username=username).exists():
+            user = authenticate(username=username, password=password)
+            if User.is_superuser:
+                if user is not None:
+                    auth.login(request, user)
+                    return redirect('/admin_dashboard')
+                else:
+                    messages.error(request, 'Incorrect password')
+                    return redirect('/login_page')
+            else:
+                messages.error(request, 'Invalid User type')
+                return redirect('/admin_login')
+        else:
+            messages.error(request, 'Username does no exists')
+            return redirect('/admin_login')
+    else:
+        messages.error(request, 'Invalid username or password !')
+        return redirect('/admin_login')
+    
+    
+    
+def admin_logout(request):
+    logout(request)
+    return redirect('/admin_login')

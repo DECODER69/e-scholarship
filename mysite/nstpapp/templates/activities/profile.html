@@ -1,11 +1,11 @@
-<!DOCTYPE html>{% load static %}
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="../../static/css/profile.css">
     <link rel="icon" href="../../static/images/logo.png">
     <title>profile</title>
 </head>
@@ -16,7 +16,7 @@
 
     <section class="home-section">
         <div class="heads">
-            <h1 class="text"><i class='bx bxs-dashboard'></i> User profile</h1><br>
+            <h1 class="text"><i class="fa-solid fa-user"></i> USER PROFILE</h1><br>
         </div>
 
 
@@ -31,7 +31,7 @@
                             <img src="{{s.picture.url}}" id="profile">
 
                         </div>&nbsp; {% if s.status == 'APPROVED' %}
-                        <h3 style="text-align: center;">{{s.firstname}} {{s.lastname}} <i class='bx bxs-badge-check'></i></h3>
+                        <h3 style="text-align: center;" id="fullname">{{s.firstname}} {{s.lastname}} <i class='bx bxs-badge-check'></i></h3>
                         {% else %}
                         <h3 style="text-align: center;">{{s.firstname}} {{s.lastname}} </h3>
                         {% endif %}
@@ -259,7 +259,7 @@
                     <br>
                     <div class="save">
 
-                        <button class="btn btn-info" id="update" type="submit"><i class='bx bx-refresh'></i>  Update</button>
+                        <button class="btn btn-info" id="update" type="submit"><i class="fa-solid fa-bookmark"></i>  Update</button>
 
 
 
