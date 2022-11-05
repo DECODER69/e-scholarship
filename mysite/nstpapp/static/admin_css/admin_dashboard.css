@@ -358,7 +358,7 @@ td textarea:hover {
     }
 }
 
-@media screen and (min-width:1366px) and (max-width:1920px) {
+@media screen and (min-width:1921px) {
     .container-fluid {
         height: auto;
         width: 100%;
@@ -366,12 +366,18 @@ td textarea:hover {
     }
     .cards {
         border-radius: 8px;
-        /* background-color: #16a1b4; */
+        background-color: #16a1b4;
         height: 20%;
         width: 22%;
         gap: 10px;
     }
     .right img {
         width: 50%;
+    }
+    #yellow {
+        height: 100% !important;
+    }
+    #yellow .inside1 .left h1 {
+        font-size: 30px !important;
     }
 }
