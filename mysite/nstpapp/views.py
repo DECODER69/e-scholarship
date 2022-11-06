@@ -1660,9 +1660,10 @@ def edit(request, id):
         gcontact = request.POST.get('gcontact')
         sources_income = request.POST.get('sources_income')
         monthly_income = request.POST.get('monthly_income')
-        
+        print("hahahahahahaha")
         ids = extenduser.objects.get(id=id)
-        
+
+    
 
       
         # print("image to" +str(grade_ss) )
@@ -1674,19 +1675,33 @@ def edit(request, id):
         
         
         # extenduser.objects.filter(id=ids).update(grade_ss=grade)
-        ids.grade_ss = request.FILES['grade_ss']
-        image_path = ids.grade_ss.path
+        # ids.grade_ss = request.FILES['grade_ss']
+        # if ids.grade_ss != ids.grade_ss:
+        #     print("equal")
+        #     image_path = ids.grade_ss.path
+        #     if os.path.exists(image_path):
+        #         os.remove(image_path)
+        #         ids.save()
+        #         print("nagsave")
+        #         return redirect('/profile_page')
+        #     else:
+            
+        #         ids.save()
+        #         print("nagsave")
+        #         return redirect('/profile_page')
+        # else:
+        #     print("hindi")
+        #     return redirect('/profile_page')
+        
+        image = extenduser.objects.get(id=id)
+   
+        image.grade_ss = request.FILES['grade_ss']
+        image_path = image.grade_ss.path
         if os.path.exists(image_path):
             os.remove(image_path)
-            ids.save()
-            print("nagsave")
-            return redirect('/profile_page')
-        else:
-            ids.save()
-            print("nagsave")
-            return redirect('/profile_page')
-
-
+        image.save()
+        return redirect('/profile_page')
+   
 
     else:
         return redirect('/profile_page')

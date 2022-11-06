@@ -59,7 +59,7 @@ class extenduser(models.Model):
     proof = models.FileField(upload_to='proofs/', default='')
     s_year = models.CharField(max_length=100, default='0000')
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    grade_ss = models.ImageField(upload_to='images/', null=True)
+    grade_ss = models.ImageField(upload_to='images/', default='Grade Picture', null=True, blank=True)
 
     
     # attendance
