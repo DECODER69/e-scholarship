@@ -11,6 +11,7 @@ from turtle import end_fill
 from webbrowser import get
 from django.http import HttpResponseRedirect
 from django.http.request import QueryDict
+from pkgutil import extend_path
 
 
 from http.client import HTTPResponse
@@ -50,7 +51,7 @@ import datetime
 import pandas as pd
 #   PAGE SHOWING
 def index(request):
-    return render(request, 'activities/login.html')
+    return render(request, 'activities/landing.html')
 def signup_page(request):
     schools = sections.objects.all()
     context = {
@@ -71,14 +72,7 @@ def dashboard_page(request):
     }
     return render(request, 'activities/dashboard.html', context)
 @login_required(login_url='/login_page')
-def profile_page(request):
-    name = extenduser.objects.filter(user = request.user)
-    usern = extenduser.objects.filter(user=request.user)
-    context={
-        'usern':usern,
-        'name': name,
-    }
-    return render(request, 'activities/profile.html', context)
+
 @login_required(login_url='/login_page')
 def editprofile(request):
     editwow = extenduser.objects.filter(user=request.user)
@@ -128,7 +122,7 @@ def navbar(request):
     return render(request, 'activities/navbar.html')
 def logout_student(request):
     logout(request)
-    return redirect('/login_page')
+    return redirect('/')
 
 # ADMIN DISPLAY PAGE###################################
 ####################
@@ -362,37 +356,7 @@ def signin(request):
         messages.error(request, 'Invalid username or password !')
         return redirect('/login_page')
 
-@login_required(login_url='/login_page')
-def edit(request):
 
-    if request.method == 'POST':
-        gender = request.POST.get('gender')
-        section = request.POST.get('section')
-        email = request.POST.get('email')
-        age = request.POST.get('age')
-        civil = request.POST.get('civil')
-        cpnumber = request.POST.get('cpnumber')
-        address = request.POST.get('address')
-        birthday = request.POST.get('birthday')
-        nfather = request.POST.get('nfather')
-        foccupation = request.POST.get('foccupation')
-        nmother = request.POST.get('nmother')
-        moccupation = request.POST.get('moccupation')
-        pcontact = request.POST.get('pcontact')
-        nguardian  = request.POST.get('nguardian')
-        goccupation = request.POST.get('goccupation')
-        gcontact = request.POST.get('gcontact')
-        sources_income = request.POST.get('sources_income')
-        monthly_income = request.POST.get('monthly_income')
-        extenduser.objects.filter(user=request.user).update(gender=gender, section=section, email=email, age=age, 
-                                                            civil=civil, cpnumber=cpnumber, address=address, birthday=birthday,
-                                                            nfather=nfather, foccupation=foccupation, nmother=nmother, moccupation=moccupation,
-                                                            pcontact=pcontact, nguardian=nguardian, goccupation=goccupation, gcontact=gcontact,
-                                                            sources_income=sources_income, monthly_income=monthly_income)
-                                            
-        return redirect('/profile_page')
-    else:
-        return redirect('/profile_page')
 @login_required(login_url='/login_page')
 def edit_others(request, id):
     hehe = extenduser.objects.get(id=id)
@@ -643,42 +607,7 @@ def edit_manage(request, id):
 
     return render (request, 'activities/edit_manage.html', context)
 
-def update_manage(request):
-    if request.method == 'POST':
-        ids = request.POST.get('ids')
-        firstname = request.POST.get('firstname')
-        middlename = request.POST.get('middlename')
-        lastname = request.POST.get('lastname')
-        address = request.POST.get('address')
-        cpnumber = request.POST.get('cpnumber')
-        birthday = request.POST.get('birthday')
-        age = request.POST.get('age')
-        civil = request.POST.get('civil')
-        email = request.POST.get('email')
-        idnumber = request.POST.get('idnumber')
-        status =request.POST.get('status')
-        field = request.POST.get('field')
-        platoons = request.POST.get('platoons')
-        section2 = request.POST.get('section')
-        nfather = request.POST.get('nfather')
-        foccupation = request.POST.get('foccupation')
-        nmother = request.POST.get('nmother')
-        moccupation  = request.POST.get('moccupation')
-        pcontact = request.POST.get('pcontact')
-        nguardian = request.POST.get('nguardian')
-        goccupation = request.POST.get('goccupation')
-        gcontact = request.POST.get('gcontact')
-        
-        extenduser.objects.filter(id=ids).update(firstname = firstname, middlename = middlename, lastname = lastname, 
-                                                 address = address, cpnumber=cpnumber, birthday=birthday, age=age,
-                                                 civil=civil,email=email,idnumber=idnumber,status=status,field=field,
-                                                 platoons=platoons, section=section2,nfather=nfather, foccupation=foccupation, nmother=nmother, moccupation=moccupation,
-                                                 pcontact=pcontact, nguardian=nguardian, goccupation=goccupation, gcontact=gcontact)
-        User.objects.filter(id=ids).update(username=idnumber)
-        messages.success(request, str(idnumber)+' has been Updated')
-        return redirect('/create_platoon_page')
 
-    return redirect('/create_platoon_page')
         
         
         
@@ -1708,3 +1637,121 @@ def admin_log(request):
 def admin_logout(request):
     logout(request)
     return redirect('/admin_login')
+
+@login_required(login_url='/login_page')
+def edit(request, id):
+  
+    if request.method == 'POST':
+        gender = request.POST.get('gender')
+        section = request.POST.get('section')
+        email = request.POST.get('email')
+        age = request.POST.get('age')
+        civil = request.POST.get('civil')
+        cpnumber = request.POST.get('cpnumber')
+        address = request.POST.get('address')
+        birthday = request.POST.get('birthday')
+        nfather = request.POST.get('nfather')
+        foccupation = request.POST.get('foccupation')
+        nmother = request.POST.get('nmother')
+        moccupation = request.POST.get('moccupation')
+        pcontact = request.POST.get('pcontact')
+        nguardian  = request.POST.get('nguardian')
+        goccupation = request.POST.get('goccupation')
+        gcontact = request.POST.get('gcontact')
+        sources_income = request.POST.get('sources_income')
+        monthly_income = request.POST.get('monthly_income')
+        
+        ids = extenduser.objects.get(id=id)
+        
+
+      
+        # print("image to" +str(grade_ss) )
+        extenduser.objects.filter(user=request.user).update(gender=gender, section=section, email=email, age=age, 
+                                                            civil=civil, cpnumber=cpnumber, address=address, birthday=birthday,
+                                                            nfather=nfather, foccupation=foccupation, nmother=nmother, moccupation=moccupation,
+                                                            pcontact=pcontact, nguardian=nguardian, goccupation=goccupation, gcontact=gcontact,
+                                                            sources_income=sources_income, monthly_income=monthly_income)
+        
+        
+        # extenduser.objects.filter(id=ids).update(grade_ss=grade)
+        ids.grade_ss = request.FILES['grade_ss']
+        image_path = ids.grade_ss.path
+        if os.path.exists(image_path):
+            os.remove(image_path)
+            ids.save()
+            print("nagsave")
+            return redirect('/profile_page')
+        else:
+            ids.save()
+            print("nagsave")
+            return redirect('/profile_page')
+
+
+
+    else:
+        return redirect('/profile_page')
+    
+def profile_page(request):
+    name = extenduser.objects.filter(user = request.user)
+    usern = extenduser.objects.filter(user=request.user)
+    context={
+        'usern':usern,
+        'name': name,
+    }
+    return render(request, 'activities/profile.html', context)
+
+
+def update_manage(request):
+    if request.method == 'POST':
+        ids = request.POST.get('ids')
+        firstname = request.POST.get('firstname')
+        middlename = request.POST.get('middlename')
+        lastname = request.POST.get('lastname')
+        address = request.POST.get('address')
+        cpnumber = request.POST.get('cpnumber')
+        birthday = request.POST.get('birthday')
+        age = request.POST.get('age')
+        civil = request.POST.get('civil')
+        email = request.POST.get('email')
+        idnumber = request.POST.get('idnumber')
+        status =request.POST.get('status')
+        field = request.POST.get('field')
+        platoons = request.POST.get('platoons')
+        section2 = request.POST.get('section')
+        nfather = request.POST.get('nfather')
+        foccupation = request.POST.get('foccupation')
+        nmother = request.POST.get('nmother')
+        moccupation  = request.POST.get('moccupation')
+        pcontact = request.POST.get('pcontact')
+        nguardian = request.POST.get('nguardian')
+        goccupation = request.POST.get('goccupation')
+        gcontact = request.POST.get('gcontact')
+        sources_income = request.POST.get('sources_income')
+        monthly_income = request.POST.get('monthly_income')
+       
+        extenduser.objects.filter(id=ids).update(firstname = firstname, middlename = middlename, lastname = lastname, 
+                                                 address = address, cpnumber=cpnumber, birthday=birthday, age=age,
+                                                 civil=civil,email=email,idnumber=idnumber,status=status,field=field,
+                                                 platoons=platoons, section=section2,nfather=nfather, foccupation=foccupation, nmother=nmother, moccupation=moccupation,
+                                                 pcontact=pcontact, nguardian=nguardian, goccupation=goccupation, gcontact=gcontact, sources_income=sources_income, monthly_income=monthly_income)
+        User.objects.filter(id=ids).update(username=idnumber)
+   
+        messages.success(request, str(idnumber)+' has been Updated')
+        # return redirect('/create_platoon_page')
+        return redirect(request.META['HTTP_REFERER'])
+
+    return redirect('/create_platoon_page')
+
+def feedback(request):
+    if request.method == 'POST':
+        try:
+            sub = request.POST.get('subject')
+            msg = request.POST.get('message')
+            sender = request.POST.get('sender_email')
+            receiver = ['escholarship2022@gmail.com',]
+            send_mail(sub, msg ,sender, receiver)
+            print(msg)
+            return redirect('/')
+        except ImportError:
+            messages.success(request, 'Email Encountered some errors. Please Contact your Administrator')
+    return redirect('/')

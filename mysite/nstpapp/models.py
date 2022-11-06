@@ -48,6 +48,7 @@ class extenduser(models.Model):
     moccupation = models.CharField(max_length=20, default='')
     pcontact = models.CharField(max_length=20, default='')
     
+    
     nguardian = models.CharField(max_length=20, default='')
     goccupation = models.CharField(max_length=20, default='')
     gcontact = models.CharField(max_length=20, default='')
@@ -58,6 +59,8 @@ class extenduser(models.Model):
     proof = models.FileField(upload_to='proofs/', default='')
     s_year = models.CharField(max_length=100, default='0000')
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    grade_ss = models.ImageField(upload_to='images/', null=True)
+
     
     # attendance
     TD1= models.CharField(max_length=100, default='')

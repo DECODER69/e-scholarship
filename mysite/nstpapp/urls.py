@@ -27,7 +27,7 @@ urlpatterns = [
     path('dashboard_page/', views.dashboard_page, name='dashboard_page'),
     path('profile_page/', views.profile_page, name='profile_page'),
     path('editprofile/', views.editprofile, name='editprofile'),
-    path('edit/', views.edit, name='edit'),
+    path('edit/<str:id>', views.edit, name='edit'),
     path('others/', views.others, name='others'),
     path('edit_others/<str:id>', views.edit_others, name='edit_others'),
     path('health/', views.health, name='health'),
@@ -115,6 +115,12 @@ urlpatterns = [
     path('admin_login/', views.admin_login, name='admin_login'),
     path('admin_log/', views.admin_log, name='admin_log'),
     path('admin_logout/', views.admin_logout, name='admin_logout'),
+    path('feedback/', views.feedback, name='feedback'),
+    
+    
+    
+    
+    
     path('password_reset/',auth_views.PasswordResetView.as_view(template_name='activities/registration/password_reset_form.html'),name='password_reset'),
     path('password_reset/done/',auth_views.PasswordResetDoneView.as_view(template_name='activities/registration/password_reset_done.html'),name='password_reset_done'),
     path('reset/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name='activities/registration/password_reset_confirm.html'),name='password_reset_confirm'),
