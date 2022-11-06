@@ -665,6 +665,22 @@ header label {
     }
 }
 
+@media screen and (min-width:360px)and (max-width:640px) {
+    .dalawa img {
+        width: 50px !important;
+        height: 50px !important;
+    }
+    .dalawa a {
+        font-size: 20px !important;
+    }
+}
+
+@media screen and (min-width:641px) and (max-width:1024px) {
+    .dalawa img {
+        width: 30px;
+    }
+}
+
 
 /*@media (max-width:350px){
     
