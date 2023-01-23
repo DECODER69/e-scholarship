@@ -65,7 +65,7 @@ def login_page(request):
 def dashboard_page(request):
     
     name = extenduser.objects.filter(user = request.user)
-    anns = Announcement.objects.all()
+    anns = Announcement.objects.all().order_by('date_posted').reverse()
     context = {
         'name': name,
         'anns':anns
@@ -311,7 +311,7 @@ def attendance_main_page(request):
 def signup(request):
     if request.method == 'POST':
         firstname = request.POST.get('firstname')
-        middle = request.POST.get('middle')
+        middle = request.POST.get('middlename')
         lastname = request.POST.get('lastname')
         email = request.POST.get('email')
         idnumber = request.POST.get('idnumber')
@@ -337,18 +337,58 @@ def signup(request):
         return redirect('/')
 
 
+# def signin(request):
+#     if request.method == "POST":
+#             username = request.POST.get('username')
+#             password = request.POST.get('password')
+#             if User.objects.filter(username=username).exists():
+#                 user = authenticate(username=username, password=password)
+#                 if user is not None:
+#                     auth.login(request, user)
+#                     return redirect('/dashboard_page')
+#                 else:
+#                     messages.error(request, 'Incorrect password')
+#                     return redirect('/login_page')
+#             else:
+#                 messages.error(request, 'ID Number ' + str (username) + ' Does not exist !')
+#                 return redirect('/login_page')
+#     else:
+#         messages.error(request, 'Invalid username or password !')
+#         return redirect('/login_page')
+
 def signin(request):
     if request.method == "POST":
             username = request.POST.get('username')
             password = request.POST.get('password')
+            usertype = User.objects.filter(username=username).filter(is_staff=1)
             if User.objects.filter(username=username).exists():
-                user = authenticate(username=username, password=password)
-                if user is not None:
-                    auth.login(request, user)
-                    return redirect('/dashboard_page')
+                if usertype:
+                    print("gago")
+                    user = authenticate(username=username, password=password)
+                    if user is not None:
+                        auth.login(request, user)
+                        return redirect('/admin_dashboard')
+                    else:
+                        messages.error(request, 'Incorrect password')
+                        return redirect('/login_page')
                 else:
-                    messages.error(request, 'Incorrect password')
-                    return redirect('/login_page')
+                    user = authenticate(username=username, password=password)
+                    if user is not None:
+                        auth.login(request, user)
+                        return redirect('/dashboard_page')
+                    else:
+                        messages.error(request, 'Incorrect password')
+                        return redirect('/login_page')
+                    
+                
+                
+                # user = authenticate(username=username, password=password)
+                # if user is not None:
+                #     auth.login(request, user)
+                #     return redirect('/dashboard_page')
+                # else:
+                #     messages.error(request, 'Incorrect password')
+                #     return redirect('/login_page')
             else:
                 messages.error(request, 'ID Number ' + str (username) + ' Does not exist !')
                 return redirect('/login_page')
@@ -1788,3 +1828,15 @@ def send_feedback(request):
        data = feedback(sender=name, email=email, date_sent=date_time, subject=subject, message=message)
        data.save()
     return redirect('/contact_us')
+
+
+
+def enrollment(request):
+    name = extenduser.objects.filter(user = request.user)
+    sy = school_year.objects.all()
+    context = {
+        'name': name,
+        'sy':[sy.last()]
+
+    }
+    return render(request, 'activities/enrollment.html', context)

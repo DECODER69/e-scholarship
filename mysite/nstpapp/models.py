@@ -28,7 +28,7 @@ class extenduser(models.Model):
     section = models.CharField(max_length=20, default='')
     field = models.CharField(max_length=20, default='Select Course')
     picture = models.ImageField(upload_to='images/', null=False)
-    status = models.CharField(max_length=10, default='PENDING')
+    status = models.CharField(max_length=10, default='')
     platoons = models.CharField(max_length=20, default='PROCESSING')
     school = models.CharField(max_length=  20, default='')
     start_dates = models.CharField(max_length=15, default='')
@@ -80,6 +80,13 @@ class extenduser(models.Model):
     TD15= models.CharField(max_length=100, default='')
     
     # date_enrolled = models.DateTimeField(max_length=40, default='WAITING')
+    
+    cor = models.ImageField(upload_to="images/" , default='')
+    cog =  models.ImageField(upload_to="images/" , default='')
+    birth_cert =  models.ImageField(upload_to="images/" , default='')
+    good_moral = models.ImageField(upload_to="images/" , default='')
+    barangay =  models.ImageField(upload_to="images/" , default='')
+    mangyan =  models.ImageField(upload_to="images/" , default='')
     
     
     def __str__(self):

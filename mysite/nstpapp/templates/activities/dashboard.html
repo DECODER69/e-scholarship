@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="../../static/css/dashboard.css">
     <link rel="icon" href="../../static/images/logo2.png">
 
 
@@ -17,22 +17,21 @@
 <body>
     {% include 'activities/navbar.html' %}
 
-    <!-- MODAL -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Complete Profile !</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Student Profile</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
                 </div>
                 <div class="modal-body">
-                    Please fill up all related Field to complete <a href="/profile_page">profile</a> details. Disregard this message if you already done it. Thank you !
+                    Please Complete your profile before proceeding to Enrollment ! Incomplete Profile will not be able to Enroll. Please Disregard this message if you already done it. Thnak You..
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <a href="/profile_page"><button type="button" class="btn btn-primary">Proceed</button></a>
+                    <a href="/profile_page" class="btn btn-primary">Proceed</a>
                 </div>
             </div>
         </div>
@@ -40,129 +39,248 @@
 
 
 
-    <!-- end of modal -->
-    <section class="home-section">
+
+    <section class="page-content">
         <div class="heads">
-            <h1 class="text"><i class="fa-solid fa-house"></i> DASHBOARD</h1><br>
-        </div>
+            <h1 class="text"><i class='bx bx-home'></i>DASHBOARD</h1><br>
+            <h1 class="text" id="time"></h1>
+
+        </div><br>
         <div class="bg">
-            {% for s in name %}
-            <div class="left">
-                <div class="cards">
-                    <div class="data">
-                        <h5 id="title">Student</h5>
-                        <h1 id="name"><span style="color: red; font-style:italic;">Welcome</span> {{s.firstname}} {{s.lastname}}</h1>
+            <div class="home-content">
+                {% for s in name %}
+                <div class="uper">
+                    <div class="card-part">
+                        <div class="card-deck">
+                            <div class="card">
+                                <div class="card-horizontal">
+                                    <div class="img-square-wrapper">
+                                        <img class="" src="{{s.picture.url}}" alt="Profile picture" width="130px" height="130px">
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title">Hi {{s.firstname}} !</h4>
+                                        <p class="card-text">User</p>
+
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">e-Scholarship @ 2023</small>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-horizontal">
+                                    <div class="img-square-wrapper">
+                                        <img class="" src="../../static/images/course1.png" alt="Card image cap" width="130px" height="130px">
+                                    </div>
+                                    <div class="card-body">
+                                        {% if s.status == '' %}
+                                        <h4 class="card-title" title="Click to proceed"><a href="/enrollment" style="color: red;">Enroll Now !</a></h4>
+                                        {% elif s.status == 'PENDING' %}
+                                        <h4 class="card-title">{{s.status}}</h4>
+                                        {% elif s.status == 'ACCEPTED' %}
+                                        <h4 class="card-title">{{s.status}} <span style="color: green;"><i class="fa-solid fa-circle-check"></i></span></h4>
+                                        {% elif s.status == 'DROPPED' %}
+                                        <h4 class="card-title">{{s.status}}</h4>
+                                        {% elif s.status == 'REJECTED' %}
+                                        <h4 class="card-title" style="color: red;"> DECLINED</h4>
+                                        {% elif s.status == 'GRADUATE' %}
+                                        <h4 class="card-title">{{s.status}}</h4>
+                                        {% endif %}
+                                        <p class="card-text">Scholarship Status</p>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">Scholarship@2023</small>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-horizontal">
+                                    <div class="img-square-wrapper">
+                                        <img class="" src="../../static/images/school.png" alt="Card image cap" width="130px" height="130px">
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title">{{s.school}}</h4>
+                                        <p class="card-text">School</p>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">Scholarship@2023</small>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-horizontal">
+                                    <div class="img-square-wrapper">
+                                        <img class="" src="../../static/images/sec.png" alt="Card image cap" width="130px" height="130px">
+                                    </div>
+                                    <div class="card-body">
+                                        {% if s.start_dates == '' %}
+                                        <h4 class="card-title" style="color: red;">Not Available</h4>
+                                        {% else %}
+                                        <h4 class="card-title" style="color: rgb(14, 14, 14);">{{s.start_dates}}</h4>
+                                        {% endif %}
+                                        <p class="card-text">Scholarship Period</p>
+
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">Scholarship@2023</small>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
-                    <div class="icon">
-                        <i class="fa-solid fa-user"></i>
 
-                    </div>
+
 
                 </div>
-                <br>
-                <div class="card3">
-                    <h5 id="tits"><i class="fa-solid fa-grip-lines-vertical" style="color: rgb(138, 90, 0);"></i> Announcements</h5>
-                    <hr> {% for k in anns %}
-                    <a href="/open_anns/{{k.id}}" id="anns">
-                        <div class="left2">
-                            <i class="fa-solid fa-bullhorn"></i>
+                {% endfor %}
 
-                        </div>
-                        <div class="right2">
-                            <h5 id="subject">{{k.subject}}</h5>
-                            <p>{{k.date_posted}}</p>
+                <br>&nbsp;<br>
 
-                        </div>
-                    </a>&nbsp; {% empty %}
-                    <h5 id="no">No Announcements <i class='bx bx-sad' style="vertical-align: middle;"></i></h5>
+                <!-- lower part -->
+
+                <div class="requirements">
+                    <div class="r1">
+
+                    </div>
+                    {% for s in name %}
+                    <div class="r2">
+                        <h5 style="text-align: left; font-weight:bolder;"><i class="fa-solid fa-list-ul"></i> Requirements Checklist</h5>
+                        <hr>
+                        <br> {% if s.cor == '' %}
+                        <h6><span>1. Certificate of Enrollment (COR)</span> <span style="color: red;"><i class="fa-solid fa-circle-xmark"></i></span></h6>
+                        {% else %}
+                        <h6><span>1. Certificate of Enrollment (COR)</span> <span style="color: rgb(0, 184, 0);"><i class="fa-solid fa-circle-check"></i></span></h6>
+                        {% endif %} {% if s.cog == '' %}
+                        <h6><span>2. Certificate of Grades (COG)</span> <span style="color: red;"><i class="fa-solid fa-circle-xmark"></i></span></h6>
+                        {% else %}
+                        <h6><span>2. Certificate of Grades (COG)</span> <span style="color: rgb(0, 184, 0);"><i class="fa-solid fa-circle-check"></i></span></h6>
+                        {% endif %} {% if s.birth_cert == '' %}
+                        <h6><span>3. Birth Certificate(Photocopy)</span> <span style="color: red;"><i class="fa-solid fa-circle-xmark"></i></span></h6>
+                        {% else %}
+                        <h6><span>3. Birth Certificate(Photocopy)</span></h6>
+                        {% endif %} {% if s.good_moral == '' %}
+                        <h6><span>4. Certificate of Good Moral Character</span> <span style="color: red;"><i class="fa-solid fa-circle-xmark"></i></span></h6>
+                        {% else %}
+                        <h6><span>4. Certificate of Good Moral Character</span> <span style="color: rgb(0, 184, 0);"><i class="fa-solid fa-circle-check"></i></span></h6>
+                        {% endif %} {% if s.barangay == '' %}
+                        <h6><span>5. Certificate of Residency from Barangay</span> <span style="color: red;"><i class="fa-solid fa-circle-xmark"></i></span></h6>
+                        {% else %}
+                        <h6><span>5. Certificate of Residency from Barangay</span> <span style="color: rgb(0, 184, 0);"><i class="fa-solid fa-circle-check"></i></span></h6>
+                        {% endif %} {% if s.mangyan == '' %}
+                        <h6><span>5. Certificate proving ligitimacy as Mangyan <br>&nbsp;&nbsp;&nbsp;&nbsp;issued by tribal leader</span> <span style="color: red;"><i class="fa-solid fa-circle-xmark"></i></span></h6>
+                        {% else %}
+                        <h6><span>5. Certificate proving ligitimacy as Mangyan <br>&nbsp;&nbsp;&nbsp;&nbsp;issued by tribal leader</span><span style="color: rgb(0, 184, 0);"><i class="fa-solid fa-circle-check"></i></span></h6>
+                        {% endif %}
+
+                    </div>
                     {% endfor %}
 
-
-
-                </div>
-
-            </div>
-
-            <div class="right">
-                <div class="cards" id="r_card2">
-                    <div class="data">
-                        <h5 id="title">Today</h5>
-                        <h1 id="name">{% now "jS F Y" %}</h1>
-
-                    </div>
-                    <div class="icon">
-                        <i class="fa-solid fa-calendar-days"></i>
-
-                    </div>
-
-                </div><br>
-                <div class="cards" id="r_card">
-                    <div class="data">
-                        <h5 id="title">Scholarship Status</h5>
-
-                        <h1 id="name">{{s.status}}</h1>
-
-
-                    </div>
-                    <div class="icon">
-                        {% if s.status == 'APPROVED' %}
-                        <i class="fa-solid fa-circle-check" style="color: rgb(0, 68, 0);"></i> {% elif s.status == 'PENDING' %}
-                        <i class='bx bxs-check-circle' style="color: rgb(187, 141, 1);"></i> {% endif %}
-                    </div>
-
-                </div>
-                <br>
-                <div class="cards1">
-                    <div class="data1">
-                        <h5 id="title">Scholarship Period</h5><br>
-                        <div class="period">
-
-                            <h1 id="name" style="color: rgb(55, 59, 55);">{{s.start_dates}} </h1>
-                            <i class="fa-solid fa-arrow-right"></i>
-                            <h1 id="name" style="color: rgb(196, 0, 0);">{{s.end_date}}</h1>
-
-                        </div>
-
-                    </div>
-                    <!-- <div class="icon">
-                        {% if s.status == 'ENROLLED' %}
-                        <i class='bx bxs-time'></i> {% elif s.status == 'PENDING' %}
-                        <i class='bx bxs-time'></i> {% endif %}
-                    </div> -->
-
                 </div>
 
 
             </div>
-
-
-            {% endfor %}
-
-
         </div>
 
+        {% comment %} <small id="smalls">@sentinels 2022</small> {% endcomment %}
+
     </section>
-
-
     <script>
-        var txt = document.getElementById('status').value;
-
-        if (txt == 'ENROLLED') {
-            document.getElementById('play').style.display = "initial"
-        } else {
-            document.getElementById('pause').style.display = "initial"
-        }
-    </script>
-
-    <script type="text/javascript">
-        $(window).on('load', function() {
-            $('#exampleModal').modal('show');
+        $(document).ready(function() {
+            $("#exampleModal").modal('show');
         });
     </script>
 
-    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
+    <!-- <div class="custom-shape-divider-bottom-1669703185">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
+            <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path>
+            <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path>
+        </svg>
+    </div> -->
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+    <!-- 
+    <script>
+    var config = {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: [ {{absent|safe}} , {{present|safe}}],
+     
+          backgroundColor: [
+             '#D0021B','#7ED321'
+          ],
+          label: {{labels | safe}}
+        }],
+        labels: {{labels | safe}}
+      },
+      options: {
+        responsive: true
+      }
+    };
+    
+    window.onload = function() {
+      var ctx = document.getElementById('pie-chart').getContext('2d');
+   
+      window.myPie = new Chart(ctx, config);
+    };
+     </script>  
+ <script>
+        var config2 = {
+          type: 'doughnut',
+          data: {
+            datasets: [{
+              data: [ {{absent2|safe}} , {{present2|safe}}],
+              backgroundColor: [
+                 '#D0021B','#7ED321'
+              ],
+              label: {{labels | safe}}
+            }],
+            labels: {{labels | safe}}
+          },
+          options: {
+            responsive: true
+          }
+        };
+        
+    
+        window.onload = function() {
+          var ctx = document.getElementById('pie-chart2').getContext('2d');
+       
+          window.myPie = new Chart(ctx, config2);
+        };
+    
+         </script>     -->
+
+
+
+
+
+
 
 </body>
+
 
 </html>
