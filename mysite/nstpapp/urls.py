@@ -116,6 +116,8 @@ urlpatterns = [
     path('admin_log/', views.admin_log, name='admin_log'),
     path('admin_logout/', views.admin_logout, name='admin_logout'),
     path('feedback/', views.feedback, name='feedback'),
+    path('contact_us/', views.contact_us, name='contact_us'),
+    path('send_feedback/', views.send_feedback, name='send_feedback'),
     
     
     

@@ -1770,3 +1770,21 @@ def feedback(request):
         except ImportError:
             messages.success(request, 'Email Encountered some errors. Please Contact your Administrator')
     return redirect('/')
+
+
+
+def contact_us(request):
+    # sss
+    return render(request, 'activities/contact_us.html')
+
+
+def send_feedback(request):
+    date_time = datetime.datetime.now() 
+    if request.method == 'POST':
+       name = request.POST.get('name')
+       email = request.POST.get('email')
+       subject = request.POST.get('subject')
+       message = request.POST.get('message')
+       data = feedback(sender=name, email=email, date_sent=date_time, subject=subject, message=message)
+       data.save()
+    return redirect('/contact_us')
