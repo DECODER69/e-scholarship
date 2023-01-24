@@ -21,7 +21,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Second Semester Enrollment</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">E-Scholarship Program</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -36,14 +36,14 @@
                         </div>
 
                         <div class="form-group">
-                            <h3 style="color: red;">
-                                Enroll Second Sem ?
+                            <h3 style="color: rgb(10, 126, 0);">
+                                Apply E-Scholarship ?
                             </h3>
 
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Enroll</button>
+                            <button type="submit" class="btn btn-primary">Apply</button>
                         </div>
 
                     </form>
@@ -67,9 +67,9 @@
         <div class="bg">
             {% for s in name %}
             <div class="containers">
-                <h1>
-                    Welcome Oriental Mindoro E-Scholarship Program
-                </h1>
+                <h3 style="font-weight: bolder;">
+                    Welcome Oriental Mindoro E-Scholarship Program Application
+                </h3>
                 <hr>
 
                 <!-- <h2 id="user" style="font-weight: bold;"><span>Hello</span> <span style="color: rgb(34, 34, 34);">{{s.lastname}} !</span></h2> -->
@@ -85,8 +85,10 @@
 
                 <br>
 
-                <h5><span style="font-weight: bolder;"><i class="fa-solid fa-id-card"></i> Student ID:</span> {{s.idnumber}}</h5>
-                <button class="btn btn-info"> Apply Now !</button> {% endif %}
+                <h5><span><i class="fa-solid fa-id-card" style="color: grey;"></i> Student ID:</span> {{s.idnumber}}</h5>
+                <h5><span><i class="fa-solid fa-school-circle-check"  style="color: grey;"></i> School:</span> {{s.school}}</h5>
+                <br>
+                <button class="btn btn-info" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-arrow-right"></i> Apply Now !</button> <br>{% endif %}
 
 
                 <br>
