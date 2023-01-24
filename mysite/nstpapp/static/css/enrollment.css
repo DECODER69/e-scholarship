@@ -64,6 +64,10 @@ section {
     margin: auto;
 }
 
+.containers h5 {
+    line-height: 40px;
+}
+
 #user {
     color: rgb(0, 14, 26);
 }
