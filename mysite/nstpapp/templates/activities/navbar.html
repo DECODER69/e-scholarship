@@ -21,7 +21,7 @@
                 <div class="sidebar-brand">
 
                     <a href="#" style="justify-content:space-between;">
-                        <i class="fa-solid fa-chalkboard-user"></i>&nbsp;
+
 
                         <span style="color: rgb(255, 255, 255);">&nbsp;e-Scholarship</span>
                     </a>
@@ -30,22 +30,16 @@
                         <!-- {% for s in staff %}<a href="#">{{s.firstname}} {{s.lastname}}</a> {% endfor %} -->
                     </div>
                 </div>
-                {% for s in name %}
+
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <img class="img-responsive img-rounded" src="{{s.picture.url}}" alt="User picture">
+                        <img class="img-responsive img-rounded" src="../../static/images/logo.png" alt="User picture">
                     </div>
 
                 </div>
 
-                <div class="sidebar-brand">
 
 
-
-                    <span id="pogi"><h6>{{s.firstname}}  {{s.lastname}} <i class="fa-solid fa-circle" style="color: green; vertical-align:middle;"></i></h6></span>
-
-                </div>
-                {% endfor %}
                 <!-- sidebar-header -->
                 <!-- <div class="sidebar-search">
                     <div>

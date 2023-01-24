@@ -63,21 +63,21 @@ class extenduser(models.Model):
 
     
     # attendance
-    TD1= models.CharField(max_length=100, default='')
-    TD2= models.CharField(max_length=100, default='')
-    TD3= models.CharField(max_length=100, default='')
-    TD4= models.CharField(max_length=100, default='')
-    TD5= models.CharField(max_length=100, default='')
-    TD6= models.CharField(max_length=100, default='')
-    TD7= models.CharField(max_length=100, default='')
-    TD8= models.CharField(max_length=100, default='')
-    TD9= models.CharField(max_length=100, default='')
-    TD10= models.CharField(max_length=100, default='')
-    TD11= models.CharField(max_length=100, default='')
-    TD12= models.CharField(max_length=100, default='')
-    TD13= models.CharField(max_length=100, default='')
-    TD14= models.CharField(max_length=100, default='')
-    TD15= models.CharField(max_length=100, default='')
+    # TD1= models.CharField(max_length=100, default='')
+    # TD2= models.CharField(max_length=100, default='')
+    # TD3= models.CharField(max_length=100, default='')
+    # TD4= models.CharField(max_length=100, default='')
+    # TD5= models.CharField(max_length=100, default='')
+    # TD6= models.CharField(max_length=100, default='')
+    # TD7= models.CharField(max_length=100, default='')
+    # TD8= models.CharField(max_length=100, default='')
+    # TD9= models.CharField(max_length=100, default='')
+    # TD10= models.CharField(max_length=100, default='')
+    # TD11= models.CharField(max_length=100, default='')
+    # TD12= models.CharField(max_length=100, default='')
+    # TD13= models.CharField(max_length=100, default='')
+    # TD14= models.CharField(max_length=100, default='')
+    # TD15= models.CharField(max_length=100, default='')
     
     # date_enrolled = models.DateTimeField(max_length=40, default='WAITING')
     
@@ -87,6 +87,8 @@ class extenduser(models.Model):
     good_moral = models.ImageField(upload_to="images/" , default='')
     barangay =  models.ImageField(upload_to="images/" , default='')
     mangyan =  models.ImageField(upload_to="images/" , default='')
+    
+    nationality = models.CharField(max_length=100, default='')
     
     
     def __str__(self):

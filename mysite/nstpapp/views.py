@@ -1679,7 +1679,7 @@ def admin_logout(request):
     return redirect('/admin_login')
 
 @login_required(login_url='/login_page')
-def edit(request, id):
+def edit(request):
   
     if request.method == 'POST':
         gender = request.POST.get('gender')
@@ -1700,8 +1700,9 @@ def edit(request, id):
         gcontact = request.POST.get('gcontact')
         sources_income = request.POST.get('sources_income')
         monthly_income = request.POST.get('monthly_income')
+        nationality = request.POST.get('nationality')
         print("hahahahahahaha")
-        ids = extenduser.objects.get(id=id)
+   
 
     
 
@@ -1711,7 +1712,7 @@ def edit(request, id):
                                                             civil=civil, cpnumber=cpnumber, address=address, birthday=birthday,
                                                             nfather=nfather, foccupation=foccupation, nmother=nmother, moccupation=moccupation,
                                                             pcontact=pcontact, nguardian=nguardian, goccupation=goccupation, gcontact=gcontact,
-                                                            sources_income=sources_income, monthly_income=monthly_income)
+                                                            sources_income=sources_income, monthly_income=monthly_income, nationality=nationality)
         
         
         # extenduser.objects.filter(id=ids).update(grade_ss=grade)
@@ -1733,13 +1734,13 @@ def edit(request, id):
         #     print("hindi")
         #     return redirect('/profile_page')
         
-        image = extenduser.objects.get(id=id)
+        # image = extenduser.objects.get(id=id)
    
-        image.grade_ss = request.FILES['grade_ss']
-        image_path = image.grade_ss.path
-        if os.path.exists(image_path):
-            os.remove(image_path)
-        image.save()
+        # image.grade_ss = request.FILES['grade_ss']
+        # image_path = image.grade_ss.path
+        # if os.path.exists(image_path):
+        #     os.remove(image_path)
+        # image.save()
         return redirect('/profile_page')
    
 
@@ -1753,7 +1754,7 @@ def profile_page(request):
         'usern':usern,
         'name': name,
     }
-    return render(request, 'activities/profile.html', context)
+    return render(request, 'activities/student_profile.html', context)
 
 
 def update_manage(request):
@@ -1840,3 +1841,5 @@ def enrollment(request):
 
     }
     return render(request, 'activities/enrollment.html', context)
+
+
