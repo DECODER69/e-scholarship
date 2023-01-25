@@ -75,21 +75,19 @@
                 <!-- <h2 id="user" style="font-weight: bold;"><span>Hello</span> <span style="color: rgb(34, 34, 34);">{{s.lastname}} !</span></h2> -->
 
 
-                {% if s.address and s.cor == '' %}
+                {% if s.cor and s.address and s.birth_cert and s.barangay != "" %}
                 <br>
-                <h6 style="color: red;">Please Complete Your Profile and Requirements first before proceeding to Application. !</h6>
-
-                {% else %}
-
-
-
                 <br>
 
-                <h5><span style="font-weight: bolder;"><i class="fa-solid fa-id-card" style="color: grey; "></i> Student ID:</span> {{s.idnumber}}</h5>
-                <h5><span style="font-weight: bolder;"><i class="fa-solid fa-school-circle-check"  style="color: grey;"></i> School:</span> {{s.school}}</h5>
-                <h5><span style="font-weight: bolder;"><i class="fa-solid fa-school-circle-check"  style="color: grey;"></i> Scholarship Period:</span> {{s.start_dates}}</h5>
+                <h5><span id="r6">Student Name:</span> <span id="r7">{{s.firstname}}</span></h5>
+                <h5><span id="r6">Program:</span> <span id="r7">{{s.section}}</span></h5>
+                <h5><span id="r6">School:</span> <span id="r7">{{s.school}}</span></h5>
                 <br>
-                <button class="btn btn-info" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-arrow-right"></i> Apply Now !</button> <br>{% endif %}
+                <br> {% else%}
+                <h6 style="color: red;">Please Complete Your <a href="">Profile Informations</a> and <a href="">Requirements</a> first before proceeding to Application. !</h6>
+                <!-- <button class="btn btn-info" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-arrow-right"></i> Apply Now !</button> -->
+
+                {% endif %}
 
 
                 <br>

@@ -56,16 +56,34 @@ section {
 }
 
 .containers {
+    font-family: Arial, Helvetica, sans-serif;
     border: solid 1px rgba(128, 128, 128, 0.432);
     width: 90%;
     height: auto;
     border-radius: 6px;
-    padding: 5px;
+    padding: 10px;
     margin: auto;
+}
+
+.containers h3 {
+    background: -webkit-linear-gradient(rgb(0, 107, 9), rgb(114, 93, 0));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .containers h5 {
     line-height: 40px;
+    width: 47%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.containers h5 #r6 {
+    font-weight: bolder;
+}
+
+.containers h5 #r7 {
+    width: 60%;
 }
 
 #user {
