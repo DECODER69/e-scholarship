@@ -1843,3 +1843,5 @@ def enrollment(request):
     return render(request, 'activities/enrollment.html', context)
 
 
+def requirements(request):
+    return render(request, 'activities/requirements.html')

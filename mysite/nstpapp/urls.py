@@ -119,6 +119,7 @@ urlpatterns = [
     path('contact_us/', views.contact_us, name='contact_us'),
     path('send_feedback/', views.send_feedback, name='send_feedback'),
     path('enrollment/', views.enrollment, name='enrollment'),
+    path('requirements/', views.requirements, name='requirements'),
     
     
     

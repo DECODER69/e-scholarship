@@ -80,10 +80,17 @@ section {
 
 .containers h5 #r6 {
     font-weight: bolder;
+    font-size: 15px;
+}
+
+.containers h5 #r61 {
+    font-weight: bolder;
+    font-size: 15px;
 }
 
 .containers h5 #r7 {
     width: 60%;
+    font-size: 15px;
 }
 
 .containers h5 #r71 {
@@ -99,6 +106,7 @@ section {
 }
 
 .containers #em {
+    cursor: none;
     width: 100%;
     display: flex !important;
 }
