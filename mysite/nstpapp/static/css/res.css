@@ -52,7 +52,7 @@ section {
 
 .alls {
     margin: auto;
-    width: 80%;
+    width: 85%;
     height: auto;
     display: block !important;
     border: solid 1px rgba(95, 95, 95, 0.295);
@@ -72,7 +72,13 @@ section {
 }
 
 .alls .input-group .s .custom-file {
-    width: 90%;
+    width: 80%;
+}
+
+.alls .input-group .s .input-group-append {
+    display: flex;
+    justify-content: space-between;
+    width: 18%;
 }
 
 .input-group #labs {

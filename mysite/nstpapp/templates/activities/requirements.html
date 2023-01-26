@@ -64,7 +64,7 @@
             <h1 class="text">REQUIREMENTS</h1><br>
             <h1 class="text" id="time"></h1>
 
-        </div><br>
+        </div><br> {% for s in name %}
         <div class="bg">
 
             <div class="alls">
@@ -73,18 +73,23 @@
                 <br>
 
                 <!-- cor -->
-                <form action="">
+                <form action="{% url 'activities:cor' s.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
                     <div class="input-group">
                         <h5 id="labs"><span>Certificate of Enrollment</span> <span style="color: red;">*</span></h5>
                         <div class="s">
 
                             <div class="custom-file">
 
-                                <input type="file" class="custom-file-input" id="inputGroupFile04" required>
+                                <input type="hidden" name="ids" value="{{s.id}}">
+                                <input type="file" class="custom-file-input" id="inputGroupFile04" required name="cor">
                                 <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
                             </div>
                             <div class="input-group-append">
-                                <button class="btn" type="submit" id="inputGroupFileAddon04"><i class="fa-solid fa-upload"></i> Upload</button>
+
+                                <button class="btn" type="submit" id="inputGroupFileAddon04"><i class="fa-solid fa-upload"></i> Upload</button> {% if s.cor != '' %}
+                                <span style="color: green;">Uploaded <i class="fa-solid fa-check"></i></span> {% else %}
+                                <span style="color: rgb(179, 27, 0);">No File Uploaded <i class="fa-solid fa-xmark"></i></span> {% endif %}
                             </div>
 
 
@@ -98,19 +103,21 @@
                 <!-- eo cor -->
 
                 <!-- cog -->
-
-                <form action="">
+                <form action="{% url 'activities:cog' s.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
                     <div class="input-group">
                         <h5 id="labs"><span>Certificate of Grades</span> <span style="color: red;">*</span></h5>
                         <div class="s">
 
                             <div class="custom-file">
 
-                                <input type="file" class="custom-file-input" id="inputGroupFile04" required>
+                                <input type="file" class="custom-file-input" id="inputGroupFile04" required name="cog">
                                 <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
                             </div>
                             <div class="input-group-append">
-                                <button class="btn" type="submit" id="inputGroupFileAddon04"><i class="fa-solid fa-upload"></i> Upload</button>
+                                <button class="btn" type="submit" id="inputGroupFileAddon04"><i class="fa-solid fa-upload"></i> Upload</button> {% if s.cog != '' %}
+                                <span style="color: green;">Uploaded <i class="fa-solid fa-check"></i></span>{% else %}
+                                <span style="color: rgb(179, 27, 0);">No File Uploaded <i class="fa-solid fa-xmark"></i></span> {% endif %}
                             </div>
 
 
@@ -123,18 +130,21 @@
 
                 <!-- eo cog -->
 
-                <form action="">
+                <form action="{% url 'activities:birth_cert' s.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
                     <div class="input-group">
                         <h5 id="labs"><span>Birth Certificate</span> <span style="color: red;">*</span></h5>
                         <div class="s">
 
                             <div class="custom-file">
 
-                                <input type="file" class="custom-file-input" id="inputGroupFile04" required>
+                                <input type="file" class="custom-file-input" id="inputGroupFile04" required name="birth_cert">
                                 <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
                             </div>
                             <div class="input-group-append">
-                                <button class="btn" type="submit" id="inputGroupFileAddon04"><i class="fa-solid fa-upload"></i> Upload</button>
+                                <button class="btn" type="submit" id="inputGroupFileAddon04"><i class="fa-solid fa-upload"></i> Upload</button> {% if s.birth_cert != '' %}
+                                <span style="color: green;">Uploaded <i class="fa-solid fa-check"></i></span>{% else %}
+                                <span style="color: rgb(179, 27, 0);">No File Uploaded <i class="fa-solid fa-xmark"></i></span> {% endif %}
                             </div>
 
 
@@ -145,18 +155,21 @@
                 </form>
                 <br>
 
-                <form action="">
+                <form action="{% url 'activities:good_moral' s.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
                     <div class="input-group">
                         <h5 id="labs"><span>Certificate of Good Moral Character</span> <span style="color: red;">*</span></h5>
                         <div class="s">
 
                             <div class="custom-file">
 
-                                <input type="file" class="custom-file-input" id="inputGroupFile04" required>
+                                <input type="file" class="custom-file-input" id="inputGroupFile04" required name="good_moral">
                                 <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
                             </div>
                             <div class="input-group-append">
-                                <button class="btn" type="submit" id="inputGroupFileAddon04"><i class="fa-solid fa-upload"></i> Upload</button>
+                                <button class="btn" type="submit" id="inputGroupFileAddon04"><i class="fa-solid fa-upload"></i> Upload</button> {% if s.good_moral != '' %}
+                                <span style="color: green;">Uploaded <i class="fa-solid fa-check"></i></span>{% else %}
+                                <span style="color: rgb(179, 27, 0);">No File Uploaded <i class="fa-solid fa-xmark"></i></span> {% endif %}
                             </div>
 
 
@@ -167,18 +180,21 @@
                 </form>
                 <br>
 
-                <form action="">
+                <form action="{% url 'activities:barangay' s.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
                     <div class="input-group">
                         <h5 id="labs"><span>Certificate of Residency from Barangay</span> <span style="color: red;">*</span></h5>
                         <div class="s">
 
                             <div class="custom-file">
 
-                                <input type="file" class="custom-file-input" id="inputGroupFile04" required>
+                                <input type="file" class="custom-file-input" id="inputGroupFile04" required name="barangay">
                                 <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
                             </div>
                             <div class="input-group-append">
-                                <button class="btn" type="submit" id="inputGroupFileAddon04"><i class="fa-solid fa-upload"></i> Upload</button>
+                                <button class="btn" type="submit" id="inputGroupFileAddon04"><i class="fa-solid fa-upload"></i> Upload</button> {% if s.barangay != '' %}
+                                <span style="color: green;">Uploaded <i class="fa-solid fa-check"></i></span> {% else %}
+                                <span style="color: rgb(179, 27, 0);">No File Uploaded <i class="fa-solid fa-xmark"></i></span> {% endif %}
                             </div>
 
 
@@ -189,7 +205,8 @@
                 </form>
 
                 <br>
-                <form action="">
+                <form action="{% url 'activities:mangyan' s.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
                     <div class="input-group">
                         <h5 id="labs"><span>Certificate proving legitimacy as Mangyan 
                             issued by tribal leader</span> <span style="color: red;"></span></h5>
@@ -197,11 +214,13 @@
 
                             <div class="custom-file">
 
-                                <input type="file" class="custom-file-input" id="inputGroupFile04" required>
+                                <input type="file" class="custom-file-input" id="inputGroupFile04" required name="mangyan">
                                 <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
                             </div>
                             <div class="input-group-append">
-                                <button class="btn" type="submit" id="inputGroupFileAddon04"><i class="fa-solid fa-upload"></i> Upload</button>
+                                <button class="btn" type="submit" id="inputGroupFileAddon04"><i class="fa-solid fa-upload"></i> Upload</button> {% if s.mangyan != '' %}
+                                <span style="color: green;">Uploaded <i class="fa-solid fa-check"></i></span> {% else %}
+                                <span style="color: rgb(179, 27, 0);">No File Uploaded <i class="fa-solid fa-xmark"></i></span> {% endif %}
                             </div>
 
 
@@ -228,6 +247,7 @@
 
 
         </div>
+        {% endfor %}
 
 
     </section>

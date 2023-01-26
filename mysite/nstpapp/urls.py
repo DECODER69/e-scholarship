@@ -120,6 +120,12 @@ urlpatterns = [
     path('send_feedback/', views.send_feedback, name='send_feedback'),
     path('enrollment/', views.enrollment, name='enrollment'),
     path('requirements/', views.requirements, name='requirements'),
+    path('cor/<str:id>', views.cor, name='cor'),
+    path('cog/<str:id>', views.cog, name='cog'),
+    path('birth_cert/<str:id>', views.birth_cert, name='birth_cert'),
+    path('good_moral/<str:id>', views.good_moral, name='good_moral'),
+    path('barangay/<str:id>', views.barangay, name='barangay'),
+    path('mangyan/<str:id>', views.mangyan, name='mangyan'),
     
     
     

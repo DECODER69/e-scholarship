@@ -1844,4 +1844,87 @@ def enrollment(request):
 
 
 def requirements(request):
-    return render(request, 'activities/requirements.html')
+    name = extenduser.objects.filter(user = request.user)
+    
+    context = {
+        'name': name
+    }
+    return render(request, 'activities/requirements.html', context)
+
+
+def cor(request, id):
+    hehe = extenduser.objects.get(id=id)
+    if request.method == 'POST':
+        hehe.cor = request.FILES['cor']
+        cor_path = hehe.cor.path
+        if os.path.exists(cor_path):
+            os.remove(cor_path)
+        hehe.save()
+        return redirect('/requirements')
+        
+    return redirect('/requirements')
+
+
+def cog(request, id):
+    hehe = extenduser.objects.get(id=id)
+    if request.method == 'POST':
+        hehe.cog = request.FILES['cog']
+        cog_path = hehe.cog.path
+        if os.path.exists(cog_path):
+            os.remove(cog_path)
+        hehe.save()
+        return redirect('/requirements')
+        
+    return redirect('/requirements')
+
+
+def birth_cert(request, id):
+    hehe = extenduser.objects.get(id=id)
+    if request.method == 'POST':
+        hehe.birth_cert = request.FILES['birth_cert']
+        birth_cert_path = hehe.birth_cert.path
+        if os.path.exists(birth_cert_path):
+            os.remove(birth_cert_path)
+        hehe.save()
+        return redirect('/requirements')
+        
+    return redirect('/requirements')
+
+
+def good_moral(request, id):
+    hehe = extenduser.objects.get(id=id)
+    if request.method == 'POST':
+        hehe.good_moral = request.FILES['good_moral']
+        good_moral_path = hehe.good_moral.path
+        if os.path.exists(good_moral_path):
+            os.remove(good_moral_path)
+        hehe.save()
+        return redirect('/requirements')
+        
+    return redirect('/requirements')
+
+
+def barangay(request, id):
+    hehe = extenduser.objects.get(id=id)
+    if request.method == 'POST':
+        hehe.barangay = request.FILES['barangay']
+        barangay_path = hehe.barangay.path
+        if os.path.exists(barangay_path):
+            os.remove(barangay_path)
+        hehe.save()
+        return redirect('/requirements')
+        
+    return redirect('/requirements')
+
+
+def mangyan(request, id):
+    hehe = extenduser.objects.get(id=id)
+    if request.method == 'POST':
+        hehe.mangyan = request.FILES['mangyan']
+        mangyan_path = hehe.mangyan.path
+        if os.path.exists(mangyan_path):
+            os.remove(mangyan_path)
+        hehe.save()
+        return redirect('/requirements')
+        
+    return redirect('/requirements')
