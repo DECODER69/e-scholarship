@@ -86,6 +86,23 @@ section {
     width: 60%;
 }
 
+.containers h5 #r71 {
+    background-color: orange;
+    float: left !important;
+    width: 60%;
+}
+
+.containers h5 #r72 {
+    background-color: rgb(0, 204, 17);
+    float: left !important;
+    width: 60%;
+}
+
+.containers #em {
+    width: 100%;
+    display: flex !important;
+}
+
 #user {
     color: rgb(0, 14, 26);
 }

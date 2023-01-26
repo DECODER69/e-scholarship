@@ -92,6 +92,21 @@
                     </div>
 
                     <div class="l2">
+                        <br>
+                        <br>
+                        <h5><span id="r6">Student Number:</span> <span id="r7">{{s.idnumber}}</span></h5>
+
+
+
+                        <br>
+                        <hr>
+
+                        <br>
+                        <br> {% if s.status == '' %}
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-arrow-right"></i> Apply Now !</button> {% elif s.status == 'PENDING' %}
+                        <h5 id="em"><span id="r61">Application Status:</span> <span class="btn" id="r71">{{s.status}}</span></h5> {% elif s.status == 'APPROVED' %}
+                        <h5 id="em"><span id="r61">Application Status:</span> <span class="btn" id="r72">{{s.status}}</span></h5>
+                        {% endif %}
 
                     </div>
                     {% else%}
