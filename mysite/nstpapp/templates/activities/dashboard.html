@@ -27,7 +27,8 @@
               </button>
                 </div>
                 <div class="modal-body">
-                    Please Complete your profile before proceeding to Enrollment ! Incomplete Profile will not be able to Enroll. Please Disregard this message if you already done it. Thnak You..
+                    Please Complete your <a href="/profile_page">profile</a> and <a href="/requirements">requirements</a> first before proceeding to <a href="/enrollment">Application</a>! Incomplete Profile will not be able to Apply. Please Disregard
+                    this message if you already done it. Thnak You..
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -159,23 +160,23 @@
                         {% endif %} {% if s.cog == '' %}
                         <h6><span>2. Certificate of Grades (COG)</span> <span style="color: red;"><i class="fa-solid fa-circle-xmark"></i></span></h6>
                         {% else %}
-                        <h6><span>2. Certificate of Grades (COG)</span> <span style="color: rgb(0, 184, 0);"><i class="fa-solid fa-circle-check"></i></span></h6>
+                        <h6><span><a href="{{s.cog.url}}" target="_blank">2. Certificate of Grades (COG)</a></span> <span style="color: rgb(0, 184, 0);"><i class="fa-solid fa-circle-check"></i></span></h6>
                         {% endif %} {% if s.birth_cert == '' %}
                         <h6><span>3. Birth Certificate(Photocopy)</span> <span style="color: red;"><i class="fa-solid fa-circle-xmark"></i></span></h6>
                         {% else %}
-                        <h6><span>3. Birth Certificate(Photocopy)</span> <span style="color: rgb(0, 184, 0);"><i class="fa-solid fa-circle-check"></i></span></h6>
+                        <h6><span><a href="{{s.birth_cert.url}}" target="_blank">3. Birth Certificate(Photocopy)</a></span> <span style="color: rgb(0, 184, 0);"><i class="fa-solid fa-circle-check"></i></span></h6>
                         {% endif %} {% if s.good_moral == '' %}
                         <h6><span>4. Certificate of Good Moral Character</span> <span style="color: red;"><i class="fa-solid fa-circle-xmark"></i></span></h6>
                         {% else %}
-                        <h6><span>4. Certificate of Good Moral Character</span> <span style="color: rgb(0, 184, 0);"><i class="fa-solid fa-circle-check"></i></span></h6>
+                        <h6><span><a href="{{s.good_moral.url}}" target="_blank">4. Certificate of Good Moral Character</a></span> <span style="color: rgb(0, 184, 0);"><i class="fa-solid fa-circle-check"></i></span></h6>
                         {% endif %} {% if s.barangay == '' %}
                         <h6><span>5. Certificate of Residency from Barangay</span> <span style="color: red;"><i class="fa-solid fa-circle-xmark"></i></span></h6>
                         {% else %}
-                        <h6><span>5. Certificate of Residency from Barangay</span> <span style="color: rgb(0, 184, 0);"><i class="fa-solid fa-circle-check"></i></span></h6>
+                        <h6><span><a href="{{s.barangay.url}}" target="_blank">5. Certificate of Residency from Barangay</a></span> <span style="color: rgb(0, 184, 0);"><i class="fa-solid fa-circle-check"></i></span></h6>
                         {% endif %} {% if s.mangyan == '' %}
-                        <h6><span>5. Certificate proving legitimacy as Mangyan <br>&nbsp;&nbsp;&nbsp;&nbsp;issued by tribal leader</span> <span style="color: red;"><i class="fa-solid fa-circle-xmark"></i></span></h6>
+                        <h6><span>6. Certificate proving legitimacy as Mangyan <br>&nbsp;&nbsp;&nbsp;&nbsp;issued by tribal leader</span> <span style="color: red;"><i class="fa-solid fa-circle-xmark"></i></span></h6>
                         {% else %}
-                        <h6><span>5. Certificate proving legitimacy as Mangyan <br>&nbsp;&nbsp;&nbsp;&nbsp;issued by tribal leader</span><span style="color: rgb(0, 184, 0);"><i class="fa-solid fa-circle-check"></i></span></h6>
+                        <h6><span><a href="{{s.mangyan.url}}" target="_blank">6. Certificate proving legitimacy as Mangyan <br>&nbsp;&nbsp;&nbsp;&nbsp;issued by tribal leader</a> </span><span style="color: rgb(0, 184, 0);"><i class="fa-solid fa-circle-check"></i></span></h6>
                         {% endif %}
 
                     </div>
