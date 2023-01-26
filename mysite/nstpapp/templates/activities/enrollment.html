@@ -72,22 +72,37 @@
                 </h3>
                 <hr>
 
+                <div class="inside">
+
+                    {% if s.cor and s.address and s.birth_cert and s.barangay != "" %}
+                    <div class="l1">
+
+                        <br>
+                        <br>
+
+                        <h5><span id="r6">Student Name:</span> <span id="r7">{{s.firstname}}</span></h5>
+                        <h5><span id="r6">Program:</span> <span id="r7">{{s.section}}</span></h5>
+                        <h5><span id="r6">School:</span> <span id="r7">{{s.school}}</span></h5>
+                        <h5><span id="r6">Email:</span> <span id="r7">{{s.email}}</span></h5>
+
+                        <br>
+                        <!-- <button class="btn btn-info" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-arrow-right"></i> Apply Now !</button> -->
+
+
+                    </div>
+
+                    <div class="l2">
+
+                    </div>
+                    {% else%}
+                    <h6 style="color: red;">Please Complete Your <a href="/profile_page">Profile Informations</a> and <a href="">Requirements</a> first before proceeding to Application. !</h6>
+
+                    {% endif %}
+                </div>
+
                 <!-- <h2 id="user" style="font-weight: bold;"><span>Hello</span> <span style="color: rgb(34, 34, 34);">{{s.lastname}} !</span></h2> -->
 
 
-                {% if s.cor and s.address and s.birth_cert and s.barangay != "" %}
-                <br>
-                <br>
-
-                <h5><span id="r6">Student Name:</span> <span id="r7">{{s.firstname}}</span></h5>
-                <h5><span id="r6">Program:</span> <span id="r7">{{s.section}}</span></h5>
-                <h5><span id="r6">School:</span> <span id="r7">{{s.school}}</span></h5>
-                <br>
-                <br> {% else%}
-                <h6 style="color: red;">Please Complete Your <a href="">Profile Informations</a> and <a href="">Requirements</a> first before proceeding to Application. !</h6>
-                <!-- <button class="btn btn-info" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-arrow-right"></i> Apply Now !</button> -->
-
-                {% endif %}
 
 
                 <br>

@@ -73,7 +73,7 @@ section {
 
 .containers h5 {
     line-height: 40px;
-    width: 47%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
 }
@@ -88,4 +88,18 @@ section {
 
 #user {
     color: rgb(0, 14, 26);
+}
+
+.containers .inside {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.inside .l1 {
+    width: 50%;
+}
+
+.inside .l2 {
+    width: 45%;
 }
