@@ -28,7 +28,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages 
 from django.contrib.auth.decorators import login_required
 import datetime
-
+import datetime as dt
 #models imported
 from .models import extenduser,school_year, sections, training_day,Announcement, certification
 import os
@@ -45,7 +45,8 @@ from django.db import IntegrityError
 # track active users
 from django.utils.timezone import now
 from datetime import timedelta
-import datetime
+from datetime import datetime
+
 
 
 import pandas as pd
@@ -132,6 +133,8 @@ def logout_student(request):
 # ADMIN PAGE DISPLAYS
 @login_required(login_url='/admin_login')
 def admin_dashboard(request):
+    end_date = datetime.now()
+    start_date = end_date - timedelta(days=1)
     if request.user.is_superuser:
         audience = sections.objects.all()
         ann = Announcement.objects.all()
@@ -140,6 +143,7 @@ def admin_dashboard(request):
         pending = extenduser.objects.filter(status='PENDING').count()
         cnt = sections.objects.all().count()
         nav_pending_count = extenduser.objects.filter(status='PENDING').count()
+        new = extenduser.objects.filter(date_applied__range= (start_date, end_date)).count()
         context = {
             'active':active,   
             'pending':pending,
@@ -147,7 +151,8 @@ def admin_dashboard(request):
             'audience':audience,
             'ann':ann,
             'cnt':cnt,
-            'nav_pending_count':nav_pending_count
+            'nav_pending_count':nav_pending_count,
+            'new':new,
         
         
         }
@@ -160,7 +165,7 @@ def admin_dashboard(request):
 def admin_staff(request):
     if request.user.is_superuser:
         s_years = school_year.objects.all()
-        details = extenduser.objects.filter(status='APPROVED')
+        details = extenduser.objects.filter(status='PENDING')
         pendings = extenduser.objects.filter(status='PENDING')
         pending = extenduser.objects.filter(status='PENDING').count()
 
@@ -263,7 +268,7 @@ def create_platoon_page2(request):
     return render (request, 'activities/create_platoon2.html', context)
 
 def manage_section(request):
-    current_datetime = datetime.datetime.now() 
+    current_datetime = dt.datetime.now() 
     userContent = User.objects.all()
     sectionxx = extenduser.objects.all()
     counts = extenduser.objects.filter(status='ENROLLED').count()
@@ -1676,7 +1681,7 @@ def admin_log(request):
     
 def admin_logout(request):
     logout(request)
-    return redirect('/admin_login')
+    return redirect('/')
 
 @login_required(login_url='/login_page')
 def edit(request):
@@ -1928,3 +1933,22 @@ def mangyan(request, id):
         return redirect('/requirements')
         
     return redirect('/requirements')
+
+
+def apply(request):
+    date_applied = dt.datetime.now()
+    if request.method == 'POST':
+       
+        idnumber = request.POST.get('idnumber')
+        not_ip = request.POST.get('not-ip')
+        ip = request.POST.get('ip')
+        ipcat = request.POST.get('ip-cat')
+        if not_ip is not None:
+            extenduser.objects.filter(id=idnumber).update(ip_status=not_ip, status='PENDING', date_applied=date_applied)
+        elif ipcat is not None:
+            extenduser.objects.filter(id=idnumber).update(ip_status=ip,status='PENDING', ip_category='', date_applied=date_applied)
+        
+     
+
+    
+    return redirect('/enrollment')

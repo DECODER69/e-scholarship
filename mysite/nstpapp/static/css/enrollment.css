@@ -65,6 +65,12 @@ section {
     margin: auto;
 }
 
+#exampleModalLabel {
+    background: -webkit-linear-gradient(rgb(0, 107, 9), rgb(114, 93, 0));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 .containers h3 {
     background: -webkit-linear-gradient(rgb(0, 107, 9), rgb(114, 93, 0));
     -webkit-background-clip: text;

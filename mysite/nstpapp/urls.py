@@ -126,6 +126,8 @@ urlpatterns = [
     path('good_moral/<str:id>', views.good_moral, name='good_moral'),
     path('barangay/<str:id>', views.barangay, name='barangay'),
     path('mangyan/<str:id>', views.mangyan, name='mangyan'),
+    path('apply/', views.apply, name='apply'),
+
     
     
     

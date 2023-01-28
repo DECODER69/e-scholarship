@@ -92,97 +92,127 @@
             <h1 class="text"><i class='bx bx-home'></i> e-Scholarship Dashboard</h1><br>
             <h1 class="text">{% now "jS F Y" %}</h1>
         </div><br>
+        <br>
+        <br>
         <div class="bg">
 
             <div class="container-fluid">
                 <div class="stats">
-                    <div class="cards" id="blue">
-                        <div class="inside1">
-                            <div class="left">
-                                <h1>{{active}}</h1>
-                                <p>Active Scholars</p>
-                            </div>
-                            <div class="right">
-                                <img class="graph" src="../../static/images/graph.png">
-                            </div>
-                        </div>
-                        <div class="more">
-                            <p class="info"><a href="/admin_staff">More info  </a> <i class='bx bxs-right-arrow-circle'></i></p>
+                    <a href="/admin_staff" style="text-decoration: none;">
+                        <div class="cards2">
+                            <div class="cards">
+                                <div class="left" id="l1">
+                                    <img src="../../static/images/new.png" alt="image">
+                                </div>
 
-                        </div>
-                    </div>
-                    <br>
+                                <div class="card_body">
+                                    <br>
+                                    <h5 class="card-title">New Applicants</h5>
+                                    <h2 class="card-text">{{pending}}</h2>
 
-                    <div class="cards" id="red">
-                        <div class="inside1">
-                            <div class="left">
-                                <h1>{{pending}}</h1>
-                                <p>Pending Applications</p>
+                                </div>
+
                             </div>
-                            <div class="right">
-                                <img class="graph" src="../../static/images/graph.png">
+
+                            <div>
+
+                                <h4 style="font-size: 17px; text-align:center;"><span style="color: rgb(0, 177, 0);">+ {{new}}</span> <span style="color: #474747;">new applicant in 1 day</span></h4>
                             </div>
                         </div>
-                        <div class="more">
-                            <p class="info"><a href="/admin_pending">More info  </a> <i class='bx bxs-right-arrow-circle'></i></p>
 
-                        </div>
-                    </div>
-                    <br>
+                    </a>
 
 
-                    <!-- <div class="cards" id="yellow">
-                        <div class="inside1">
-                            <div class="left">
-                                {% for s in sy %}
-                                <h1>{{s.years}}</h1>
-                                {% endfor %}
-                                <p>School Year</p>
+                    <a href="/admin_staff" style="text-decoration: none;">
+                        <div class="cards2">
+                            <div class="cards">
+                                <div class="left" id="l2">
+                                    <img src="../../static/images/exam.png" alt="image">
+                                </div>
+
+                                <div class="card_body">
+                                    <br>
+                                    <h5 class="card-title">For Examination</h5>
+                                    <h2 class="card-text">{{pending}}</h2>
+
+                                </div>
                             </div>
-                            <div class="right">
-                                <img class="graph" src="../../static/images/graph.png">
-                            </div>
-                        </div>
-                        <div class="more">
-                            <p class="info"><a href="/school_years">More info  </a> <i class='bx bxs-right-arrow-circle'></i></p>
 
-                        </div>
-                    </div> -->
-
-                    <br>
-                    <div class="cards" id="green">
-                        <div class="inside1">
-                            <div class="left">
-                                <h1>{{cnt}}</h1>
-                                <p>All Schools</p>
-                            </div>
-                            <div class="right">
-                                <img class="graph" src="../../static/images/graph.png">
+                            <div>
+                                <h4 style="font-size: 17px; text-align:center;"><span style="color: rgb(0, 177, 0);">+ {{new}}</span> <span style="color: #474747;">new examinee in 1 day</span></h4>
                             </div>
                         </div>
-                        <div class="more">
-                            <p class="info"><a href="#">More info  </a> <i class='bx bxs-right-arrow-circle'></i></p>
 
+                    </a>
+
+
+                    <a href="/admin_staff" style="text-decoration: none;">
+                        <div class="cards2">
+                            <div class="cards">
+                                <div class="left" id="l4">
+                                    <img src="../../static/images/appr.png" alt="image">
+                                </div>
+
+                                <div class="card_body">
+                                    <br>
+                                    <h5 class="card-title">Approved Scholar</h5>
+                                    <h2 class="card-text">{{pending}}</h2>
+
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 style="font-size: 17px; text-align:center;"><span style="color: rgb(0, 177, 0);">+ {{new}}</span> <span style="color: #474747;">new applicant in 1 day</span></h4>
+                            </div>
                         </div>
-                    </div>
+
+                    </a>
 
 
-                </div>
+
+                    <a href="/admin_staff" style="text-decoration: none;">
+                        <div class="cards2">
+                            <div class="cards">
+                                <div class="left" id="l3">
+                                    <img src="../../static/images/new.png" alt="image">
+                                </div>
+
+                                <div class="card_body">
+                                    <br>
+                                    <h5 class="card-title">IP</h5>
+                                    <h2 class="card-text">{{pending}}</h2>
+
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4>dfdf</h4>
+                            </div>
+                        </div>
+
+                    </a>
+
+
+
+
+
+
+                </div>`
 
             </div>
+            <br>
 
-
-            <div class="inside2">
-                <div class="hes">
+            <div class="container-fluid">
+                <div class="hes table-responsive">
                     <br>
                     <div class="for">
                         <h1 style="margin-left: 10px; font-size:30px; color:#000000" id="mega">Announcements List</h1><br>
-                        <button type="button" class="btns" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" id="new"><i class='bx bx-plus'></i>  ADD NEW ANNOUNCEMENT</button>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" id="new"><i class='bx bx-plus'></i>  ADD NEW ANNOUNCEMENT</button>
                     </div>
                     <br>
                     <br>
 
-                    <div class="announce">
+                    <div class="announce ">
 
                         <table id="example" class="table table-bordered table-hover ">
                             <thead class="thead">
@@ -305,7 +335,7 @@
         </div>
 
 
-        </div> -->
+        </div>
 
         </div>
     </section>
@@ -351,7 +381,7 @@
     </script> -->
 
     <script>
-        $('.btn-danger').on('click', function(e) {
+        $('.del').on('click', function(e) {
             e.preventDefault();
             var self = $(this);
             console.log(self.data('title'))

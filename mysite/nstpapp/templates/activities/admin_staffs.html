@@ -28,29 +28,15 @@
 
     <section class="page-content">
         <div class="heads">
-            <h1 class="text"><i class='bx bx-user-pin'></i> ACTIVE SCHOLARS</h1><br>
+            <h1 class="text"><i class='bx bx-user-pin'></i>NEW APPLICATIONS</h1><br>
         </div>
         <div class="bg">
-            <ul class="nav nav-tabs nav-pills nav-fill">
-                <!-- <li class="nav-item">
-                    <a href="/school_years" class="nav-link">School Year</a>
-                </li> -->
-                <li class="nav-item">
-                    <a class="nav-link active" style="background-color: #25A643;" href="/admin_staff">Active Scholars <i class='bx bxs-badge-check' style="vertical-align: middle;"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin_pending">Pending Applications <i class='bx bxs-time-five' style="vertical-align: middle;" ></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin_rejected">Rejected <i class='bx bxs-user-minus' style="vertical-align: middle;"></i></a>
-                </li>
-
-            </ul>
+            <!--  -->
             <br>
             <div>
                 <div class="table-responsive">
                     {% for s in s_years %}
-                    <p1 style="font-size:20px;color:#000000;"><i class="fa-solid fa-play"></i> Officially Enrolled Students. SY: {{s.years}}</p1><br>&nbsp; {% endfor %}
+                    <p1 style="font-size:20px;color:#000000;"><i class="fa-solid fa-play"></i>New Applicants</p1><br>&nbsp; {% endfor %}
                     <table id="myTable" class="table table-bordered table-hover ">
                         <thead class="thead">
                             <tr>

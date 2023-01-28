@@ -92,13 +92,13 @@
 </a>
                                     </li> -->
                                     <li>
-                                        <a href="/admin_staff">Approved</a>
+                                        <a href="/admin_staff">New Applicants</a>
                                     </li>
                                     <li>
-                                        <a href="/admin_pending">Pending <span class="badge badge-pill badge-danger">{{nav_pending_count}}</span></a>
+                                        <a href="/admin_pending">For Examination<span class="badge badge-pill badge-danger">{{nav_pending_count}}</span></a>
                                     </li>
                                     <li>
-                                        <a href="/admin_rejected">Rejected <span class="badge badge-pill badge-danger">{{nav_rejected_count}}</span></a>
+                                        <a href="/admin_rejected">Approved<span class="badge badge-pill badge-danger">{{nav_rejected_count}}</span></a>
                                     </li>
                                 </ul>
                             </div>
@@ -134,11 +134,20 @@
                         </li>
                         <li class="sidebar-dropdowns">
                             <a href="/graduates">
+                                <i class="fa-solid fa-file-shield"></i>
+                                <span>Care of</span>
+                            </a>
+
+                        </li>
+                        <li class="sidebar-dropdowns">
+                            <a href="/graduates">
                                 <i class="fa-solid fa-user-graduate"></i>
                                 <span>Graduates</span>
                             </a>
 
                         </li>
+
+
 
                         <!-- <li class="sidebar-dropdowns">
                             <a href="/sample_attendance">
@@ -206,7 +215,7 @@
             </div>
             <!-- sidebar-content -->
             <div class="sidebar-footer">
-                <a href="#">
+                <!-- <a href="#">
                     <i class="fa fa-bell"></i>
                     <span class="badge badge-pill badge-warning notification">3</span>
                 </a>
@@ -217,9 +226,9 @@
                 <a href="#">
                     <i class="fa fa-cog"></i>
                     <span class="badge-sonar"></span>
-                </a>
-                <a href="/admin_logout">
-                    <i class="fa fa-power-off"></i>
+                </a> -->
+                <a href="/admin_logout" title="Sign out">
+                    <i class="fa-solid fa-right-from-bracket"></i> Log out
                 </a>
             </div>
         </nav>

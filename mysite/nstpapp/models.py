@@ -87,8 +87,15 @@ class extenduser(models.Model):
     good_moral = models.ImageField(upload_to="images/" , default='')
     barangay =  models.ImageField(upload_to="images/" , default='')
     mangyan =  models.ImageField(upload_to="images/" , default='')
+    ip_status = models.CharField(max_length=100, default='')
+    ip_category = models.CharField(max_length=100, default='')
+    
     
     nationality = models.CharField(max_length=100, default='')
+    
+    date_applied = models.DateTimeField(null=True)
+    date_exam = models.DateTimeField(null=True)
+    date_approved = models.DateTimeField(null=True)
     
     
     def __str__(self):

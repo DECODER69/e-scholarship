@@ -76,8 +76,10 @@
                                     </div>
                                     <div class="card-body">
                                         {% if s.status == '' %}
-                                        <h4 class="card-title" title="Click to proceed"><a href="/enrollment" style="color: red;">Enroll Now !</a></h4>
+                                        <h4 class="card-title" title="Click to proceed"><a href="/enrollment" style="color: red;">Apply  Now !</a></h4>
                                         {% elif s.status == 'PENDING' %}
+                                        <h4 class="card-title" style="color: rgb(236, 162, 0);">{{s.status}}</h4>
+                                        {% elif s.status == 'PROCESSING' %}
                                         <h4 class="card-title">{{s.status}}</h4>
                                         {% elif s.status == 'ACCEPTED' %}
                                         <h4 class="card-title">{{s.status}} <span style="color: green;"><i class="fa-solid fa-circle-check"></i></span></h4>
@@ -149,7 +151,7 @@
                     </div>
                     {% for s in name %}
                     <div class="r2">
-                        <a href="/">
+                        <a href="/" style="color: black;">
                             <h5 style="text-align: left; font-weight:bolder;"><i class="fa-solid fa-list-ul"></i> Requirements Checklist</h5>
                         </a>
                         <hr>

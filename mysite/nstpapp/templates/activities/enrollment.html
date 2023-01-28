@@ -8,6 +8,12 @@
     <title>SCHOLARSHIP</title>
     <link rel="stylesheet" href="../../static/css/enrollment.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
 </head>
 
 <body>
@@ -28,17 +34,49 @@
                 </div>
                 <div class="modal-body">
                     {% for s in name %}
-                    <form action="" method="POST">
+                    <form action="{% url 'activities:apply' %}" method="POST">
                         {% csrf_token %}
                         <div class="form-group">
 
-                            <input id="1" type="hidden" value="{{s.idnumber}}" class="form-control" name="idnumber">
+                            <input id="1" type="hidden" value="{{s.id}}" class="form-control" name="idnumber">
                         </div>
 
                         <div class="form-group">
-                            <h3 style="color: rgb(10, 126, 0);">
+                            <!-- <h3 style="color: rgb(10, 126, 0);">
                                 Apply E-Scholarship ?
-                            </h3>
+                            </h3> -->
+                            <br>
+                            <h5>SCHOLARSHIP CATEGORIES</h5>
+
+                            <div class="col">
+                                <div class="form-group options" id="form-group">
+                                    <input type="checkbox" id="myCheckbox1" class="single-checkbox" value="Non IP" name="not-ip" required>
+                                    <label for="">Not Indigenous People</label>
+                                    <br>
+
+                                    <input type="checkbox" id="myCheckbox" class="single-checkbox" value="IP" name="ip" required>
+                                    <label for="">Indigenous People</label>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col">
+                                <div class="form-group">
+                                    <select class="required form-control" id="" name="ip-cat" style="display: none;">
+                                        <option value=""  selected>--Select Your Tribe--</option>
+                                        <option value="Iraya">Iraya</option>
+                                        <option value="Alangan">Alangan</option>
+                                        <option value="Tadyawan">Tadyawan</option>
+                                        <option value="Tau-buid">Tau-buid</option>
+                                        <option value="Bangon">Bangon</option>
+                                        <option value="Buhid">Buhid</option>
+                                        <option value="Hanunoo">Hanunoo</option>
+                                        <option value="Ratagnon">Ratagnon</option>
+                                    </select>
+
+                                </div>
+                            </div>
 
                         </div>
                         <div class="modal-footer">
@@ -103,7 +141,9 @@
 
                         <br>
                         <br> {% if s.status == '' %}
-                        <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-arrow-right"></i> Apply Now !</button> {% elif s.status == 'PROCESSING' %}
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-arrow-right"></i> Apply Now !</button> {% elif s.status == 'PENDING' %}
+                        <h5 id="em"><span id="r61">Application Status:</span> <span class="btn" id="r71">{{s.status}}</span></h5>
+                        {% elif s.status == 'PROCESSING' %}
                         <h5 id="em"><span id="r61">Application Status:</span> <span class="btn" id="r71">{{s.status}}</span></h5>
                         {% elif s.status == 'APPROVED' %}
                         <h5 id="em"><span id="r61">Application Status:</span> <span class="btn" id="r72">{{s.status}}</span></h5>
@@ -133,17 +173,56 @@
         </div>
 
 
+
+
+
+
+
     </section>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        var $myCheckbox = $('#myCheckbox1'),
+            $required = $('.required');
+
+        $myCheckbox.on('click', function() {
+            this.checked ? $required.prop('hidden', true) : $required.prop('required', false);
+        });
+    </script>
+
+
+
+    <script>
+        var $myCheckbox = $('#myCheckbox'),
+            $required = $('.required');
+
+        $myCheckbox.on('click', function() {
+            $(".required").show();
+            this.checked ? $required.prop('required', true) : $required.prop('required', false);
+        });
+    </script>
     <!-- <script>
 
-        {% for msg in messages %}
+        {% for msg in messages %}4
         Swal.fire({
             icon: '{{msg.icon}}',
             text: '{{ msg }}'
         }) {% endfor %}
     </script>   -->
 
+
+    <script>
+        $(function() {
+            var requiredCheckboxes = $('.options :checkbox[required]');
+            requiredCheckboxes.change(function() {
+                if (requiredCheckboxes.is(':checked')) {
+                    requiredCheckboxes.removeAttr('required');
+                } else {
+                    requiredCheckboxes.attr('required', 'required');
+                }
+            });
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 
