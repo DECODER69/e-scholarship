@@ -168,6 +168,11 @@ section {
     justify-content: space-between;
 }
 
+.bbt {
+    margin: auto;
+    display: flex;
+}
+
 @media (max-width: 600px) {
     .bg {
         padding: 0;

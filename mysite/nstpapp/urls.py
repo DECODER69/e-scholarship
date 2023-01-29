@@ -49,7 +49,7 @@ urlpatterns = [
     path('admin_view_profile/<str:id>', views.admin_view_profile, name='admin_view_profile'),
     path('approve/<str:idnumber>', views.approve, name='approve'),
     path('decline/<str:id>', views.decline, name='decline'),
-    path('admin_rejected/', views.admin_rejected, name='admin_rejected,'),
+    # path('admin_rejected/', views.admin_rejected, name='admin_rejected,'),
     path('custom/', views.custom, name='custom'),
     path('rejected_email_page/<str:id>', views.rejected_email_page, name='rejected_email_page'),
     path('school_years/', views.school_years, name='school_years'),
@@ -127,7 +127,11 @@ urlpatterns = [
     path('barangay/<str:id>', views.barangay, name='barangay'),
     path('mangyan/<str:id>', views.mangyan, name='mangyan'),
     path('apply/', views.apply, name='apply'),
-
+    path('view_profile/<str:id>', views.view_profile, name='view_profile'),
+    path('action_applicant/', views.action_applicant, name='action_applicant'),
+    path('add_score/', views.add_score, name='add_score'),
+    path('admin_approved/', views.admin_approved, name='admin_approved'),
+    path('view_Approved/<str:id>', views.view_Approved, name='view_Approved'),
     
     
     

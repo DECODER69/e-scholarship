@@ -141,9 +141,11 @@ def admin_dashboard(request):
         sy = school_year.objects.all()
         active = extenduser.objects.filter(status='ENROLLED').count()
         pending = extenduser.objects.filter(status='PENDING').count()
+        processing = extenduser.objects.filter(status='PROCESSING').count()
         cnt = sections.objects.all().count()
         nav_pending_count = extenduser.objects.filter(status='PENDING').count()
         new = extenduser.objects.filter(date_applied__range= (start_date, end_date)).count()
+        exam = extenduser.objects.filter(date_exam__range= (start_date, end_date)).count()
         context = {
             'active':active,   
             'pending':pending,
@@ -153,6 +155,8 @@ def admin_dashboard(request):
             'cnt':cnt,
             'nav_pending_count':nav_pending_count,
             'new':new,
+            'exam':exam,
+            'processing':processing,
         
         
         }
@@ -181,8 +185,8 @@ def admin_staff(request):
 
 def admin_pending(request):
     platoons = sections.objects.all()
-    pending = extenduser.objects.filter(status='PENDING').count()
-    pendings = extenduser.objects.filter(status='PENDING')
+    pending = extenduser.objects.filter(status='PROCESSING').count()
+    pendings = extenduser.objects.filter(status='PROCESSING')
     context = {
         'pendings':pendings,
         'pending':pending,
@@ -190,9 +194,9 @@ def admin_pending(request):
     }
     return render(request, 'activities/admin_pending.html', context)
 
-def admin_rejected(request):
+def admin_approved(request):
     # pending = extenduser.objects.filter(status='PENDING').count()
-    rejected = extenduser.objects.filter(status='REJECTED')
+    rejected = extenduser.objects.filter(status='APPROVED')
 
     context = {
       
@@ -919,11 +923,15 @@ def update_sy(request, ):
     return redirect('/school_years')
 
 def update_officially(request, id):
+    date_exam = dt.datetime.now()
     if request.method == 'POST':
         stats = request.POST.get('slc')
         idd = request.POST.get('idd')
         print("hahaha" +str(idd))
-        extenduser.objects.filter(id=idd).update(status=stats)
+        if stats == 'PROCESSING':
+            extenduser.objects.filter(id=idd).update(status=stats,  date_exam=date_exam)
+        else:
+            extenduser.objects.filter(id=idd).update(status=stats)
     return redirect('/admin_staff')
 
 def cert_page(request):
@@ -1952,3 +1960,54 @@ def apply(request):
 
     
     return redirect('/enrollment')
+
+
+def view_profile(request, id):
+    name = extenduser.objects.filter(id=id)
+    context = {
+        'name': name
+    }
+    return render(request, 'activities/view_profile.html', context)
+
+
+def action_applicant(request):
+    date_exam = dt.datetime.now()
+    if request.method == 'POST':
+        options = request.POST.get('options')
+        ids = request.POST.get('ids')
+        
+        if options == 'PROCESSING':
+            extenduser.objects.filter(id=ids).update(status=options, date_exam=date_exam)
+        else:
+            extenduser.objects.filter(id=ids).update(status=options)
+    return redirect('/admin_staff')
+
+
+
+def add_score(request):
+    if request.method == 'POST':
+        ids = request.POST.get('ids')
+        care_of = request.POST.get('care_of')
+        status = request.POST.get('status')
+        score = request.POST.get('score')
+        if status == 'APPROVED':
+            sub = "E-SCHOLARSHIP EXAMINATION"
+            msg = "Congratualtions! You have passed the e-Scholarship Examination."
+            emaila = request.POST.get('cusemail')
+            send_mail(sub, msg,'escholarship2022@gmail.com',[emaila])
+            extenduser.objects.filter(id=ids).update(status=status, care_of=care_of, exam_result=score) 
+        else:
+            sub = "E-SCHOLARSHIP EXAMINATION"
+            msg = "Good day.  We are sorry to inform you that you have failed the e-Scholarship examination."
+            emaila = request.POST.get('cusemail')
+            send_mail(sub, msg,'escholarship2022@gmail.com',[emaila])
+            extenduser.objects.filter(id=ids).update(status=status, care_of=care_of, exam_result=score) 
+    return redirect('/admin_pending')
+
+
+def view_Approved(request, id):
+    name = extenduser.objects.filter(id=id)
+    context = {
+        'name': name
+    }
+    return render(request, 'activities/view_approved.html', context)

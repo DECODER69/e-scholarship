@@ -20,7 +20,7 @@
 
     <section class="page-content">
         <div class="heads">
-            <h1 class="text"><i class='bx bx-time'></i> PENDING APPLICATIONS</h1><br>
+            <h1 class="text"><i class='bx bx-time'></i>EXAMINEES</h1><br>
         </div>
 
         <div class="bg">
@@ -29,17 +29,21 @@
 
             <div class="table-responsive">
 
-                <p1 style="font-size:20px; color:#000000;"><i class="fa-solid fa-play"></i> Pending Enrollees. SY:</p1><br>&nbsp;
+                <p1 style="font-size:20px; color:#000000;">For Examination</p1><br>&nbsp;
                 <table class="table table-bordered" id="myTable">
                     <thead class="thead">
                         <tr>
-                            <th scope="col">ID Number</th>
+
                             <th scope="col">Full name</th>
                             <th scope="col">Email</th>
 
                             <th scope="col">Course</th>
+                            <th scope="col">Bachelors Degree</th>
 
                             <th scope="col">View Profile</th>
+                            <th scope="col">Exam result</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Care of</th>
                             <!-- <th scope="col">Select Section / Platoon</th> -->
                             <th scope="col">Action</th>
 
@@ -48,37 +52,47 @@
                     <tbody>
                         {% for s in pendings %}
                         <tr>
-                            <td>
-                                {{s.idnumber}}
-                            </td>
-                            <td>{{s.firstname}} {{s.middlename}} {{s.lastname}}</td>
-                            <td>{{s.email}}</td>
+                            <form action="{% url 'activities:add_score' %}" method="post">
+                                {% csrf_token %}
 
-                            <td>{{s.section}}</td>
+                                <td>{{s.firstname}} {{s.middlename}} {{s.lastname}}</td>
+                                <td>{{s.email}}</td>
 
-                            <td class="tar">
-                                <a href="{% url 'activities:admin_view_profile' s.id %}" title="Click to view profile"><i class='bx bxs-show' style="vertical-align: middle;"></i>
+                                <td>{{s.section}}</td>
+                                <td>{{s.ip_status}} / {{s.ip_category}}</td>
+
+                                <td class="tar">
+                                    <a href="{% url 'activities:admin_view_profile' s.id %}" title="Click to view profile"><i class="fa-solid fa-eye"></i>
                                         View Profile
                                         </a>
-                            </td>
-                            <td class="actions">
-                                <div class="ehe">
-                                    <form action="{% url 'activities:approve' s.idnumber %}" method="post">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="getID" value="{{s.idnumber}}"><button type="submit" class="btn btn-success"><i class='bx bx-check'></i>  Approve</button>
-                                    </form>
-                                </div><br>&nbsp;<br>
-                                <div class="ehe">
-                                    <form action="{% url 'activities:decline' s.id %}" method="post">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="getID2" value="{{s.idnumber}}"><button type="submit" class="btn btn-danger"><i class='bx bx-x-circle'></i> Decline</button>
-                                    </form>
-                                </div>
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control" placeholder="Score" name="score">
+                                </td>
+
+                                <td>
+                                    <select name="status" id="" class="form-control" required>
+                                    <option value="" selected disabled>--Select--</option>
+                                    <option value="APPROVED">PASSED</option>
+                                    <option value="FAILED">FAILED</option>
+
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="care_of" id="" class="form-control">
+                                        <option value="CEDIRC">CEDRIC</option>
+                                        <option value="RAPAL">RAPAL</option>
+                                </select>
+                                </td>
+                                <td class="actions">
+                                    <input type="hidden" name="cusemail" value="{{s.email}}">
+                                    <input type="hidden" name="ids" value="{{s.id}}">
+                                    <button class="btn btn-primary" type="submit"><i class="fa-solid fa-floppy-disk"></i> Update</button>
 
 
-                            </td>
+                                </td>
 
-
+                            </form>
                         </tr>
                         {% empty %} {% endfor %}
 

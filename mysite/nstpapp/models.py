@@ -89,6 +89,8 @@ class extenduser(models.Model):
     mangyan =  models.ImageField(upload_to="images/" , default='')
     ip_status = models.CharField(max_length=100, default='')
     ip_category = models.CharField(max_length=100, default='')
+    exam_result = models.CharField(max_length=10, default='')
+    care_of = models.CharField(max_length=100, default='')
     
     
     nationality = models.CharField(max_length=100, default='')
