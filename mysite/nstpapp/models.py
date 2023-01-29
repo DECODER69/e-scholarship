@@ -98,6 +98,8 @@ class extenduser(models.Model):
     date_applied = models.DateTimeField(null=True)
     date_exam = models.DateTimeField(null=True)
     date_approved = models.DateTimeField(null=True)
+    start = models.CharField(max_length=100, default='')
+    end = models.CharField(max_length=100, default='')
     
     
     def __str__(self):
@@ -152,6 +154,10 @@ class certification(models.Model):
     def __str__(self):
         return self.year
     
+    
+class name_care_of(models.Model):
+    name = models.CharField(max_length=20, default='')
+    picture = models.ImageField(upload_to="images/" , default='')
     
 
     

@@ -5,23 +5,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>platoon content</title>
+    <title>admin rejected students</title>
+
+    <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> -->
+    <link rel="stylesheet" href="../../static/admin_css/admin_rejected.css">
+    <!-- icon for seacrch -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/solid.css">
     <link rel="icon" href="../../static/images/logo2.png">
-    <link rel="stylesheet" href="../../static/admin_css/pl_content.css">
+    <!-- for table pagination -->
     <link rel="stylesheet" href="../../static/admin_css/minmin.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <!-- pagination css -->
-    <!-- <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"> -->
+
 </head>
 
 <body>
     {% include 'activities/admin_nav.html' %}
 
-    <section class="home-section">
+    <section class="page-content">
         <div class="heads">
             <a href="/graduates">
-                <h1 class="text"><i class='bx bxs-dashboard'></i> GRADUATES &nbsp;>&nbsp;</h1>
+                <h1 class="text"><i class='bx bxs-dashboard'></i>GRADUATES &nbsp;>&nbsp;</h1>
             </a>
 
             <h1 class="text"><i class='bx bx-intersect'></i> {{getSection}}
@@ -29,114 +32,132 @@
 
         </div>
         <div class="bg">
-            <div class="inside">
 
-                <div class="table-responsive">
-                    <div class="he">
+            <div class="upper">
+                <div class="card">
 
-                        <div class="ada">
-                            <p1 style="margin-left:  10px;font-size:20px;  color:#000000;"><i class="fa-solid fa-play"></i> List of all Graduates</p1><br>
-
-                        </div>
-
-                        <div class="adda">
-                            <form action="{% url 'activities:download' %}" method="POST">
-                                {% csrf_token %}
-                                <input type="hidden" value="{{getSection}}" name="cate">
-                                <button class="btn btn-success" type="submit" style="width: 100%;" id="dl"><i class='bx bxs-download' ></i> Download List</button>
-                                <!-- <a href="{% url 'activities:add_students' %}" class="btn btn-success" style="width: 100%;" target="_blank">Add Student</a> -->
-                            </form>
-                            <form action="{% url 'activities:add_students' %}" method="POST" target="_new">
-                                {% csrf_token %}
-                                <input type="hidden" value="{{getSection}}" name="platoon">
-                                <button class="btn btn-success" type="submit" style="width: 100%;" id="adds"><i class='bx bx-plus'></i> Add Student</button>
-                                <!-- <a href="{% url 'activities:add_students' %}" class="btn btn-success" style="width: 100%;" target="_blank">Add Student</a> -->
-                            </form>
-
-
-
-
-                        </div>
-
+                    <div class="card-body">
+                        <h5>Total Graduate</h5>
+                        <h2> {{content33}}</h2>
 
                     </div>
-                    <br>
-                    <table id="myTable" class="table table-bordered table-hover ">
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Indigenous People</h5>
+                        <h2> {{ip}}</h2>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Not Indigenous People</h5>
+                        <h2> {{non_ip}}</h2>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <br>
+
+
+            <div>
+                <div class="table-responsive">
+                    <p1 style="font-size:20px;color:#000000;">List of all Graduate Students</p1><br><br>
+                    <table id="table1" class="table table-bordered table-hover ">
                         <thead class="thead">
                             <tr>
-                                <th scope="col">ID NUMBER</th>
-                                <th scope="col">FULL NAME</th>
-                                <th scope="col">EMAIL</th>
+                                <th scope="col">Full name</th>
+                                <th scope="col">Email</th>
 
-                                <th scope="col">COURSE</th>
-                                <th scope="col">DATE APPROVED</th>
-                                <th scope="col">DATE GRADUATED</th>
+                                <th scope="col">Course</th>
+                                <th scope="col">Bachelors Degree</th>
 
+
+                                <th scope="col">Exam result</th>
+
+                                <th scope="col">Care of</th>
+
+                                <th scope="col">Start of Subsidy</th>
+                                <th scope="col">End of Subsidy</th>
+                                <th scope="col">View Profile</th>
+                                <!-- <th scope="col">Select Section / Platoon</th> -->
 
                             </tr>
                         </thead>
                         <tbody>
                             {% for s in content3 %}
-
                             <tr>
-                                <td>{{s.idnumber}}</td>
-                                <td>{{s.firstname}} {{s.middlename}} {{s.lastname}}</td>
+
+                                <td>
+                                    {{s.firstname}} {{s.lastname}}
+                                </td>
+
                                 <td>{{s.email}}</td>
-
                                 <td>{{s.section}}</td>
-                                <form action="{% url 'activities:update_years' %}" method="post">
-                                    {% csrf_token %}
-
-                                    <td>
-                                        <input type="date" class="form-control" name="start_date" value="{{s.start_dates}}">
-                                    </td>
-                                    <td>
-                                        <input type="date" class="form-control" name="end_date" value="{{s.end_date}}">
-                                    </td>
+                                <td>{{s.ip_status}} | {{s.ip_category}}</td>
 
 
-                                </form>
+                                <td>{{s.exam_result}}</td>
+
+                                <td>{{s.care_of}}</td>
+
+                                <!-- <td>{{ s.date_approved|date:"Y-m-d" }}
+                                </td> -->
+                                <td>{{s.start}}</td>
+
+                                <!-- for red colors -->
+
+
+                                <td style="color:rgb(0, 0, 0);">{{s.end}}</td>
+
+                                <!-- 
+                                end -->
+                                <td class="tar">
+                                    <a href="{% url 'activities:graduate_view' s.id %}" target="_self" title="View student profile"><i class="fa-solid fa-eye"></i>
+                                         View Profile
+                                    </a>
+                                </td>
+
                             </tr>
-
-
-                            {% empty %} {% endfor %}
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
             </div>
-            <br>
+
+
+
+
+
+
 
         </div>
+
+
     </section>
+
+
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 
-    <!-- for editing tables -->
-    <script src="extensions/editable/bootstrap-table-editable.js"></script>
 
-
+    <!-- pagination -->
     <script src="../../static/js/pag.js"></script>
     <script src="../../static/js/datbot.js"></script>
     <script src="../../static/js/dat.js"></script>
     <script>
         $(document).ready(function() {
-            $('#myTable').DataTable({
+            $('#table1').DataTable({
                 pagingType: 'full_numbers',
             });
         });
     </script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- <script>
-
-        {% for msg in messages %}
-        Swal.fire({
-            icon: '{{msg.icon}}',
-            text: '{{ msg }}'
-        }) {% endfor %}
-    </script>   -->
-
 </body>
 
 </html>

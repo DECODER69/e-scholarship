@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../static/css/dashboard.css">
     <link rel="icon" href="../../static/images/logo2.png">
+    <link rel="stylesheet" href="../../static/admin_css/minmin.css">
 
 
 
@@ -147,6 +148,53 @@
 
                 <div class="requirements">
                     <div class="r1">
+                        <div class="hes table-responsive">
+
+                            <h5 style="text-align: left;"><i class="fa-solid fa-scroll"></i> Announcements</h5>
+                            <br>
+
+                            <div class="announce ">
+
+                                <table id="example" class="table table-bordered table-hover ">
+                                    <thead class="thead">
+                                        <tr>
+                                            <th scope="col">Subject</th>
+
+
+                                            <th scope="col">Date Posted</th>
+                                            <th scope="col">Content</th>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for s in anns %}
+                                        <tr>
+                                            <form action="{% url 'activities:edit_announcement' s.id %}" method="POST">
+                                                {% csrf_token %}
+
+                                                <td>{{s.subject}}</td>
+
+                                                <td id="posted"> <i class='bx bx-calendar'></i> {{s.date_posted}}</td>
+                                                <td>
+                                                    <textarea type="text" class="form-control" readonly>{{s.content}}</textarea>
+                                                </td>
+
+
+                                            </form>
+
+
+                                        </tr>
+
+                                        {% empty %} {% endfor %}
+                                    </tbody>
+                                </table>
+                                <!-- </div> -->
+
+                            </div>
+
+                        </div>
+
 
                     </div>
                     {% for s in name %}
@@ -282,7 +330,17 @@
 
 
 
-
+    <!-- pagination -->
+    <script src="../../static/js/pag.js"></script>
+    <script src="../../static/js/datbot.js"></script>
+    <script src="../../static/js/dat.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                pagingType: 'full_numbers',
+            });
+        });
+    </script>
 
 
 </body>

@@ -132,9 +132,16 @@ urlpatterns = [
     path('add_score/', views.add_score, name='add_score'),
     path('admin_approved/', views.admin_approved, name='admin_approved'),
     path('view_Approved/<str:id>', views.view_Approved, name='view_Approved'),
-    
-    
-    
+    path('view_active/<str:id>', views.view_active, name='view_active'),
+    path('school_view/<str:id>', views.school_view,name='school_view'),
+    path('update_manage_2/', views.update_manage_2, name='update_manage_2'),
+    path('graduate_view/<str:id>', views.graduate_view, name='graduate_view'),
+    path('care_of/', views.care_of, name='care_of'),
+    path('create_care_of/', views.create_care_of, name='create_care_of'),
+    path('delete_care/<str:id>', views.delete_care, name='delete_care'),
+    path('care_of_profile/', views.care_of_profile, name='care_of_profile'),
+    path('view_care_of/<str:id>', views.view_care_of, name='view_care_of'),
+    path('update_care_of/', views.update_care_of, name='update_care_of'),
     
     path('password_reset/',auth_views.PasswordResetView.as_view(template_name='activities/registration/password_reset_form.html'),name='password_reset'),
     path('password_reset/done/',auth_views.PasswordResetDoneView.as_view(template_name='activities/registration/password_reset_done.html'),name='password_reset_done'),

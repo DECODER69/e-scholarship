@@ -61,16 +61,16 @@
 
     <section class="page-content">
         <div class="heads">
-            <a href="/admin_approved">
-                <h1 class="text"><i class='bx bx-user-pin'></i>APPROVED &nbsp;>&nbsp;</h1>
+            <a href="/admin_pending">
+                <h1 class="text"><i class='bx bx-user-pin'></i>EXAMINEES &nbsp;>&nbsp;</h1>
             </a><br>
-            <h1 class="text"><i class='bx bx-user-pin'></i>PROFILE</h1>
+            <h1 class="text"><i class='bx bx-user-pin'></i>APPLICANT'S PROFILE</h1>
         </div>
 
         <br>
 
         <!-- whole body -->
-        {% for s in name %}
+        {% for s in profiles %}
         <div class="bg" id="ggs">
 
             <form action="{% url 'activities:action_applicant' %}" method="POST" enctype="multipart/form-data">
@@ -177,29 +177,6 @@
 
 
 
-                            </div>
-                            <br>
-
-                            <div class="card p-3">
-                                <div class="mb-2" style="color: rgb(43, 43, 43);"><b><i class="fa-solid fa-scroll"></i>RESULTS</b></div>
-                                <hr>
-                                <br>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <h6 style="font-weight: bold; color:rgb(0, 101, 141)">{{s.exam_result}}</h6>
-                                            <label>Exam Score</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <h6 style="font-weight: bold; color:rgb(0, 101, 141)">{{s.care_of}}</h6>
-                                            <label>Care of</label>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
@@ -395,12 +372,8 @@
 
                                                                 </div>
 
-                                                                <br>
-                                                                <br>
-                                                                <hr>
-                                                                <h3>Action</h3>
-                                                                <br>
-                                                                <div class="row">
+
+                                                                <!-- <div class="row">
                                                                     <div class="col">
                                                                         <div class="form-group">
                                                                             <select name="options" id="" required class="form-control">
@@ -427,7 +400,7 @@
 
 
 
-                                                                </div>
+                                                                </div> -->
 
 
                                                                 <hr>

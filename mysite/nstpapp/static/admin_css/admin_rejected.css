@@ -34,7 +34,6 @@ section {
 }
 
 .heads {
-    justify-content: space-between;
     display: flex;
     background: #4b4d52;
     height: 60px !important;
@@ -201,6 +200,26 @@ section {
 .actions {
     display: flex;
     justify-content: center;
+}
+
+.upper {
+    /* margin: auto; */
+    height: 10vh;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.upper .card {
+    width: 30%;
+    display: flex !important;
+    justify-content: space-between;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.card .card-body {
+    justify-content: space-between;
+    display: flex;
 }
 
 

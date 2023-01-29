@@ -30,7 +30,7 @@ from django.contrib.auth.decorators import login_required
 import datetime
 import datetime as dt
 #models imported
-from .models import extenduser,school_year, sections, training_day,Announcement, certification
+from .models import extenduser,school_year, sections, training_day,Announcement, certification, name_care_of
 import os
 import csv  
 
@@ -184,13 +184,15 @@ def admin_staff(request):
         return render(request, 'activities/admin_staffs.html', context)
 
 def admin_pending(request):
+    care_off = name_care_of.objects.all()
     platoons = sections.objects.all()
     pending = extenduser.objects.filter(status='PROCESSING').count()
     pendings = extenduser.objects.filter(status='PROCESSING')
     context = {
         'pendings':pendings,
         'pending':pending,
-        'platoons':platoons
+        'platoons':platoons,
+        'care_off':care_off
     }
     return render(request, 'activities/admin_pending.html', context)
 
@@ -212,7 +214,7 @@ def admin_view_profile(request, id):
         'profiles':profiles,
         'pending':pending
     }
-    return render(request, 'activities/profile_view.html', context)
+    return render(request, 'activities/pending_view.html', context)
 
 
 
@@ -233,7 +235,7 @@ def school_years(request):
     return render(request, 'activities/sy.html', context)
 
 def create_platoon_page(request):
-    current_datetime = datetime.datetime.now() 
+    current_datetime = dt.datetime.now() 
     userContent = User.objects.all()
     sectionxx = extenduser.objects.all()
     counts = extenduser.objects.filter(status='APPROVED').count()
@@ -258,7 +260,7 @@ def create_platoon_page(request):
 def create_platoon_page2(request):
     sectionxx = extenduser.objects.all()
     counts = extenduser.objects.filter(status='ENROLLED').count()
-    counts1 = extenduser.objects.filter(status='ENROLLED')
+    counts1 = extenduser.objects.filter(status='APPROVED')
     section = sections.objects.all()
     section1 = sections.objects.all().count()
     context = {
@@ -712,6 +714,7 @@ def edit_student(request, id):
 
 
 def section_content(request):
+    current_datetime = dt.datetime.now() 
     userContent = User.objects.all()
     schools = school_year.objects.all()
     if request.method == 'POST':
@@ -721,7 +724,9 @@ def section_content(request):
         content3 = extenduser.objects.filter(school=getSection).filter(status='APPROVED')
         print("school" + str(content3))
         print(getSection)
-        content33 = extenduser.objects.filter(platoons=getSection).filter(status='APPROVED').count()
+        content33 = extenduser.objects.filter(school=getSection).filter(status='APPROVED').count()
+        ip = extenduser.objects.filter(school=getSection, status='APPROVED').filter(ip_status='IP').count()
+        non_ip  =extenduser.objects.filter(school=getSection, status='APPROVED').filter(ip_status='Non IP').count()
     else:
        
         return render(request, 'activities/pl_content.html')
@@ -731,6 +736,9 @@ def section_content(request):
         'content33':content33,
         'getSection':getSection,
         'schools':[schools.last()],
+        'ip':ip,
+        'non_ip':non_ip,
+        'current_datetime':current_datetime
          
     }
     print(content33)
@@ -789,7 +797,7 @@ def section_day(request):
     return redirect('/attendance_page')
 
 def create_announcement(request):
-    date = datetime.datetime.now()  
+    date = dt.datetime.now()  
     if request.method == 'POST':
         assign = request.POST.get('assign')
         subject = request.POST.get('subject')
@@ -1023,7 +1031,7 @@ def open_folder(request,section_created):
     return render(request, 'activities/open_folder.html', context)
 
 def dropped(request):
-    current_datetime = datetime.datetime.now() 
+    current_datetime = dt.datetime.now() 
     userContent = User.objects.all()
     sectionxx = extenduser.objects.all()
     counts = extenduser.objects.filter(status='DROP').count()
@@ -1621,30 +1629,7 @@ def graduates(request):
     }
     return render(request, 'activities/graduates.html', context)
 
-def graduates_list(request):
-    schools = school_year.objects.all()
-    if request.method == 'POST':
-     
-        getSection = request.POST.get('getSection')
-       
-        content3 = extenduser.objects.filter(school=getSection).filter(status='GRADUATE')
-        print("school" + str(content3))
-        print(getSection)
-        content33 = extenduser.objects.filter(platoons=getSection).filter(status='GRADUATE').count()
-    else:
-       
-        return render(request, 'activities/graduates_list.html')
-    context = {
-        'content3':content3,
-        
-        'content33':content33,
-        'getSection':getSection,
-        'schools':[schools.last()],
-         
-    }
-    print(content33)
-    print(getSection)
-    return render(request, 'activities/graduates_list.html', context)
+
 
 def open_anns(request, id):
     anns2 = Announcement.objects.filter(id=id)
@@ -1770,46 +1755,6 @@ def profile_page(request):
     return render(request, 'activities/student_profile.html', context)
 
 
-def update_manage(request):
-    if request.method == 'POST':
-        ids = request.POST.get('ids')
-        firstname = request.POST.get('firstname')
-        middlename = request.POST.get('middlename')
-        lastname = request.POST.get('lastname')
-        address = request.POST.get('address')
-        cpnumber = request.POST.get('cpnumber')
-        birthday = request.POST.get('birthday')
-        age = request.POST.get('age')
-        civil = request.POST.get('civil')
-        email = request.POST.get('email')
-        idnumber = request.POST.get('idnumber')
-        status =request.POST.get('status')
-        field = request.POST.get('field')
-        platoons = request.POST.get('platoons')
-        section2 = request.POST.get('section')
-        nfather = request.POST.get('nfather')
-        foccupation = request.POST.get('foccupation')
-        nmother = request.POST.get('nmother')
-        moccupation  = request.POST.get('moccupation')
-        pcontact = request.POST.get('pcontact')
-        nguardian = request.POST.get('nguardian')
-        goccupation = request.POST.get('goccupation')
-        gcontact = request.POST.get('gcontact')
-        sources_income = request.POST.get('sources_income')
-        monthly_income = request.POST.get('monthly_income')
-       
-        extenduser.objects.filter(id=ids).update(firstname = firstname, middlename = middlename, lastname = lastname, 
-                                                 address = address, cpnumber=cpnumber, birthday=birthday, age=age,
-                                                 civil=civil,email=email,idnumber=idnumber,status=status,field=field,
-                                                 platoons=platoons, section=section2,nfather=nfather, foccupation=foccupation, nmother=nmother, moccupation=moccupation,
-                                                 pcontact=pcontact, nguardian=nguardian, goccupation=goccupation, gcontact=gcontact, sources_income=sources_income, monthly_income=monthly_income)
-        User.objects.filter(id=ids).update(username=idnumber)
-   
-        messages.success(request, str(idnumber)+' has been Updated')
-        # return redirect('/create_platoon_page')
-        return redirect(request.META['HTTP_REFERER'])
-
-    return redirect('/create_platoon_page')
 
 def feedback(request):
     if request.method == 'POST':
@@ -1985,6 +1930,7 @@ def action_applicant(request):
 
 
 def add_score(request):
+    date_approved = dt.datetime.now()
     if request.method == 'POST':
         ids = request.POST.get('ids')
         care_of = request.POST.get('care_of')
@@ -1995,13 +1941,13 @@ def add_score(request):
             msg = "Congratualtions! You have passed the e-Scholarship Examination."
             emaila = request.POST.get('cusemail')
             send_mail(sub, msg,'escholarship2022@gmail.com',[emaila])
-            extenduser.objects.filter(id=ids).update(status=status, care_of=care_of, exam_result=score) 
+            extenduser.objects.filter(id=ids).update(status=status, care_of=care_of, exam_result=score, date_approved = date_approved) 
         else:
             sub = "E-SCHOLARSHIP EXAMINATION"
             msg = "Good day.  We are sorry to inform you that you have failed the e-Scholarship examination."
             emaila = request.POST.get('cusemail')
             send_mail(sub, msg,'escholarship2022@gmail.com',[emaila])
-            extenduser.objects.filter(id=ids).update(status=status, care_of=care_of, exam_result=score) 
+            extenduser.objects.filter(id=ids).update(status=status, care_of=care_of, exam_result=score, date_approved = date_approved) 
     return redirect('/admin_pending')
 
 
@@ -2011,3 +1957,268 @@ def view_Approved(request, id):
         'name': name
     }
     return render(request, 'activities/view_approved.html', context)
+
+
+def view_active(request, id):
+    name = extenduser.objects.filter(id=id)
+    context = {
+        'name': name
+    }
+    return render(request, 'activities/edit_manage.html', context)
+
+def school_view(request, id):
+    name = extenduser.objects.filter(id=id)
+    context = {
+        'name': name
+    }
+    return render(request, 'activities/school_view.html', context)
+
+def graduate_view(request, id):
+    name = extenduser.objects.filter(id=id)
+    context = {
+        'name': name
+    }
+    return render(request, 'activities/graduate_view.html', context)
+
+
+def view_care_of(request, id):
+    name = extenduser.objects.filter(id=id)
+    context = {
+        'name': name
+    }
+    return render(request, 'activities/view_care_of.html', context)
+
+
+
+def update_manage(request):
+    if request.method == 'POST':
+        ids = request.POST.get('ids')
+        firstname = request.POST.get('firstname')
+        middlename = request.POST.get('middlename')
+        lastname = request.POST.get('lastname')
+        address = request.POST.get('address')
+        cpnumber = request.POST.get('cpnumber')
+        birthday = request.POST.get('birthday')
+        age = request.POST.get('age')
+        civil = request.POST.get('civil')
+        email = request.POST.get('email')
+        idnumber = request.POST.get('idnumber')
+        status =request.POST.get('status')
+        field = request.POST.get('field')
+        platoons = request.POST.get('platoons')
+        section2 = request.POST.get('section')
+        nfather = request.POST.get('nfather')
+        foccupation = request.POST.get('foccupation')
+        nmother = request.POST.get('nmother')
+        moccupation  = request.POST.get('moccupation')
+        pcontact = request.POST.get('pcontact')
+        nguardian = request.POST.get('nguardian')
+        goccupation = request.POST.get('goccupation')
+        gcontact = request.POST.get('gcontact')
+        sources_income = request.POST.get('sources_income')
+        monthly_income = request.POST.get('monthly_income')
+        start = request.POST.get('start')
+        end = request.POST.get('end')
+       
+        extenduser.objects.filter(id=ids).update(firstname = firstname, middlename = middlename, lastname = lastname, 
+                                                 address = address, cpnumber=cpnumber, birthday=birthday, age=age,
+                                                 civil=civil,email=email,idnumber=idnumber,status=status,field=field,
+                                                 platoons=platoons, section=section2,nfather=nfather, foccupation=foccupation, nmother=nmother, moccupation=moccupation,
+                                                 pcontact=pcontact, nguardian=nguardian, goccupation=goccupation, gcontact=gcontact, sources_income=sources_income, monthly_income=monthly_income, start=start, end=end)
+        User.objects.filter(id=ids).update(username=idnumber)
+   
+        messages.success(request, str(idnumber)+' has been Updated')
+        # return redirect('/create_platoon_page')
+        return redirect(request.META['HTTP_REFERER'])
+
+    return redirect('/create_platoon_page')
+
+
+def update_manage_2(request):
+    if request.method == 'POST':
+        ids = request.POST.get('ids')
+        firstname = request.POST.get('firstname')
+        middlename = request.POST.get('middlename')
+        lastname = request.POST.get('lastname')
+        address = request.POST.get('address')
+        cpnumber = request.POST.get('cpnumber')
+        birthday = request.POST.get('birthday')
+        age = request.POST.get('age')
+        civil = request.POST.get('civil')
+        email = request.POST.get('email')
+        idnumber = request.POST.get('idnumber')
+        status =request.POST.get('status')
+        field = request.POST.get('field')
+        platoons = request.POST.get('platoons')
+        section2 = request.POST.get('section')
+        nfather = request.POST.get('nfather')
+        foccupation = request.POST.get('foccupation')
+        nmother = request.POST.get('nmother')
+        moccupation  = request.POST.get('moccupation')
+        pcontact = request.POST.get('pcontact')
+        nguardian = request.POST.get('nguardian')
+        goccupation = request.POST.get('goccupation')
+        gcontact = request.POST.get('gcontact')
+        sources_income = request.POST.get('sources_income')
+        monthly_income = request.POST.get('monthly_income')
+        start = request.POST.get('start')
+        end = request.POST.get('end')
+       
+        extenduser.objects.filter(id=ids).update(firstname = firstname, middlename = middlename, lastname = lastname, 
+                                                 address = address, cpnumber=cpnumber, birthday=birthday, age=age,
+                                                 civil=civil,email=email,idnumber=idnumber,status=status,field=field,
+                                                 platoons=platoons, section=section2,nfather=nfather, foccupation=foccupation, nmother=nmother, moccupation=moccupation,
+                                                 pcontact=pcontact, nguardian=nguardian, goccupation=goccupation, gcontact=gcontact, sources_income=sources_income, monthly_income=monthly_income, start=start, end=end)
+        User.objects.filter(id=ids).update(username=idnumber)
+   
+        messages.success(request, str(idnumber)+' has been Updated')
+        # return redirect('/create_platoon_page')
+        return redirect(request.META['HTTP_REFERER'])
+
+    return redirect('/create_platoon_page')
+def graduates_list(request):
+    schools = school_year.objects.all()
+    current_datetime = dt.datetime.now() 
+    if request.method == 'POST':
+     
+        getSection = request.POST.get('getSection')
+       
+        content3 = extenduser.objects.filter(school=getSection).filter(status='GRADUATE')
+        print("school" + str(content3))
+        print(getSection)
+        content33 = extenduser.objects.filter(school=getSection).filter(status='GRADUATE').count()
+        ip = extenduser.objects.filter(school=getSection, status='GRADUATE').filter(ip_status='IP').count()
+        non_ip  =extenduser.objects.filter(school=getSection, status='GRADUATE').filter(ip_status='Non IP').count()
+    else:
+       
+        return render(request, 'activities/graduates_list.html')
+    context = {
+        'content3':content3,
+        
+        'content33':content33,
+        'getSection':getSection,
+        'schools':[schools.last()],
+        'current_datetime':current_datetime,
+        'ip':ip,
+        'non_ip':non_ip
+         
+    }
+    print(content33)
+    print(getSection)
+    return render(request, 'activities/graduates_list.html', context)
+
+
+def care_of(request):
+    name = name_care_of.objects.all()
+    context ={
+        'name':name
+    }
+    return render(request, 'activities/care_of.html', context)
+
+
+def create_care_of(request):
+    if request.method == 'POST':
+        secs = request.POST.get('secs')
+
+        print("pogi" +str(field))
+        if secs is not None and field is not None:
+            if name_care_of.objects.filter(name=secs).exists():
+               
+                return redirect('/care_of')
+            else:
+                data = name_care_of(name=secs)
+                data.save()
+               
+                return redirect('/care_of')
+        else:
+          
+            return redirect('/care_of')
+    return redirect('/care_of')
+
+
+
+def delete_care(request, id):
+    name_care_of.objects.filter(id=id).delete()
+ 
+    return redirect('/care_of')
+
+def care_of_profile(request):
+    
+    current_datetime = dt.datetime.now() 
+    if request.method == 'POST':
+        ids = request.POST.get('ids')
+        person = request.POST.get('person')
+        print(ids)
+     
+        getSection = request.POST.get('getSection')
+        names = name_care_of.objects.filter(id=ids)
+        content3 = extenduser.objects.filter(care_of=person).filter(status='APPROVED')
+
+        content33 = extenduser.objects.filter(care_of=person).filter(status='APPROVED').count()
+        ip = extenduser.objects.filter(care_of=person, status='APPROVED').filter(ip_status='IP').count()
+        non_ip  =extenduser.objects.filter(care_of=person, status='APPROVED').filter(ip_status='Non IP').count()
+    else:
+       
+        return render(request, 'activities/graduates_list.html')
+    context = {
+        'content3':content3,
+        
+        'content33':content33,
+        'getSection':getSection,
+    
+        'current_datetime':current_datetime,
+        'ip':ip,
+        'non_ip':non_ip,
+        'names':names
+         
+    }
+    print(content33)
+    print(getSection)
+    return render(request, 'activities/care_off_content.html',context)
+
+
+
+
+
+def update_care_of(request):
+    if request.method == 'POST':
+        ids = request.POST.get('ids')
+        firstname = request.POST.get('firstname')
+        middlename = request.POST.get('middlename')
+        lastname = request.POST.get('lastname')
+        address = request.POST.get('address')
+        cpnumber = request.POST.get('cpnumber')
+        birthday = request.POST.get('birthday')
+        age = request.POST.get('age')
+        civil = request.POST.get('civil')
+        email = request.POST.get('email')
+        idnumber = request.POST.get('idnumber')
+        status =request.POST.get('status')
+        field = request.POST.get('field')
+        platoons = request.POST.get('platoons')
+        section2 = request.POST.get('section')
+        nfather = request.POST.get('nfather')
+        foccupation = request.POST.get('foccupation')
+        nmother = request.POST.get('nmother')
+        moccupation  = request.POST.get('moccupation')
+        pcontact = request.POST.get('pcontact')
+        nguardian = request.POST.get('nguardian')
+        goccupation = request.POST.get('goccupation')
+        gcontact = request.POST.get('gcontact')
+        sources_income = request.POST.get('sources_income')
+        monthly_income = request.POST.get('monthly_income')
+        start = request.POST.get('start')
+        end = request.POST.get('end')
+       
+        extenduser.objects.filter(id=ids).update(firstname = firstname, middlename = middlename, lastname = lastname, 
+                                                 address = address, cpnumber=cpnumber, birthday=birthday, age=age,
+                                                 civil=civil,email=email,idnumber=idnumber,status=status,field=field,
+                                                 platoons=platoons, section=section2,nfather=nfather, foccupation=foccupation, nmother=nmother, moccupation=moccupation,
+                                                 pcontact=pcontact, nguardian=nguardian, goccupation=goccupation, gcontact=gcontact, sources_income=sources_income, monthly_income=monthly_income, start=start, end=end)
+        User.objects.filter(id=ids).update(username=idnumber)
+   
+        messages.success(request, str(idnumber)+' has been Updated')
+        # return redirect('/create_platoon_page')
+        return redirect(request.META['HTTP_REFERER'])
+
+    return redirect('/care_of')

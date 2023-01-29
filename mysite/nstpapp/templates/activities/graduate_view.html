@@ -61,8 +61,8 @@
 
     <section class="page-content">
         <div class="heads">
-            <a href="/admin_approved">
-                <h1 class="text"><i class='bx bx-user-pin'></i>APPROVED &nbsp;>&nbsp;</h1>
+            <a href="/graduates">
+                <h1 class="text"><i class='bx bx-user-pin'></i>GRADUATES &nbsp;>&nbsp;</h1>
             </a><br>
             <h1 class="text"><i class='bx bx-user-pin'></i>PROFILE</h1>
         </div>
@@ -73,7 +73,7 @@
         {% for s in name %}
         <div class="bg" id="ggs">
 
-            <form action="{% url 'activities:action_applicant' %}" method="POST" enctype="multipart/form-data">
+            <form action="{% url 'activities:update_manage_2' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="containers">
                     <div class="row flex-lg-nowrap">
@@ -253,19 +253,19 @@
                                                                         <div class="form-group">
                                                                             <label>First Name </label>
                                                                             <input type="hidden" name="ids" value="{{s.id}}">
-                                                                            <input class="form-control" type="text" name="firstname" placeholder="First Name" value="{{s.firstname}}" readonly>
+                                                                            <input class="form-control" type="text" name="firstname" placeholder="First Name" value="{{s.firstname}}">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col">
                                                                         <div class="form-group">
                                                                             <label>Middle Name</label>
-                                                                            <input class="form-control" type="text" name="middlename" placeholder="Middle name" value="{{s.middlename}}" readonly>
+                                                                            <input class="form-control" type="text" name="middlename" placeholder="Middle name" value="{{s.middlename}}">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col">
                                                                         <div class="form-group">
                                                                             <label>Last name</label>
-                                                                            <input class="form-control" type="text" name="lastname" placeholder="Last Name" value="{{s.lastname}}" readonly>
+                                                                            <input class="form-control" type="text" name="lastname" placeholder="Last Name" value="{{s.lastname}}">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -273,13 +273,13 @@
                                                                     <div class="col">
                                                                         <div class="form-group">
                                                                             <label>Email</label>
-                                                                            <input class="form-control" type="text" placeholder="gsfe Email" value="{{s.email}}" name="email" readonly>
+                                                                            <input class="form-control" type="text" placeholder="gsfe Email" value="{{s.email}}" name="email">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col">
                                                                         <div class="form-group">
                                                                             <label>ID Number</label>
-                                                                            <input class="form-control" type="text" placeholder="Student ID" value="{{s.idnumber}}" name="idnumber" readonly readonly>
+                                                                            <input class="form-control" type="text" placeholder="Student ID" value="{{s.idnumber}}" name="idnumber">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -287,7 +287,7 @@
                                                                     <div class="col">
                                                                         <div class="form-group">
                                                                             <label>Address <span style="color: red; font-size:20px; vertical-align:bottom;">*</span></label>
-                                                                            <input class="form-control" type="text" placeholder="Address" value="{{s.address}}" name="address" required readonly>
+                                                                            <input class="form-control" type="text" placeholder="Address" value="{{s.address}}" name="address" required>
                                                                         </div>
                                                                     </div>
 
@@ -297,7 +297,7 @@
                                                                     <div class="col">
                                                                         <div class="form-group">
                                                                             <label>Birthday <span style="color: red; font-size:20px; vertical-align:bottom;">*</span></label>
-                                                                            <input type="date" name="birthday" id="birthday" class="form-control" value="{{s.birthday}}" required readonly><br/><br/>
+                                                                            <input type="date" name="birthday" id="birthday" class="form-control" value="{{s.birthday}}" required><br/><br/>
 
                                                                             <input type="hidden" name="m" class="form-control"><br>
                                                                             <input type="hidden" name="d" class="form-control"><br>
@@ -316,7 +316,7 @@
                                                                     <div class="col">
                                                                         <div class="form-group">
                                                                             <label>Gender <span style="color: red; font-size:20px; vertical-align:bottom;">*</span></label>
-                                                                            <select id="" class="form-control" name="gender" required readonly>
+                                                                            <select id="" class="form-control" name="gender" required>
                                                                                 <option value="{{s.gender}}" selected di>{{s.gender}}</option>
                                                                                 <option value="Male">Male</option>
                                                                                 <option value="Female">Female</option>
@@ -327,8 +327,8 @@
                                                                     <div class="col">
                                                                         <div class="form-group">
                                                                             <label>Course <span style="color: red; font-size:20px; vertical-align:bottom;">*</span></label>
-                                                                            <input required type="text" placeholder="Section" class="form-control" name="section" value="{{s.section}}" readonly>
-                                                                            <input type="hidden" value="{{s.status}}" name="status">
+                                                                            <input required type="text" placeholder="Section" class="form-control" name="section" value="{{s.section}}">
+
                                                                         </div>
                                                                     </div>
 
@@ -338,14 +338,14 @@
                                                                     <div class="col">
                                                                         <div class="form-group">
                                                                             <label>Contact <span style="color: red; font-size:20px; vertical-align:bottom;">*</span></label>
-                                                                            <input type="number" name="cpnumber" class="form-control" value="{{s.cpnumber}}" placeholder="Contact Number" required readonly>
+                                                                            <input type="number" name="cpnumber" class="form-control" value="{{s.cpnumber}}" placeholder="Contact Number" required>
 
                                                                         </div>
                                                                     </div>
                                                                     <div class="col">
                                                                         <div class="form-group">
                                                                             <label>Civil Status <span style="color: red; font-size:20px; vertical-align:bottom;">*</span></label>
-                                                                            <select name="civil" id="" class="form-control" required readonly>
+                                                                            <select name="civil" id="" class="form-control" required>
                                                                                 <option value="{{s.civil}}" disabled>{{s.civil}}</option>
                                                                                 <option value="Single">Single</option>
                                                                                 <option value="Married">Married</option>
@@ -361,14 +361,14 @@
                                                                     <div class="col">
                                                                         <div class="form-group">
                                                                             <label>Nationality <span style="color: red; font-size:20px; vertical-align:bottom;">*</span></label>
-                                                                            <input required type="text" placeholder="Nationality" name="nationality" value="{{s.nationality}}" class="form-control" readonly>
+                                                                            <input required type="text" placeholder="Nationality" name="nationality" value="{{s.nationality}}" class="form-control">
                                                                         </div>
                                                                     </div>
 
                                                                     <div class="col">
                                                                         <div class="form-group">
                                                                             <label>Family Estimated Monthly Income</label>
-                                                                            <input type="text" placeholder="Income" name="monthly_income" value="{{s.monthly_income}}" class="form-control" readonly>
+                                                                            <input type="text" placeholder="Income" name="monthly_income" value="{{s.monthly_income}}" class="form-control">
                                                                         </div>
 
                                                                     </div>
@@ -382,14 +382,14 @@
                                                                     <div class="col">
                                                                         <div class="form-group">
                                                                             <label>Contact person <span style="color: red; font-size:20px; vertical-align:bottom;">*</span></label>
-                                                                            <input required type="text" name="nfather" class="form-control" value="{{s.nfather}}" placeholder="Contact Person" required readonly>
+                                                                            <input required type="text" name="nfather" class="form-control" value="{{s.nfather}}" placeholder="Contact Person" required>
 
                                                                         </div>
                                                                     </div>
                                                                     <div class="col">
                                                                         <div class="form-group">
                                                                             <label>Contact Number <span style="color: red; font-size:20px; vertical-align:bottom;">*</span></label>
-                                                                            <input required type="text" placeholder="Number" class="form-control" name="pcontact" value="{{s.pcontact}}" readonly minlength="11" maxlength="11" onkeypress="return /\d/.test(String.fromCharCode(((event||window.event).which||(event||window.event).which)));">
+                                                                            <input required type="text" placeholder="Number" class="form-control" name="pcontact" value="{{s.pcontact}}" minlength="11" maxlength="11" onkeypress="return /\d/.test(String.fromCharCode(((event||window.event).which||(event||window.event).which)));">
                                                                         </div>
                                                                     </div>
 
@@ -398,24 +398,45 @@
                                                                 <br>
                                                                 <br>
                                                                 <hr>
-                                                                <h3>Action</h3>
+                                                                <h3>Scholarship Status</h3>
                                                                 <br>
                                                                 <div class="row">
                                                                     <div class="col">
                                                                         <div class="form-group">
-                                                                            <select name="options" id="" required class="form-control">
-                                                                                <option value="" disabled selected>--Select Action--</option>
-                                                                                <option value="PROCESSING">APPROVE</option>
-                                                                                <option value="DECLINED">DECLINE</option>
+                                                                            <label for="">Start of Subsidy</label>
+                                                                            <input type="date" class="form-control" value="{{s.start}}" name="start">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="form-group">
+                                                                            <label for="">End of Subsidy</label>
+                                                                            <input type="date" class="form-control" value="{{s.end}}" name="end">
+                                                                        </div>
+                                                                    </div>
+
+
+
+
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <div class="form-group">
+                                                                            <label for="">Student Status</label>
+                                                                            <select name="status" id="" class="form-control">
+                                                                                <option value="{{s.status}}" selected >{{s.status}}</option>
+                                                                                <option value="GRADUATE">GRADUATE</option>
+                                                                                <option value="INACTIVE">INACTIVE</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
 
 
 
+
+
                                                                 </div>
                                                                 <br>
-                                                                <div class="row">
+                                                                <!-- <div class="row">
                                                                     <div class="col">
                                                                         <div class="form-group">
                                                                             <button class="btn btn-block btn-success" type="submit">
@@ -427,7 +448,7 @@
 
 
 
-                                                                </div>
+                                                                </div> -->
 
 
                                                                 <hr>

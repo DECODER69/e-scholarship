@@ -67,7 +67,7 @@
                                         </a>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control" placeholder="Score" name="score">
+                                    <input type="number" class="form-control" placeholder="Score" name="score" required>
                                 </td>
 
                                 <td>
@@ -79,9 +79,11 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <select name="care_of" id="" class="form-control">
-                                        <option value="CEDIRC">CEDRIC</option>
-                                        <option value="RAPAL">RAPAL</option>
+                                    <select name="care_of" id="" class="form-control" required>
+                                        <option value="" selected disabled >--Select--</option>
+                                       {% for s in care_off %}
+                                       <option value="{{s.name}}">{{s.name}}</option>
+                                       {% endfor %}
                                 </select>
                                 </td>
                                 <td class="actions">
