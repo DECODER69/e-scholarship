@@ -66,68 +66,76 @@
             <div>
                 <div class="table-responsive">
                     <p1 style="font-size:20px;color:#000000;">List of all Active students</p1><br><br>
-                    <table id="table1" class="table table-bordered table-hover ">
-                        <thead class="thead">
-                            <tr>
-                                <th scope="col">Full name</th>
-                                <th scope="col">Email</th>
+                    <form action="{% url 'activities:export1' %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger"><i class="fa-solid fa-file-pdf"></i> Save as PDF</button>
+                        <input type="hidden" name="school" value="{{getSection}}">
+                        <br>
+                        <br>
+                        <table id="table1" class="table table-bordered table-hover ">
+                            <thead class="thead">
+                                <tr>
+                                    <th scope="col">Full name</th>
+                                    <th scope="col">Email</th>
 
-                                <th scope="col">Course</th>
-                                <th scope="col">Bachelors Degree</th>
-
-
-                                <th scope="col">Exam result</th>
-
-                                <th scope="col">Care of</th>
-
-                                <th scope="col">Start of Subsidy</th>
-                                <th scope="col">End of Subsidy</th>
-                                <th scope="col">View Profile</th>
-                                <!-- <th scope="col">Select Section / Platoon</th> -->
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for s in content3 %}
-                            <tr>
-
-                                <td>
-                                    {{s.firstname}} {{s.lastname}}
-                                </td>
-
-                                <td>{{s.email}}</td>
-                                <td>{{s.section}}</td>
-                                <td>{{s.ip_status}} | {{s.ip_category}}</td>
+                                    <th scope="col">Course</th>
+                                    <th scope="col">Bachelors Degree</th>
 
 
-                                <td>{{s.exam_result}}</td>
+                                    <th scope="col">Exam result</th>
 
-                                <td>{{s.care_of}}</td>
+                                    <th scope="col">Care of</th>
 
-                                <!-- <td>{{ s.date_approved|date:"Y-m-d" }}
+                                    <th scope="col">Start of Subsidy</th>
+                                    <th scope="col">End of Subsidy</th>
+                                    <th scope="col">View Profile</th>
+                                    <!-- <th scope="col">Select Section / Platoon</th> -->
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for s in content3 %}
+                                <tr>
+
+                                    <td>
+                                        {{s.firstname}} {{s.lastname}}
+                                    </td>
+
+                                    <td>{{s.email}}</td>
+                                    <td>{{s.section}}</td>
+                                    <td>{{s.ip_status}} | {{s.ip_category}}</td>
+
+
+                                    <td>{{s.exam_result}}</td>
+
+                                    <td>{{s.care_of}}</td>
+
+                                    <!-- <td>{{ s.date_approved|date:"Y-m-d" }}
                                 </td> -->
-                                <td>{{s.start}}</td>
+                                    <td>{{s.start}}</td>
 
-                                <!-- for red colors -->
+                                    <!-- for red colors -->
 
-                                {% if s.end == current_datetime|date:"Y-m-d" %}
-                                <td style="background-color: red; color:white;">{{s.end}}</td>
-                                {% else %}
+                                    {% if s.end == current_datetime|date:"Y-m-d" %}
+                                    <td style="background-color: red; color:white;">{{s.end}}</td>
+                                    {% else %}
 
-                                <td style="background-color: rgb(0, 110, 0); color:rgb(243, 243, 243);">{{s.end}}</td>
-                                {% endif %}
-                                <!-- 
+                                    <td style="background-color: rgb(0, 110, 0); color:rgb(243, 243, 243);">{{s.end}}</td>
+                                    {% endif %}
+                                    <!-- 
                                 end -->
-                                <td class="tar">
-                                    <a href="{% url 'activities:school_view' s.id %}" target="_self" title="View student profile"><i class="fa-solid fa-eye"></i>
+                                    <td class="tar">
+                                        <a href="{% url 'activities:school_view' s.id %}" target="_self" title="View student profile"><i class="fa-solid fa-eye"></i>
                                          View Profile
                                     </a>
-                                </td>
+                                    </td>
 
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </form>
                 </div>
             </div>
 

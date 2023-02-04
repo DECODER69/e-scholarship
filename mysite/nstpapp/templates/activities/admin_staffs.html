@@ -8,7 +8,7 @@
     <title>Students</title>
     <link rel="stylesheet" href="../../static/admin_css/admin_staff.css">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <link rel="icon" href="../../static/images/logo2.png">
+    <link rel="icon" href="../../static/images/logo.png">
 
     <!-- icon for seacrch -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/solid.css">
@@ -50,6 +50,8 @@
 
 
                                 <th scope="col">OPTIONS</th>
+                                <th scope="col">CATEGORY</th>
+                                <th scope="col">CARE OF</th>
                                 <th scope="col">SAVE</th>
                             </tr>
                         </thead>
@@ -74,6 +76,21 @@
                                         <option value="PROCESSING">APPROVE</option>
                                         <option value="DECLINED">DECLINE</option>
                                         
+                                    </select>
+                                    </td>
+                                    <td>
+                                        <select name="category" id="" class="form-control" required>
+                                            <option value="" selected disabled>--Select--</option>
+                                            <option value="BACHELORS DEGREE">BACHELORS DEGREE</option>
+                                            <option value="PANG ALALAY">PANG ALALAY</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="care_of" id="" class="form-control" required>
+                                            <option value="" selected disabled >--Select--</option>
+                                           {% for s in care_off %}
+                                           <option value="{{s.name}}">{{s.name}}</option>
+                                           {% endfor %}
                                     </select>
                                     </td>
                                     <td style="text-align: center;">

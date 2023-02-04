@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>pending</title>
     <link rel="stylesheet" href="../../static/admin_css/admin_pending.css">
-    <link rel="icon" href="../../static/images/logo2.png">
+    <link rel="icon" href="../../static/images/logo.png">
     <!-- icon for seacrch -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/solid.css">
     <!-- for table pagination -->
@@ -43,7 +43,7 @@
                             <th scope="col">View Profile</th>
                             <th scope="col">Exam result</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Care of</th>
+                            <!-- <th scope="col">Care of</th> -->
                             <!-- <th scope="col">Select Section / Platoon</th> -->
                             <th scope="col">Action</th>
 
@@ -78,14 +78,14 @@
 
                                     </select>
                                 </td>
-                                <td>
+                                <!-- <td>
                                     <select name="care_of" id="" class="form-control" required>
                                         <option value="" selected disabled >--Select--</option>
                                        {% for s in care_off %}
                                        <option value="{{s.name}}">{{s.name}}</option>
                                        {% endfor %}
                                 </select>
-                                </td>
+                                </td> -->
                                 <td class="actions">
                                     <input type="hidden" name="cusemail" value="{{s.email}}">
                                     <input type="hidden" name="ids" value="{{s.id}}">

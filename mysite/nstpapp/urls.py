@@ -117,7 +117,7 @@ urlpatterns = [
     path('admin_logout/', views.admin_logout, name='admin_logout'),
     path('feedback/', views.feedback, name='feedback'),
     path('contact_us/', views.contact_us, name='contact_us'),
-    path('send_feedback/', views.send_feedback, name='send_feedback'),
+
     path('enrollment/', views.enrollment, name='enrollment'),
     path('requirements/', views.requirements, name='requirements'),
     path('cor/<str:id>', views.cor, name='cor'),
@@ -142,6 +142,13 @@ urlpatterns = [
     path('care_of_profile/', views.care_of_profile, name='care_of_profile'),
     path('view_care_of/<str:id>', views.view_care_of, name='view_care_of'),
     path('update_care_of/', views.update_care_of, name='update_care_of'),
+    path('send_message/', views.send_message, name='send_message'),
+    path('update_mess/', views.update_mess, name='update_mess'),
+    path('send_response/<str:id>', views.send_response, name='send_response'),
+    path('response/', views.response, name='response'),
+    path('mess_history/', views.mess_history, name='mess_history'),
+    path('export1/', views.export1, name='export1'),
+    
     
     path('password_reset/',auth_views.PasswordResetView.as_view(template_name='activities/registration/password_reset_form.html'),name='password_reset'),
     path('password_reset/done/',auth_views.PasswordResetDoneView.as_view(template_name='activities/registration/password_reset_done.html'),name='password_reset_done'),

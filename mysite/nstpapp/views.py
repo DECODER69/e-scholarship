@@ -3,6 +3,7 @@ from dataclasses import field
 import csv
 from distutils.command.build_scripts import first_line_re
 from genericpath import exists
+import io
 
 from pkgutil import extend_path
 import re
@@ -30,7 +31,7 @@ from django.contrib.auth.decorators import login_required
 import datetime
 import datetime as dt
 #models imported
-from .models import extenduser,school_year, sections, training_day,Announcement, certification, name_care_of
+from .models import extenduser,school_year, sections, training_day,Announcement, certification, name_care_of, feedbacks
 import os
 import csv  
 
@@ -47,7 +48,24 @@ from django.utils.timezone import now
 from datetime import timedelta
 from datetime import datetime
 
+# for pdf
 
+
+from django.http import FileResponse
+from django.template.loader import get_template
+from django.shortcuts import render
+from io import BytesIO
+import os
+from django.conf import settings
+
+
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import letter, landscape
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch
+from reportlab.lib.pagesizes import letter
 
 import pandas as pd
 #   PAGE SHOWING
@@ -131,21 +149,24 @@ def logout_student(request):
 ####################
 #########################
 # ADMIN PAGE DISPLAYS
-@login_required(login_url='/admin_login')
+@login_required(login_url='/login_page')
 def admin_dashboard(request):
     end_date = datetime.now()
     start_date = end_date - timedelta(days=1)
     if request.user.is_superuser:
+        feed = feedbacks.objects.filter(status='PENDING')
         audience = sections.objects.all()
         ann = Announcement.objects.all()
         sy = school_year.objects.all()
-        active = extenduser.objects.filter(status='ENROLLED').count()
+        active = extenduser.objects.filter(status='APPROVED').count()
         pending = extenduser.objects.filter(status='PENDING').count()
         processing = extenduser.objects.filter(status='PROCESSING').count()
         cnt = sections.objects.all().count()
         nav_pending_count = extenduser.objects.filter(status='PENDING').count()
         new = extenduser.objects.filter(date_applied__range= (start_date, end_date)).count()
         exam = extenduser.objects.filter(date_exam__range= (start_date, end_date)).count()
+        ip = extenduser.objects.filter(ip_status='IP').count()
+        ip_pday = extenduser.objects.filter(date_applied__range= (start_date, end_date)).count()
         context = {
             'active':active,   
             'pending':pending,
@@ -157,6 +178,9 @@ def admin_dashboard(request):
             'new':new,
             'exam':exam,
             'processing':processing,
+            'ip':ip,
+            'ip_pday':ip_pday,
+            'feed':feed
         
         
         }
@@ -168,6 +192,7 @@ def admin_dashboard(request):
 @login_required(login_url='/admin_login')
 def admin_staff(request):
     if request.user.is_superuser:
+        care_off = name_care_of.objects.all()
         s_years = school_year.objects.all()
         details = extenduser.objects.filter(status='PENDING')
         pendings = extenduser.objects.filter(status='PENDING')
@@ -177,7 +202,8 @@ def admin_staff(request):
             'pending':pending,
             'details': details,
             'pendings':pendings,
-            's_years':[s_years.last()]
+            's_years':[s_years.last()],
+            'care_off':care_off
         
         }
         
@@ -933,11 +959,14 @@ def update_sy(request, ):
 def update_officially(request, id):
     date_exam = dt.datetime.now()
     if request.method == 'POST':
+        care_of = request.POST.get('care_of')
         stats = request.POST.get('slc')
+        category = request.POST.get('category')
+        
         idd = request.POST.get('idd')
         print("hahaha" +str(idd))
         if stats == 'PROCESSING':
-            extenduser.objects.filter(id=idd).update(status=stats,  date_exam=date_exam)
+            extenduser.objects.filter(id=idd).update(status=stats, care_of=care_of,  date_exam=date_exam, category=category)
         else:
             extenduser.objects.filter(id=idd).update(status=stats)
     return redirect('/admin_staff')
@@ -1777,16 +1806,16 @@ def contact_us(request):
     return render(request, 'activities/contact_us.html')
 
 
-def send_feedback(request):
-    date_time = datetime.datetime.now() 
-    if request.method == 'POST':
-       name = request.POST.get('name')
-       email = request.POST.get('email')
-       subject = request.POST.get('subject')
-       message = request.POST.get('message')
-       data = feedback(sender=name, email=email, date_sent=date_time, subject=subject, message=message)
-       data.save()
-    return redirect('/contact_us')
+# def send_feedback(request):
+#     date_time = datetime.datetime.now() 
+#     if request.method == 'POST':
+#        name = request.POST.get('name')
+#        email = request.POST.get('email')
+#        subject = request.POST.get('subject')
+#        message = request.POST.get('message')
+#        data = feedback(sender=name, email=email, date_sent=date_time, subject=subject, message=message)
+#        data.save()
+#     return redirect('/contact_us')
 
 
 
@@ -1933,7 +1962,7 @@ def add_score(request):
     date_approved = dt.datetime.now()
     if request.method == 'POST':
         ids = request.POST.get('ids')
-        care_of = request.POST.get('care_of')
+      
         status = request.POST.get('status')
         score = request.POST.get('score')
         if status == 'APPROVED':
@@ -1941,13 +1970,13 @@ def add_score(request):
             msg = "Congratualtions! You have passed the e-Scholarship Examination."
             emaila = request.POST.get('cusemail')
             send_mail(sub, msg,'escholarship2022@gmail.com',[emaila])
-            extenduser.objects.filter(id=ids).update(status=status, care_of=care_of, exam_result=score, date_approved = date_approved) 
+            extenduser.objects.filter(id=ids).update(status=status,  exam_result=score, date_approved = date_approved) 
         else:
             sub = "E-SCHOLARSHIP EXAMINATION"
             msg = "Good day.  We are sorry to inform you that you have failed the e-Scholarship examination."
             emaila = request.POST.get('cusemail')
             send_mail(sub, msg,'escholarship2022@gmail.com',[emaila])
-            extenduser.objects.filter(id=ids).update(status=status, care_of=care_of, exam_result=score, date_approved = date_approved) 
+            extenduser.objects.filter(id=ids).update(status=status,  exam_result=score, date_approved = date_approved) 
     return redirect('/admin_pending')
 
 
@@ -2222,3 +2251,143 @@ def update_care_of(request):
         return redirect(request.META['HTTP_REFERER'])
 
     return redirect('/care_of')
+
+
+
+def send_message(request):
+    date_time = dt.datetime.now() 
+    if request.method == 'POST':
+       name = request.POST.get('name2')
+       email = request.POST.get('email')
+       subject = request.POST.get('subject')
+       message = request.POST.get('message')
+       datas = feedbacks(sender=name, email=email, date_sent=date_time, subject=subject, message=message)
+       datas.save()
+    return redirect('/contact_us')
+
+
+def update_mess(request):
+    if request.method == 'POST':
+        action_date = dt.datetime.now() 
+        actionby = request.POST.get('action')
+        ids = request.POST.get('ids')
+        status = request.POST.get('status')
+
+        feedbacks.objects.filter(id=ids).update(status = status, action_by = actionby, action_date=action_date)
+        
+
+    return redirect('/admin_dashboard')
+
+
+def send_response(request, id):
+    feed = feedbacks.objects.filter(status = 'PENDING').order_by('date_sent')
+    audience = sections.objects.all()
+    ann = Announcement.objects.all()
+    sy = school_year.objects.all()
+    nav_pending_count = extenduser.objects.filter(status='PENDING').count()
+    nav_rejected_count = extenduser.objects.filter(status='REJECTED').count()
+    active = extenduser.objects.filter(status='ENROLLED').count()
+    pending = extenduser.objects.filter(status='PENDING').count()
+
+   
+
+    id = id
+    
+    details = feedbacks.objects.filter(id=id)
+    
+    context = {
+        'id': id,
+        'details': details,
+        'active':active,   
+        'pending':pending,
+        'sy':[sy.last()],
+        'audience':audience,
+        'ann':ann,
+        # 'staff':staff,
+        'nav_pending_count':nav_pending_count,
+        'nav_rejected_count':nav_rejected_count ,
+        'feed':feed
+    }
+    return render(request, 'activities/popup.html', context)
+
+
+def response(request):
+    if request.method == 'POST':
+        try:
+            sub = request.POST.get('emailtext')
+            msg = request.POST.get('message')
+            email = request.POST.get('email')
+            send_mail(sub, msg,'tupc.nstp@gmail.com',[email])
+            return redirect('/admin_dashboard')
+        except ImportError:
+            messages.success(request, 'Email Encountered some errors. Please Contact your Administrator')
+    return redirect('/admin_dashboard')
+
+def mess_history(request):
+    details = feedbacks.objects.filter(status = 'DONE')
+    context = {
+        'details':details,
+    }
+    return render(request, 'activities/history.html', context)
+
+
+
+
+
+# def export1(request):
+#     if request.method == 'POST':
+#         pdf = extenduser.objects.get(school=request.POST.get('school'))
+#         response = FileResponse(pdf.pdf_file, content_type='application/pdf')
+#         response['Content-Disposition'] = f'attachment; filename={pdf.file_name}.pdf'
+#         return response
+
+from reportlab.lib import pagesizes
+
+def export1(request):
+    # Create a file-like buffer to receive PDF data.
+    buffer = io.BytesIO()
+
+    # Create the PDF object, using the buffer as its "file."
+    # p = canvas.Canvas(buf, pagesize=letter,bottomup=0)
+    page_size = pagesizes.letter
+    p = canvas.Canvas(buffer, pagesize=page_size)
+    
+    # textob = p.beginText()
+    # textob.setTextOrigin(inch, inch)
+    # textob.setFont('Helvetica',13)
+    school = request.POST.get('school')
+    students = extenduser.objects.filter(school=school)
+    p.drawString(20, 720, "School:"+ school)
+    lines =[
+        ['Fullname',  'Scholarship category', 'IP Status', 'Care of', 'Start of Subsidy', 'End of Subsidy'],
+    ]
+    
+    for s in students:
+        lines.append([s.firstname + ' ' + s.lastname,  s.category, s.ip_status + ' ' + s.ip_category, s.care_of, s.start, s.end])
+
+    # for line in lines:
+    #     textob.textLine(line)
+        
+    table = Table(lines)
+    table.setStyle(TableStyle([
+       ('BACKGROUND', (0, 0), (-1, 0), (0, 0, 0, 1)),
+        ('TEXTCOLOR', (0, 0), (-1, 0), (1, 1, 1)),
+        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica'),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+        ('BACKGROUND', (0, 1), (-1, -1), (0.98, 0.98, 0.98)),
+        ('GRID', (0, 0), (-1, -1), 1, (0.75, 0.75, 0.75))
+    ]))
+
+    # p.build([table])
+        
+    table.wrapOn(p, page_size[0], page_size[1])
+    table.drawOn(p, 20, 650)
+    p.save()
+    buffer.seek(0)
+    
+    return FileResponse(buffer, as_attachment=True, filename='List.pdf')
+    
+
+    # Draw things on the PDF. Here's where the HTML table is rendered.
+   

@@ -2,12 +2,13 @@
 <html lang="en">
 
 <head>
+    <link rel="icon" href="../../static/images/logo.png">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../static/css/student_profile.css">
-    <link rel="icon" href="../../static/images/tup.png">
-    <title>profile</title>
+
+    <title>SCHOLARSHIP</title>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
@@ -74,82 +75,6 @@
                 {% csrf_token %}
                 <div class="containers">
                     <div class="row flex-lg-nowrap">
-                        <div class="col-12 col-lg-auto mb-3" style="width: 300px;">
-                            <!-- <div class="card p-3">
-                                <div class="e-navlist e-navlist--active-bg">
-                                    <ul class="nav">
-                                        <li class="nav-item"><a class="nav-link px-2 active" href="#"><i class="fa fa-fw fa-bar-chart mr-1"></i><span>Overview</span></a></li>
-                                        <li class="nav-item"><a class="nav-link px-2" href="https://www.bootdey.com/snippets/view/bs4-crud-users" target="__blank"><i class="fa fa-fw fa-th mr-1"></i><span>CRUD</span></a></li>
-                                        <li class="nav-item"><a class="nav-link px-2" href="https://www.bootdey.com/snippets/view/bs4-edit-profile-page" target="__blank"><i class="fa fa-fw fa-cog mr-1"></i><span>Settings</span></a></li>
-                                    </ul>
-                                </div>
-                            </div> -->
-
-
-
-                            <div class="card p-3">
-                                <div class="mb-2" style="color: red;"><b><i class="fa-solid fa-scroll"></i> Logs</b></div>
-                                <hr>
-                                <br>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-
-                                            <h6 style="font-weight: bold;">{{s.approved_by}}</h6>
-                                            <label>Approved by</label>
-
-                                        </div>
-                                    </div>
-                                    <br>
-
-                                </div>
-
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-
-                                            <h6 style="font-weight: bold; color:#1d7901;">{{s.date_declined}}</h6>
-                                            <label>Date Approved</label>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <hr>
-                                <br>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-
-                                            <h6 style="font-weight: bold; color:#e49c00;">{{s.modified_by}}</h6>
-                                            <label>Last Modified by</label>
-
-                                        </div>
-                                    </div>
-
-
-                                </div>
-
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-
-                                            <h6 style="font-weight: bold; color:#e49c00;">{{s.date_modified}}</h6>
-                                            <label>Last Date Modified</label>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
-
-
-
-
-                            </div>
-                        </div>
 
                         <div class="col" id="ggs">
                             <div class="row">

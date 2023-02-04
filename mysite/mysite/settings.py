@@ -145,7 +145,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 
 EMAIL_HOST_USER = 'escholarship2022@gmail.com'
 
-EMAIL_HOST_PASSWORD = 'xedpzfhmwzrheufl'
+EMAIL_HOST_PASSWORD = 'pqfdjxwindgzgcuz'
 
 EMAIL_PORT = 587
 

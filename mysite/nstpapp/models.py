@@ -88,6 +88,7 @@ class extenduser(models.Model):
     barangay =  models.ImageField(upload_to="images/" , default='')
     mangyan =  models.ImageField(upload_to="images/" , default='')
     ip_status = models.CharField(max_length=100, default='')
+    category = models.CharField(max_length=100, default='')
     ip_category = models.CharField(max_length=100, default='')
     exam_result = models.CharField(max_length=10, default='')
     care_of = models.CharField(max_length=100, default='')
@@ -161,3 +162,12 @@ class name_care_of(models.Model):
     
 
     
+class feedbacks(models.Model):
+    sender = models.CharField(max_length=50, default='')
+    email = models.CharField(max_length=50, default='')
+    date_sent = models.DateTimeField(null=True)
+    subject = models.CharField(max_length=50, default='')
+    message = models.CharField(max_length=160, default='')
+    status = models.CharField(max_length=50, default='PENDING')
+    action_by = models.CharField(max_length=20, default='')
+    action_date = models.DateTimeField(null=True)
