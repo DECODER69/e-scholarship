@@ -148,6 +148,8 @@ urlpatterns = [
     path('response/', views.response, name='response'),
     path('mess_history/', views.mess_history, name='mess_history'),
     path('export1/', views.export1, name='export1'),
+    path('export2/', views.export2, name='export2'),
+    path('export3/', views.export3, name='export3'),
     
     
     path('password_reset/',auth_views.PasswordResetView.as_view(template_name='activities/registration/password_reset_form.html'),name='password_reset'),

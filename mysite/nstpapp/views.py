@@ -2092,8 +2092,9 @@ def update_manage_2(request):
         monthly_income = request.POST.get('monthly_income')
         start = request.POST.get('start')
         end = request.POST.get('end')
+        status = request.POST.get('status')
        
-        extenduser.objects.filter(id=ids).update(firstname = firstname, middlename = middlename, lastname = lastname, 
+        extenduser.objects.filter(user_id=ids).update(firstname = firstname, middlename = middlename, lastname = lastname, 
                                                  address = address, cpnumber=cpnumber, birthday=birthday, age=age,
                                                  civil=civil,email=email,idnumber=idnumber,status=status,field=field,
                                                  platoons=platoons, section=section2,nfather=nfather, foccupation=foccupation, nmother=nmother, moccupation=moccupation,
@@ -2391,3 +2392,93 @@ def export1(request):
 
     # Draw things on the PDF. Here's where the HTML table is rendered.
    
+def export2(request):
+        # Create a file-like buffer to receive PDF data.
+    buffer = io.BytesIO()
+
+    # Create the PDF object, using the buffer as its "file."
+    # p = canvas.Canvas(buf, pagesize=letter,bottomup=0)
+    page_size = pagesizes.letter
+    p = canvas.Canvas(buffer, pagesize=page_size)
+    
+    # textob = p.beginText()
+    # textob.setTextOrigin(inch, inch)
+    # textob.setFont('Helvetica',13)
+    school = request.POST.get('school')
+    students = extenduser.objects.filter(care_of=school)
+    p.drawString(20, 720, "Care Of:"+ school)
+    lines =[
+        ['Fullname',  'Scholarship category', 'IP Status', 'Course', 'Start of Subsidy', 'End of Subsidy'],
+    ]
+    
+    for s in students:
+        lines.append([s.firstname + ' ' + s.lastname,  s.category, s.ip_status + ' ' + s.ip_category, s.section, s.start, s.end])
+
+    # for line in lines:
+    #     textob.textLine(line)
+        
+    table = Table(lines)
+    table.setStyle(TableStyle([
+       ('BACKGROUND', (0, 0), (-1, 0), (0, 0, 0, 1)),
+        ('TEXTCOLOR', (0, 0), (-1, 0), (1, 1, 1)),
+        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica'),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+        ('BACKGROUND', (0, 1), (-1, -1), (0.98, 0.98, 0.98)),
+        ('GRID', (0, 0), (-1, -1), 1, (0.75, 0.75, 0.75))
+    ]))
+
+    # p.build([table])
+        
+    table.wrapOn(p, page_size[0], page_size[1])
+    table.drawOn(p, 20, 650)
+    p.save()
+    buffer.seek(0)
+    
+    return FileResponse(buffer, as_attachment=True, filename='List.pdf')
+    
+def export3(request):
+        # Create a file-like buffer to receive PDF data.
+    buffer = io.BytesIO()
+
+    # Create the PDF object, using the buffer as its "file."
+    # p = canvas.Canvas(buf, pagesize=letter,bottomup=0)
+    page_size = pagesizes.letter
+    p = canvas.Canvas(buffer, pagesize=page_size)
+    
+    # textob = p.beginText()
+    # textob.setTextOrigin(inch, inch)
+    # textob.setFont('Helvetica',13)
+    school = request.POST.get('school')
+    students = extenduser.objects.filter(school=school, status='GRADUATE')
+    p.drawString(20, 720, "School:"+ school)
+    lines =[
+        ['Fullname',  'Scholarship category', 'IP Status', 'Course', 'Start of Subsidy', 'End of Subsidy'],
+    ]
+    
+    for s in students:
+        lines.append([s.firstname + ' ' + s.lastname,  s.category, s.ip_status + ' ' + s.ip_category, s.section, s.start, s.end])
+
+    # for line in lines:
+    #     textob.textLine(line)
+        
+    table = Table(lines)
+    table.setStyle(TableStyle([
+       ('BACKGROUND', (0, 0), (-1, 0), (0, 0, 0, 1)),
+        ('TEXTCOLOR', (0, 0), (-1, 0), (1, 1, 1)),
+        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica'),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+        ('BACKGROUND', (0, 1), (-1, -1), (0.98, 0.98, 0.98)),
+        ('GRID', (0, 0), (-1, -1), 1, (0.75, 0.75, 0.75))
+    ]))
+
+    # p.build([table])
+        
+    table.wrapOn(p, page_size[0], page_size[1])
+    table.drawOn(p, 20, 650)
+    p.save()
+    buffer.seek(0)
+    
+    return FileResponse(buffer, as_attachment=True, filename='List.pdf')
+    
