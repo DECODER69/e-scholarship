@@ -380,10 +380,36 @@
                                                                 <div class="row">
                                                                     <div class="col">
                                                                         <div class="form-group">
+                                                                            <label>Options<span style="color: red; font-size:20px; vertical-align:bottom;">*</span></label>
                                                                             <select name="options" id="" required class="form-control">
                                                                                 <option value="" disabled selected>--Select Action--</option>
                                                                                 <option value="PROCESSING">APPROVE</option>
                                                                                 <option value="DECLINED">DECLINE</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="col">
+                                                                        <div class="form-group">
+                                                                            <label>Scholarship category<span style="color: red; font-size:20px; vertical-align:bottom;">*</span></label>
+                                                                            <select name="category" id="" required class="form-control">
+                                                                                <option value="" disabled selected>--Select Category--</option>
+                                                                                <option value="BACHELORS DEGREE">BACHELORS DEGREE</option>
+                                                                                <option value="PANG ALALAY">PANG ALALAY</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col">
+                                                                        <div class="form-group">
+                                                                            <label>Care Of<span style="color: red; font-size:20px; vertical-align:bottom;">*</span></label>
+                                                                            <select name="care_of" id="" required class="form-control">
+                                                                                <option value="" disabled selected>--Select Care of--</option>
+                                                                                {% for s in care_of %}
+                                                                                <option value="{{s.name}}">{{s.name}}</option>
+                                                                                {% endfor %}
+                                                                             
                                                                             </select>
                                                                         </div>
                                                                     </div>

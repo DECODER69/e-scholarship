@@ -1926,9 +1926,9 @@ def apply(request):
         ip = request.POST.get('ip')
         ipcat = request.POST.get('ip-cat')
         if not_ip is not None:
-            extenduser.objects.filter(id=idnumber).update(ip_status=not_ip, status='PENDING', date_applied=date_applied)
+            extenduser.objects.filter(id=idnumber).update(ip_status=not_ip, status='PENDING', date_applied=date_applied, ip_category='')
         elif ipcat is not None:
-            extenduser.objects.filter(id=idnumber).update(ip_status=ip,status='PENDING', ip_category='', date_applied=date_applied)
+            extenduser.objects.filter(id=idnumber).update(ip_status=ip,status='PENDING', ip_category=ipcat, date_applied=date_applied)
         
      
 
@@ -1938,8 +1938,10 @@ def apply(request):
 
 def view_profile(request, id):
     name = extenduser.objects.filter(id=id)
+    care_of = name_care_of.objects.all()
     context = {
-        'name': name
+        'name': name,
+        'care_of':care_of 
     }
     return render(request, 'activities/view_profile.html', context)
 
@@ -1948,10 +1950,12 @@ def action_applicant(request):
     date_exam = dt.datetime.now()
     if request.method == 'POST':
         options = request.POST.get('options')
+        category = request.POST.get('category')
+        care_of = request.POST.get('care_of')
         ids = request.POST.get('ids')
         
         if options == 'PROCESSING':
-            extenduser.objects.filter(id=ids).update(status=options, date_exam=date_exam)
+            extenduser.objects.filter(id=ids).update(status=options, date_exam=date_exam, category=category, care_of=care_of )
         else:
             extenduser.objects.filter(id=ids).update(status=options)
     return redirect('/admin_staff')
