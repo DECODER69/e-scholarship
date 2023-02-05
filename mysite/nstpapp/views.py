@@ -1730,6 +1730,7 @@ def edit(request):
         sources_income = request.POST.get('sources_income')
         monthly_income = request.POST.get('monthly_income')
         nationality = request.POST.get('nationality')
+        suffix = request.POST.get('suffix')
         print("hahahahahahaha")
    
 
@@ -1741,7 +1742,7 @@ def edit(request):
                                                             civil=civil, cpnumber=cpnumber, address=address, birthday=birthday,
                                                             nfather=nfather, foccupation=foccupation, nmother=nmother, moccupation=moccupation,
                                                             pcontact=pcontact, nguardian=nguardian, goccupation=goccupation, gcontact=gcontact,
-                                                            sources_income=sources_income, monthly_income=monthly_income, nationality=nationality)
+                                                            sources_income=sources_income, monthly_income=monthly_income, nationality=nationality, suffix=suffix)
         
         
         # extenduser.objects.filter(id=ids).update(grade_ss=grade)

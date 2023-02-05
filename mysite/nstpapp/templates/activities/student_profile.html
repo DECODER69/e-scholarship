@@ -87,7 +87,7 @@
                                                         <div class="mx-auto" style="width: 140px;">
                                                             <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
                                                                 <span style="color: rgb(255, 255, 255); font: bold 8pt Arial;">
-                                                                <img src="{{s.picture.url}}" alt="" height="140px">
+                                                                <img src="{{s.picture.url}}" alt="" width="100%">
                                                             </span>
                                                             </div>
                                                         </div>
@@ -141,6 +141,18 @@
                                                                             <input class="form-control" type="text" name="lastname" placeholder="Last Name" value="{{s.lastname}}" readonly>
                                                                         </div>
                                                                     </div>
+                                                                    <div class="col">
+                                                                        <div class="form-group">
+                                                                            <label>Suffix</label>
+                                                                            <select name="suffix" id="" class="form-control">
+                                                                                <option value="{{s.suffix}}" selected disabled>{{s.suffix}}</option>
+                                                                                <option value="Jr">Jr.</option>
+                                                                                <option value="I">I.</option>
+                                                                                <option value="II">II</option>
+                                                                                <option value="III">III</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="row" id="ro">
                                                                     <div class="col">
@@ -188,9 +200,13 @@
                                                                 <div class="row">
                                                                     <div class="col">
                                                                         <div class="form-group">
-                                                                            <label>Gender <span style="color: red; font-size:20px; vertical-align:bottom;">*</span></label>
+                                                                            <label>Sex <span style="color: red; font-size:20px; vertical-align:bottom;">*</span></label>
                                                                             <select id="" class="form-control" name="gender" required>
-                                                                                <option value="{{s.gender}}" selected di>{{s.gender}}</option>
+                                                                                {% if s.gender == "" %}
+                                                                                <option value="">--Select--</option>
+                                                                                {% else %}
+                                                                                <option value="{{s.gender}}" >{{s.gender}}</option>
+                                                                                {% endif %}
                                                                                 <option value="Male">Male</option>
                                                                                 <option value="Female">Female</option>
                                                                             </select>

@@ -17,6 +17,7 @@ class extenduser(models.Model):
     firstname = models.CharField(max_length=30, default='', null=True)
     lastname = models.CharField(max_length=30, default='')
     middlename = models.CharField(max_length=30, default='')
+    suffix = models.CharField(max_length=30, default='')
     email = models.EmailField(max_length=254, null=True, unique=True)
     idnumber = models.CharField(max_length=30, default='')
     password = models.CharField(max_length=20)
