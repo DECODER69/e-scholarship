@@ -209,8 +209,8 @@
         }) {% endfor %}
     </script> -->
     <!--/#footer-->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script> -->
 
     <script type="text/javascript" src="../../static/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../static/js/custom-scripts.js"></script>
@@ -227,33 +227,29 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4=" crossorigin="anonymous"></script>
 
-    <script type="text/javascript">
-        document.querySelector('.btn-success').onclick = function() {
+    <script>
+        const passwordInput = document.querySelector('input[type="password"]');
 
-            var password = document.querySelector('.password1').value,
-                password2 = document.querySelector('.password2').value;
-
-            if (password == "") {
-                alert("Field cannot be empty");
-            } else if (password != password2) {
-                alert("Password didn't match try again.");
-                document.querySelector('.password1').value = '';
-                document.querySelector('.password2').value = '';
-
-                return false
+        passwordInput.addEventListener('input', function() {
+            if (this.value.length < 8) {
+                this.setCustomValidity('Password must be at least 8 characters long');
+            } else {
+                this.setCustomValidity('');
             }
-            return true
-        }
-
-        setTimeout(function() {
-            if ($('#msg').length > 0) {
-                $('#msg').remove();
-            }
-        }, 3000)
+        });
     </script>
+    <script>
+        const passwordInput1 = document.querySelector('input[name="password1"]');
+        const passwordInput2 = document.querySelector('input[name="password2"]');
 
-
-
+        passwordInput2.addEventListener('input', function() {
+            if (this.value !== passwordInput1.value) {
+                this.setCustomValidity('Passwords do not match');
+            } else {
+                this.setCustomValidity('');
+            }
+        });
+    </script>
 
 
 

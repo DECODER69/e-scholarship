@@ -183,6 +183,14 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
+        $('input[type="checkbox"]').on('change', function() {
+            if ($(this).is(':checked')) {
+                $('input[type="checkbox"]').not(this).prop('checked', false);
+            }
+        });
+    </script>
+
+    <script>
         var $myCheckbox = $('#myCheckbox1'),
             $required = $('.required');
 

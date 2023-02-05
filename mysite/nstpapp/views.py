@@ -166,6 +166,7 @@ def admin_dashboard(request):
         new = extenduser.objects.filter(date_applied__range= (start_date, end_date)).count()
         exam = extenduser.objects.filter(date_exam__range= (start_date, end_date)).count()
         ip = extenduser.objects.filter(ip_status='IP').count()
+        non_ip = extenduser.objects.filter(ip_status='Non IP').count()
         ip_pday = extenduser.objects.filter(date_applied__range= (start_date, end_date)).count()
         context = {
             'active':active,   
@@ -180,7 +181,8 @@ def admin_dashboard(request):
             'processing':processing,
             'ip':ip,
             'ip_pday':ip_pday,
-            'feed':feed
+            'feed':feed,
+            'non_ip':non_ip,
         
         
         }
