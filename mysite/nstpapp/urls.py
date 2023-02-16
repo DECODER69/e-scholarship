@@ -150,7 +150,12 @@ urlpatterns = [
     path('export1/', views.export1, name='export1'),
     path('export2/', views.export2, name='export2'),
     path('export3/', views.export3, name='export3'),
-    
+    path('municipal/', views.municipal, name='municipal'),
+    path('add_municipal/', views.add_municipal, name='add_municipal'),
+    path('municipal_content/', views.municipal_content, name='municipal_content'),
+    path('export4/', views.export4, name='export4'),
+    path('municipality_view/<str:id>', views.municipality_view, name='municipality_view'),
+    path('update_muni_1/', views.update_muni_1, name='update_muni_1'),
     
     path('password_reset/',auth_views.PasswordResetView.as_view(template_name='activities/registration/password_reset_form.html'),name='password_reset'),
     path('password_reset/done/',auth_views.PasswordResetDoneView.as_view(template_name='activities/registration/password_reset_done.html'),name='password_reset_done'),

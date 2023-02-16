@@ -22,6 +22,7 @@ class extenduser(models.Model):
     idnumber = models.CharField(max_length=30, default='')
     password = models.CharField(max_length=20)
     address = models.CharField(max_length=100, default='')
+    municipal = models.CharField(max_length=100, default='')
     cpnumber = models.CharField(max_length=100, default='')
     gender = models.CharField(max_length=6, default='')
     age = models.CharField(max_length=3, default='', null=True)
@@ -102,6 +103,7 @@ class extenduser(models.Model):
     date_approved = models.DateTimeField(null=True)
     start = models.CharField(max_length=100, default='')
     end = models.CharField(max_length=100, default='')
+    municipality = models.CharField(max_length=100, default='')
     
     
     def __str__(self):
@@ -172,3 +174,7 @@ class feedbacks(models.Model):
     status = models.CharField(max_length=50, default='PENDING')
     action_by = models.CharField(max_length=20, default='')
     action_date = models.DateTimeField(null=True)
+
+class municipality(models.Model):
+    name = models.CharField(max_length=50, default='')
+    picture = models.ImageField(upload_to="images/" , default='')

@@ -31,7 +31,7 @@ from django.contrib.auth.decorators import login_required
 import datetime
 import datetime as dt
 #models imported
-from .models import extenduser,school_year, sections, training_day,Announcement, certification, name_care_of, feedbacks
+from .models import extenduser,school_year, sections, training_day,Announcement, municipality,certification, name_care_of, feedbacks
 import os
 import csv  
 
@@ -555,7 +555,7 @@ def custom(request):
             sub = request.POST.get('emailtext')
             msg = request.POST.get('message')
             emaila = request.POST.get('cusemail')
-            send_mail(sub, msg,'escholarship2022@gmail.com',[emaila])
+            send_mail(sub, msg,'orminscholarship@gmail.com',[emaila])
             return redirect('/admin_rejected')
         except ImportError:
             messages.success(request, 'Email Encountered some errors. Please Contact your Administrator')
@@ -678,7 +678,7 @@ def edit_manage(request, id):
             sub = request.POST.get('emailtext')
             msg = request.POST.get('message')
             emaila = request.POST.get('rname')
-            send_mail(sub, msg,'escholarship2022@gmail.com',[emaila])
+            send_mail(sub, msg,'orminscholarship@gmail.com',[emaila])
             messages.success(request, 'Email Sent to ' +str(emaila))
             
         except ImportError:
@@ -1731,6 +1731,7 @@ def edit(request):
         monthly_income = request.POST.get('monthly_income')
         nationality = request.POST.get('nationality')
         suffix = request.POST.get('suffix')
+        municipal = request.POST.get('municipal')
         print("hahahahahahaha")
    
 
@@ -1742,7 +1743,7 @@ def edit(request):
                                                             civil=civil, cpnumber=cpnumber, address=address, birthday=birthday,
                                                             nfather=nfather, foccupation=foccupation, nmother=nmother, moccupation=moccupation,
                                                             pcontact=pcontact, nguardian=nguardian, goccupation=goccupation, gcontact=gcontact,
-                                                            sources_income=sources_income, monthly_income=monthly_income, nationality=nationality, suffix=suffix)
+                                                            sources_income=sources_income, monthly_income=monthly_income, nationality=nationality, municipal=municipal, suffix=suffix)
         
         
         # extenduser.objects.filter(id=ids).update(grade_ss=grade)
@@ -1780,9 +1781,11 @@ def edit(request):
 def profile_page(request):
     name = extenduser.objects.filter(user = request.user)
     usern = extenduser.objects.filter(user=request.user)
+    muni = municipality.objects.all()
     context={
         'usern':usern,
         'name': name,
+        'muni':muni,
     }
     return render(request, 'activities/student_profile.html', context)
 
@@ -1794,7 +1797,7 @@ def feedback(request):
             sub = request.POST.get('subject')
             msg = request.POST.get('message')
             sender = request.POST.get('sender_email')
-            receiver = ['escholarship2022@gmail.com',]
+            receiver = ['orminscholarship@gmail.com',]
             send_mail(sub, msg ,sender, receiver)
             print(msg)
             return redirect('/')
@@ -1976,13 +1979,13 @@ def add_score(request):
             sub = "E-SCHOLARSHIP EXAMINATION"
             msg = "Congratualtions! You have passed the e-Scholarship Examination."
             emaila = request.POST.get('cusemail')
-            send_mail(sub, msg,'escholarship2022@gmail.com',[emaila])
+            send_mail(sub, msg,'orminscholarship@gmail.com',[emaila])
             extenduser.objects.filter(id=ids).update(status=status,  exam_result=score, date_approved = date_approved) 
         else:
             sub = "E-SCHOLARSHIP EXAMINATION"
             msg = "Good day.  We are sorry to inform you that you have failed the e-Scholarship examination."
             emaila = request.POST.get('cusemail')
-            send_mail(sub, msg,'escholarship2022@gmail.com',[emaila])
+            send_mail(sub, msg,'orminscholarship@gmail.com',[emaila])
             extenduser.objects.filter(id=ids).update(status=status,  exam_result=score, date_approved = date_approved) 
     return redirect('/admin_pending')
 
@@ -2489,3 +2492,186 @@ def export3(request):
     
     return FileResponse(buffer, as_attachment=True, filename='List.pdf')
     
+
+
+
+def municipal(request):
+    current_datetime = dt.datetime.now() 
+    userContent = User.objects.all()
+    sectionxx = extenduser.objects.all()
+    counts = extenduser.objects.filter(status='ENROLLED').count()
+    counts1 = extenduser.objects.filter(status='ENROLLED')
+    municipals = municipality.objects.all()
+    section1 = sections.objects.all().count()
+    secCount = request.POST.get('secCount')
+    # counts3 = extenduser.objects.filter(status='ENROLLED').filter(platoons='ALPHA')
+    context = {
+        
+    'counts':counts,
+    'counts1':counts1,
+    'municipals':municipals,
+    'section1':section1,
+    'sectionxx':sectionxx,
+    'userContent':userContent,
+    'current_datetime':current_datetime,
+    # 'counts3':counts3
+    }
+ 
+    print(secCount)
+    return render(request, 'activities/municipal.html', context)
+  
+
+
+def add_municipal(request):
+    if request.method == 'POST':
+        secs = request.POST.get('secs')
+        logos = request.FILES['logos']
+        print("pogi" +str(field))
+        if secs is not None and field is not None:
+            if municipality.objects.filter(name  = secs).exists():
+                messages.info(request, 'Municipal ' + str (secs) + ' Already exist !')
+                return redirect('/municipal')
+            else:
+                data = municipality(name=secs, picture=logos)
+                data.save()
+                messages.info(request, 'Municipality of  ' + str (secs) + ' Created !')
+                return redirect('/municipal')
+        else:
+            messages.info(request, 'Please Input Something!! Ex: Victoria')
+            return redirect('/municipal')
+    return redirect('/municipal')
+
+def municipal_content(request):
+    current_datetime = dt.datetime.now() 
+    userContent = User.objects.all()
+    schools = school_year.objects.all()
+    if request.method == 'POST':
+     
+        getSection = request.POST.get('getSection')
+       
+        content3 = extenduser.objects.filter(municipal=getSection).filter(status='APPROVED')
+        print("municipal" + str(content3))
+        print(getSection)
+        content33 = extenduser.objects.filter(municipal=getSection).filter(status='APPROVED').count()
+        ip = extenduser.objects.filter(municipal=getSection, status='APPROVED').filter(ip_status='IP').count()
+        non_ip  =extenduser.objects.filter(municipal=getSection, status='APPROVED').filter(ip_status='Non IP').count()
+    else:
+       
+        return render(request, 'activities/municipal_content.html')
+    context = {
+        'content3':content3,
+        'userContent':userContent,
+        'content33':content33,
+        'getSection':getSection,
+        'schools':[schools.last()],
+        'ip':ip,
+        'non_ip':non_ip,
+        'current_datetime':current_datetime
+         
+    }
+    print(content33)
+    print(getSection)
+    return render(request, 'activities/municipal_content.html', context)
+
+
+
+
+def export4(request):
+    # Create a file-like buffer to receive PDF data.
+    buffer = io.BytesIO()
+
+    # Create the PDF object, using the buffer as its "file."
+    # p = canvas.Canvas(buf, pagesize=letter,bottomup=0)
+    page_size = pagesizes.letter
+    p = canvas.Canvas(buffer, pagesize=page_size)
+    
+    # textob = p.beginText()
+    # textob.setTextOrigin(inch, inch)
+    # textob.setFont('Helvetica',13)
+    school = request.POST.get('school')
+    students = extenduser.objects.filter(municipal=school, status='APPROVED')
+    p.drawString(20, 720, "School:"+ school)
+    lines =[
+        ['Fullname',  'Scholarship category', 'IP Status', 'Care of', 'Start of Subsidy', 'End of Subsidy'],
+    ]
+    
+    for s in students:
+        lines.append([s.firstname + ' ' + s.lastname,  s.category, s.ip_status + ' ' + s.ip_category, s.care_of, s.start, s.end])
+
+    # for line in lines:
+    #     textob.textLine(line)
+        
+    table = Table(lines)
+    table.setStyle(TableStyle([
+       ('BACKGROUND', (0, 0), (-1, 0), (0, 0, 0, 1)),
+        ('TEXTCOLOR', (0, 0), (-1, 0), (1, 1, 1)),
+        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica'),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+        ('BACKGROUND', (0, 1), (-1, -1), (0.98, 0.98, 0.98)),
+        ('GRID', (0, 0), (-1, -1), 1, (0.75, 0.75, 0.75))
+    ]))
+
+    # p.build([table])
+        
+    table.wrapOn(p, page_size[0], page_size[1])
+    table.drawOn(p, 20, 650)
+    p.save()
+    buffer.seek(0)
+    
+    return FileResponse(buffer, as_attachment=True, filename='List.pdf')
+    
+
+
+def municipality_view(request, id):
+    name = extenduser.objects.filter(id=id)
+    context = {
+        'name': name
+    }
+    return render(request, 'activities/municipality_view.html', context)
+
+def update_muni_1(request):
+    if request.method == 'POST':
+        ids = request.POST.get('ids')
+        firstname = request.POST.get('firstname')
+        middlename = request.POST.get('middlename')
+        lastname = request.POST.get('lastname')
+        address = request.POST.get('address')
+        cpnumber = request.POST.get('cpnumber')
+        birthday = request.POST.get('birthday')
+        age = request.POST.get('age')
+        civil = request.POST.get('civil')
+        email = request.POST.get('email')
+        idnumber = request.POST.get('idnumber')
+        status =request.POST.get('status')
+        field = request.POST.get('field')
+        platoons = request.POST.get('platoons')
+        section2 = request.POST.get('section')
+        nfather = request.POST.get('nfather')
+        foccupation = request.POST.get('foccupation')
+        nmother = request.POST.get('nmother')
+        moccupation  = request.POST.get('moccupation')
+        pcontact = request.POST.get('pcontact')
+        nguardian = request.POST.get('nguardian')
+        goccupation = request.POST.get('goccupation')
+        gcontact = request.POST.get('gcontact')
+        nationality = request.POST.get('nationality')
+        sources_income = request.POST.get('sources_income')
+        monthly_income = request.POST.get('monthly_income')
+        start = request.POST.get('start')
+        end = request.POST.get('end')
+        status = request.POST.get('status')
+        gender = request.POST.get('gender')
+       
+        extenduser.objects.filter(user_id=ids).update(firstname = firstname, middlename = middlename, lastname = lastname, gender=gender,
+                                                 address = address, cpnumber=cpnumber, birthday=birthday, age=age,
+                                                 civil=civil,email=email,idnumber=idnumber,status=status,field=field,
+                                                 platoons=platoons, section=section2,nfather=nfather, foccupation=foccupation, nmother=nmother, moccupation=moccupation,
+                                                 pcontact=pcontact, nguardian=nguardian, goccupation=goccupation, gcontact=gcontact, sources_income=sources_income, monthly_income=monthly_income, nationality = nationality, start=start, end=end)
+        User.objects.filter(id=ids).update(username=idnumber)
+   
+        messages.success(request, str(idnumber)+' has been Updated')
+        # return redirect('/create_platoon_page')
+        return redirect(request.META['HTTP_REFERER'])
+
+    return redirect('/municipal_content')

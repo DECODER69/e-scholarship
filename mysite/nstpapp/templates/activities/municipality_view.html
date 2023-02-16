@@ -2,13 +2,12 @@
 <html lang="en">
 
 <head>
-    <link rel="icon" href="../../static/images/logo.png">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../static/css/student_profile.css">
-
-    <title>SCHOLARSHIP</title>
+    <link rel="icon" href="../../static/images/tup.png">
+    <title>profile</title>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
@@ -36,7 +35,7 @@
 </head>
 
 <body>
-    {% include 'activities/navbar.html' %}
+    {% include 'activities/admin_nav.html' %}
 
     <div class="modal fade" id="profile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -62,7 +61,10 @@
 
     <section class="page-content">
         <div class="heads">
-            <h1 class="text"><i class="fa-solid fa-user"></i> USER PROFILE</h1><br>
+            <a href="/municipal">
+                <h1 class="text"><i class='bx bx-user-pin'></i>MUNICIPALITIES &nbsp;>&nbsp;</h1>
+            </a><br>
+            <h1 class="text"><i class='bx bx-user-pin'></i>PROFILE</h1>
         </div>
 
         <br>
@@ -71,10 +73,135 @@
         {% for s in name %}
         <div class="bg" id="ggs">
 
-            <form action="{% url 'activities:edit' %}" method="POST" enctype="multipart/form-data">
+            <form action="{% url 'activities:update_muni_1' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="containers">
                     <div class="row flex-lg-nowrap">
+                        <div class="col-12 col-lg-auto mb-3" style="width: 300px;">
+                            <!-- <div class="card p-3">
+                                <div class="e-navlist e-navlist--active-bg">
+                                    <ul class="nav">
+                                        <li class="nav-item"><a class="nav-link px-2 active" href="#"><i class="fa fa-fw fa-bar-chart mr-1"></i><span>Overview</span></a></li>
+                                        <li class="nav-item"><a class="nav-link px-2" href="https://www.bootdey.com/snippets/view/bs4-crud-users" target="__blank"><i class="fa fa-fw fa-th mr-1"></i><span>CRUD</span></a></li>
+                                        <li class="nav-item"><a class="nav-link px-2" href="https://www.bootdey.com/snippets/view/bs4-edit-profile-page" target="__blank"><i class="fa fa-fw fa-cog mr-1"></i><span>Settings</span></a></li>
+                                    </ul>
+                                </div>
+                            </div> -->
+                            <div class="card p-3">
+                                <div class="mb-2" style="color: rgb(43, 43, 43);"><b><i class="fa-solid fa-scroll"></i> SCHOLARSHIP CATEGORY</b></div>
+                                <hr>
+                                <br>
+                                <div class="row">
+                                    <div class="col">
+
+                                        <h6 style="font-weight: bold; color:rgb(0, 101, 141)">{{s.ip_status}}</h6>
+                                        <label>Bachelors Degree</label>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col">
+                                        {% if s.ip_category == "" %}
+                                        <h6 style="font-weight: bold; color:rgb(0, 101, 141)">None</h6>
+                                        {% else %}
+                                        <h6 style="font-weight: bold; color:rgb(0, 101, 141)">{{s.ip_category}}</h6>
+                                        {% endif %}
+                                        <label>Tribe</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div class="card p-3">
+                                <div class="mb-2" style="color: rgb(43, 43, 43);"><b><i class="fa-solid fa-scroll"></i> REQUIREMENTS SUBMITTED</b></div>
+                                <hr>
+                                <br>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            {% if s.cor == "" %}
+                                            <a href="" style="text-decoration: none; color:grey; "><i class="fa-solid fa-circle-xmark" style="color: red;"></i> Certificate of Enrollment</a>{% else %}
+                                            <a href="{{s.cor.url}}" target="_blank"><i class="fa-solid fa-circle-check" style="color: green;"></i> Certificate of Enrollment</a> {% endif %}
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            {% if s.cog == "" %}
+                                            <a href="" style="text-decoration: none; color:grey; "><i class="fa-solid fa-circle-xmark" style="color: red;"></i> Certificate of Grades</a>{% else %}
+                                            <a href="{{s.cog.url}}" target="_blank"><i class="fa-solid fa-circle-check" style="color: green;"></i> Certificate of Grades</a> {% endif %}
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            {% if s.birth_cert == "" %}
+                                            <a href="" style="text-decoration: none; color:grey; "><i class="fa-solid fa-circle-xmark" style="color: red;"></i> Birth certificate</a>{% else %}
+                                            <a href="{{s.birth_cert.url}}" target="_blank"><i class="fa-solid fa-circle-check" style="color: green;"></i> Birth certificate</a> {% endif %}
+
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            {% if s.good_moral == "" %}
+                                            <a href="" style="text-decoration: none; color:grey; "><i class="fa-solid fa-circle-xmark" style="color: red;"></i> Certificate of Good Moral Character</a>{% else %}
+                                            <a href="{{s.good_moral.url}}" target="_blank"><i class="fa-solid fa-circle-check" style="color: green;"></i> Certificate of Good Moral Character</a> {% endif %}
+
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            {% if s.barangay == "" %}
+                                            <a href="" style="text-decoration: none; color:grey; "><i class="fa-solid fa-circle-xmark" style="color: red;"></i> Certificate of Residency from Barangay</a>{% else %}
+                                            <a href="{{s.barangay.url}}" target="_blank"><i class="fa-solid fa-circle-check" style="color: green;"></i> Certificate of Residency from Barangay</a> {% endif %}
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            {% if s.mangyan == "" %}
+                                            <a href="" style="text-decoration: none; color:grey; "><i class="fa-solid fa-circle-xmark" style="color: red;"></i> Certificate proving legitimacy as Mangyan
+                                                issued by tribal leader</a>{% else %}
+                                            <a href="{{s.mangyan.url}}" target="_blank"><i class="fa-solid fa-circle-check" style="color: green;"></i> Certificate proving legitimacy as Mangyan
+                                                issued by tribal leader</a> {% endif %}
+
+                                        </div>
+
+
+                                    </div>
+                                    <br>
+
+                                </div>
+
+
+
+
+
+
+
+                            </div>
+                            <br>
+
+                            <div class="card p-3">
+                                <div class="mb-2" style="color: rgb(43, 43, 43);"><b><i class="fa-solid fa-scroll"></i>RESULTS</b></div>
+                                <hr>
+                                <br>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <h6 style="font-weight: bold; color:rgb(0, 101, 141)">{{s.exam_result}}</h6>
+                                            <label>Exam Score</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <h6 style="font-weight: bold; color:rgb(0, 101, 141)">{{s.care_of}}</h6>
+                                            <label>Care of</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="col" id="ggs">
                             <div class="row">
@@ -87,7 +214,7 @@
                                                         <div class="mx-auto" style="width: 140px;">
                                                             <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
                                                                 <span style="color: rgb(255, 255, 255); font: bold 8pt Arial;">
-                                                                <img src="{{s.picture.url}}" alt="" width="100%">
+                                                                <img src="{{s.picture.url}}" alt="" height="140px">
                                                             </span>
                                                             </div>
                                                         </div>
@@ -95,7 +222,7 @@
                                                     <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
                                                         <div class="text-center text-sm-left mb-2 mb-sm-0">
                                                             <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{s.firstname}} {{s.lastname}}</h4>
-                                                            <p class="mb-0">{{s.email}}</p>
+                                                            <p class="mb-0" style="text-align: left !important;"><i class="fa-solid fa-envelope"></i> {{s.email}}</p>
                                                             <div class="text-muted"><small>Status: {{s.status}} </small></div>
                                                             <!-- <div class="mt-2">
                                                                 <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModal">
@@ -105,8 +232,8 @@
                                                             </div> -->
                                                         </div>
                                                         <div class="text-center text-sm-right">
-                                                            <span class="badge badge-success">Student</span>
-                                                            <div class="text-muted"><small>SY: {{s.s_year}}</small></div>
+                                                            <span class="badge badge-success">Applicant</span>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -125,32 +252,20 @@
                                                                     <div class="col">
                                                                         <div class="form-group">
                                                                             <label>First Name </label>
-                                                                            <input type="hidden" name="ids" value="{{s.id}}">
-                                                                            <input class="form-control" type="text" name="firstname" placeholder="First Name" value="{{s.firstname}}" readonly>
+                                                                            <input type="hidden" name="ids" value="{{s.user_id}}">
+                                                                            <input class="form-control" type="text" name="firstname" placeholder="First Name" value="{{s.firstname}}">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col">
                                                                         <div class="form-group">
                                                                             <label>Middle Name</label>
-                                                                            <input class="form-control" type="text" name="middlename" placeholder="Middle name" value="{{s.middlename}}" readonly>
+                                                                            <input class="form-control" type="text" name="middlename" placeholder="Middle name" value="{{s.middlename}}">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col">
                                                                         <div class="form-group">
                                                                             <label>Last name</label>
-                                                                            <input class="form-control" type="text" name="lastname" placeholder="Last Name" value="{{s.lastname}}" readonly>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col">
-                                                                        <div class="form-group">
-                                                                            <label>Suffix</label>
-                                                                            <select name="suffix" id="" class="form-control">
-                                                                                <option value="{{s.suffix}}" selected disabled>{{s.suffix}}</option>
-                                                                                <option value="Jr">Jr.</option>
-                                                                                <option value="I">I.</option>
-                                                                                <option value="II">II</option>
-                                                                                <option value="III">III</option>
-                                                                            </select>
+                                                                            <input class="form-control" type="text" name="lastname" placeholder="Last Name" value="{{s.lastname}}">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -158,43 +273,21 @@
                                                                     <div class="col">
                                                                         <div class="form-group">
                                                                             <label>Email</label>
-                                                                            <input class="form-control" type="text" placeholder="gsfe Email" value="{{s.email}}" name="email" readonly>
+                                                                            <input class="form-control" type="text" placeholder="gsfe Email" value="{{s.email}}" name="email">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col">
                                                                         <div class="form-group">
                                                                             <label>ID Number</label>
-                                                                            <input class="form-control" type="text" placeholder="Student ID" value="{{s.idnumber}}" name="idnumber" readonly>
+                                                                            <input class="form-control" type="text" placeholder="Student ID" value="{{s.idnumber}}" name="idnumber">
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col">
                                                                         <div class="form-group">
-                                                                            <label>Barangay <span style="color: red; font-size:20px; vertical-align:bottom;">*</span></label>
-                                                                            <input class="form-control" type="text" placeholder="Barangay" value="{{s.address}}" name="address" required>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="col">
-                                                                        <div class="form-group">
-                                                                            <label>Municipality <span style="color: red; font-size:20px; vertical-align:bottom;">*</span></label>
-
-                                                                            <select name="municipal" id="" class="form-control">
-                                                                                {% if s.municipal == "" %}
-                                                                                <option value="" disabled selected>--Select Municipality--</option>
-                                                                                {% else %}
-
-                                                                                <option value="{{s.municipal}}">{{s.municipal}}</option>
-                                                                                {% endif %}
-                                                                                
-                                                                                {% for k in muni %}
-                                                                                <option value="{{k.name}}">{{k.name}}</option>
-
-                                                                                {% endfor %}
-
-                                                                            </select>
-                                                                           
+                                                                            <label>Address <span style="color: red; font-size:20px; vertical-align:bottom;">*</span></label>
+                                                                            <input class="form-control" type="text" placeholder="Address" value="{{s.address}}" name="address" required>
                                                                         </div>
                                                                     </div>
 
@@ -224,11 +317,7 @@
                                                                         <div class="form-group">
                                                                             <label>Sex <span style="color: red; font-size:20px; vertical-align:bottom;">*</span></label>
                                                                             <select id="" class="form-control" name="gender" required>
-                                                                                {% if s.gender == "" %}
-                                                                                <option value="">--Select--</option>
-                                                                                {% else %}
-                                                                                <option value="{{s.gender}}" >{{s.gender}}</option>
-                                                                                {% endif %}
+                                                                                <option value="{{s.gender}}" selected  >{{s.gender}}</option>
                                                                                 <option value="Male">Male</option>
                                                                                 <option value="Female">Female</option>
                                                                             </select>
@@ -238,8 +327,8 @@
                                                                     <div class="col">
                                                                         <div class="form-group">
                                                                             <label>Course <span style="color: red; font-size:20px; vertical-align:bottom;">*</span></label>
-                                                                            <input required type="text" placeholder="Course" class="form-control" name="section" value="{{s.section}}">
-                                                                            <input type="hidden" value="{{s.status}}" name="status">
+                                                                            <input required type="text" placeholder="Section" class="form-control" name="section" value="{{s.section}}">
+
                                                                         </div>
                                                                     </div>
 
@@ -306,6 +395,47 @@
 
                                                                 </div>
 
+                                                                <br>
+                                                                <br>
+                                                                <hr>
+                                                                <h3>Scholarship Status</h3>
+                                                                <br>
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <div class="form-group">
+                                                                            <label for="">Start of Subsidy</label>
+                                                                            <input type="date" class="form-control" value="{{s.start}}" name="start">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="form-group">
+                                                                            <label for="">End of Subsidy</label>
+                                                                            <input type="date" class="form-control" value="{{s.end}}" name="end">
+                                                                        </div>
+                                                                    </div>
+
+
+
+
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <div class="form-group">
+                                                                            <label for="">Student Status</label>
+                                                                            <select name="status" id="" class="form-control" required>
+                                                                                <option value="{{s.status}}" selected >{{s.status}}</option>
+                                                                                <option value="GRADUATE">GRADUATE</option>
+                                                                                <option value="INACTIVE">INACTIVE</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+
+
+
+
+                                                                </div>
+                                                                <br>
                                                                 <div class="row">
                                                                     <div class="col">
                                                                         <div class="form-group">
