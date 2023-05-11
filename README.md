@@ -1,2 +1,3 @@
-# e-Scholarship
-This is a WIP Capstone project for SCHOLARSHIP
+MINDORO STATE UNIVERSITY CAPSTONE PROJECT
+
+DONE!!
